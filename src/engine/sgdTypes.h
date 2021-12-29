@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "Math.h"
 
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
 
@@ -7,19 +8,6 @@ typedef uint8_t         uint8;
 typedef unsigned int    uint;
 typedef unsigned int    undefined4;
 typedef unsigned int    undefined4;
-
-typedef struct Vector3 {
-    float x;
-    float y;
-    float z;
-};
-
-typedef struct Vector4 {
-    float x;
-    float y;
-    float z;
-    float w;
-};
 
 typedef struct VertexPoint {
     Vector4 vuMatrix;
