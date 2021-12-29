@@ -1,5 +1,5 @@
 set(CMAKE_CXX_STANDARD 17)
-add_library(engine sgdTypes.h gra3dSGDData.h gra3dSGDData.cpp)
+add_library(engine sgdTypes.h gra3dSGDData.h gra3dSGDData.cpp Camera.h Math.h)
 target_link_libraries(engine)
 set_target_properties(engine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 include_directories(./)

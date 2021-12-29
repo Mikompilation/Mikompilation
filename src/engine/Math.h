@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 typedef struct Vector3
