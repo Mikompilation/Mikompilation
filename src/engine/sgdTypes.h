@@ -1,5 +1,4 @@
 #pragma once
-
 #include <cstdint>
 
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
@@ -92,15 +91,3 @@ typedef struct SGDFILEHEADER {
     /// There are as many iterations as uiNumBlock
     SGDPROCUNITHEADER* pProcUnit[];
 };
-
-void sgdRemap(SGDFILEHEADER* pSGDHead);
-
-bool isValidSGDFile(SGDFILEHEADER* pSGDHead);
-
-void initializeVectorInfo(SGDFILEHEADER* pSGDHead);
-
-void initializeParentVectorInfo(SGDFILEHEADER* pSGDHead);
-
-void initializeSGDProcUnitHeader(SGDFILEHEADER* pSGDHead);
-
-void MappingVertexList(VERTEXLIST* param_1, SGDVECTORINFO* param_2);

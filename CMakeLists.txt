@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.17)
 
-project(Mikompilation VERSION 1.0
-        DESCRIPTION "Decompilation project of Fatal Frame"
-        LANGUAGES CXX)
+project(Mikompilation CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Mikompilation src/main.cpp)
+
+add_subdirectory(src/engine)
 
 target_link_libraries(Mikompilation PUBLIC ${EXTRA_LIBS})
 

@@ -1,4 +1,4 @@
-#include "sgd.h"
+#include "gra3dSGDData.h"
 
 uint GetGlobalBufferSize() {
     return 2000;
@@ -7,8 +7,8 @@ uint GetGlobalBufferSize() {
 bool isValidSGDFile(SGDFILEHEADER *pSGDHead) {
     return
             pSGDHead != (SGDFILEHEADER *) nullptr &&
-            pSGDHead->uiVersionId == SGD_VALID_VERSIONID &&
-    !pSGDHead->fileInitialized;
+                                          pSGDHead->uiVersionId == SGD_VALID_VERSIONID &&
+                                          !pSGDHead->fileInitialized;
 }
 
 void initializeSGDCoordinate(SGDFILEHEADER *pSGDHead) {
@@ -52,38 +52,38 @@ void initializeVectorInfo(SGDFILEHEADER *pSGDHead) {
                                                                               (int) currElement.pChildLeft);
         }
 
-        if (1 < childType && (currElement.pChildRight != (VertexPoint *) 0x0)) {
+        if (1 < childType && (currElement.pChildRight != (VertexPoint *) nullptr)) {
             pCurrentVectorInfo->sgdVectorBsp[i].pChildRight = (VertexPoint *) ((int) pSGDHead +
                                                                                (int) currElement.pChildRight);
         }
 
-        if (2 < childType && (pCurrentVectorInfo->sgdVectorBsp[i].pParent != (VERTEXLIST *) 0x0)) {
+        if (2 < childType && (pCurrentVectorInfo->sgdVectorBsp[i].pParent != (VERTEXLIST *) nullptr)) {
             pCurrentVectorInfo->sgdVectorBsp[i].pParent = (VERTEXLIST *) ((int) pSGDHead + (int) currElement.pParent);
         }
     }
 }
 
 void initializeParentVectorInfo(SGDFILEHEADER *pSGDHead) {
-    if (pSGDHead->pVectorInfo == (SGDVECTORINFO *) 0x0 || pSGDHead->pVectorInfo->iNumBlockInfo != 4) {
+    if (pSGDHead->pVectorInfo == (SGDVECTORINFO *) nullptr || pSGDHead->pVectorInfo->iNumBlockInfo != 4) {
         return;
     }
 
-    if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildLeft == (VertexPoint *) 0x0 &&
-        pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildRight == (VertexPoint *) 0x0) {
-        pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent = (VERTEXLIST *) 0x0;
+    if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildLeft == (VertexPoint *) nullptr &&
+        pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildRight == (VertexPoint *) nullptr) {
+        pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent = (VERTEXLIST *) nullptr;
     }
 
-    pSGDHead->pVectorInfo->sgdVectorBsp[0].pParent = (VERTEXLIST *) 0x0;
+    pSGDHead->pVectorInfo->sgdVectorBsp[0].pParent = (VERTEXLIST *) nullptr;
 
-    if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent == (VERTEXLIST *) 0x0) {
+    if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent == (VERTEXLIST *) nullptr) {
         return;
     }
 
-    MappingVertexList(pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent, pSGDHead->pVectorInfo);
+    //MappingVertexList(pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent, pSGDHead->pVectorInfo);
 
-    MappingVertexList((VERTEXLIST *) (&pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent +
-                                      pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent->iNumVertex * 2),
-                      pSGDHead->pVectorInfo);
+    //MappingVertexList((VERTEXLIST *) (&pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent +
+    //                                  pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent->iNumVertex * 2),
+    //                  pSGDHead->pVectorInfo);
 }
 
 void initializeSGDProcUnitHeader(SGDFILEHEADER *pSGDHead) {
@@ -93,7 +93,7 @@ void initializeSGDProcUnitHeader(SGDFILEHEADER *pSGDHead) {
 
     /* Sets full-chain of SGDPROCUNITHEADER where initialy pNext has the offset */
     for (int i = 0; i < pSGDHead->uiNumBlock; i++) {
-        if (pSGDHead->pProcUnit[i] == (SGDPROCUNITHEADER *) 0x0) {
+        if (pSGDHead->pProcUnit[i] == (SGDPROCUNITHEADER *) nullptr) {
             continue;
         }
 
@@ -111,7 +111,7 @@ void initializeSGDType(SGDFILEHEADER *pSGDHead) {
         SGDPROCUNITHEADER *previousPH = (SGDPROCUNITHEADER *) nullptr;
 
         do {
-            if (pPUHead == (SGDPROCUNITHEADER *) 0x0 || pPUHead->pNext == (SGDPROCUNITHEADER *) 0x0) {
+            if (pPUHead == (SGDPROCUNITHEADER *) nullptr || pPUHead->pNext == (SGDPROCUNITHEADER *) nullptr) {
                 break;
             }
 
@@ -134,7 +134,7 @@ void initializeSGDType(SGDFILEHEADER *pSGDHead) {
 
             pPUHead->pNext = (SGDPROCUNITHEADER *) ((int) &pPUHead->pNext + (int) pPUHead->pNext);
             pPUHead = pPUHead->pNext;
-        } while (pPUHead->pNext != (SGDPROCUNITHEADER *) 0x0);
+        } while (pPUHead->pNext != (SGDPROCUNITHEADER *) nullptr);
     }
 }
 
@@ -146,7 +146,7 @@ void sgdRemap(SGDFILEHEADER *pSGDHead) {
     pSGDHead->fileInitialized = true;
 
     // Check if value has been initialized, if not then add the current value to the offset of beginning of SGD FILE
-    if ((pSGDHead->pCoord < (SGDCOORDINATE *) 0x30000000) && (pSGDHead->pCoord != (SGDCOORDINATE *) 0x0)) {
+    if ((pSGDHead->pCoord < (SGDCOORDINATE *) 0x30000000) && (pSGDHead->pCoord != (SGDCOORDINATE *) nullptr)) {
         pSGDHead->pCoord = (SGDCOORDINATE *) ((int) pSGDHead + (int) pSGDHead->pCoord);
     }
 
@@ -154,13 +154,13 @@ void sgdRemap(SGDFILEHEADER *pSGDHead) {
         pSGDHead->pMaterial = (SGDMATERIAL *) ((int) pSGDHead + (int) pSGDHead->pMaterial);
     }
 
-    if (pSGDHead->pCoord != (SGDCOORDINATE *) 0x0) {
+    if (pSGDHead->pCoord != (SGDCOORDINATE *) nullptr) {
         initializeSGDCoordinate(pSGDHead);
     }
 
     // Calculate the address of pVectorInfo by adding the starting address of
     // pSGDHead to the value currently located at pSGDHead->pVectorInfo
-    if (pSGDHead->pVectorInfo != (SGDVECTORINFO *) 0x0) {
+    if (pSGDHead->pVectorInfo != (SGDVECTORINFO *) nullptr) {
         pSGDHead->pVectorInfo = (SGDVECTORINFO *) ((int) pSGDHead + (int) pSGDHead->pVectorInfo);
         initializeVectorInfo(pSGDHead);
         initializeParentVectorInfo(pSGDHead);
@@ -168,7 +168,4 @@ void sgdRemap(SGDFILEHEADER *pSGDHead) {
 
     initializeSGDProcUnitHeader(pSGDHead);
     initializeSGDType(pSGDHead);
-}
-
-void MappingVertexList(VERTEXLIST *vertexList, SGDVECTORINFO *vectorInfo) {
 }
