@@ -128,10 +128,10 @@ typedef struct Vector4
 
 typedef struct Matrix4x4
 {
-
+    Vector4 Matrix[4];
 };
 
 typedef struct Matrix4x3
 {
-
+    Vector4 Matrix[3];
 };

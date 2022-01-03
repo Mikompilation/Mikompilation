@@ -26,7 +26,6 @@
 - bgst_wrk
 - hole_wrk
 - room_wrk
-- hole_wrk
 - fall_wrk
 - btl_wrk
 - gus_wrk
