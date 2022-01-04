@@ -23,6 +23,7 @@
 - stage_wrk
 - ingame_wrk
 - outgame_wrk
+- cam_custom_wrk
 - bgst_wrk
 - hole_wrk
 - room_wrk
