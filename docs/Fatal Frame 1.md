@@ -95,6 +95,10 @@ PlyrPosReSet
 
 PlyrBattleChk
 
+/// Related to player control?
+
+PlyrChargeCtrl
+
 /// Should be self descriptive. Set's player door related positioning
 
 SetDoorOpenPlyrPos
