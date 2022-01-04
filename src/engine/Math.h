@@ -40,11 +40,13 @@ typedef struct Vector3
             return *this;
         }
         // Should probably use std copy in here but this will do for now chaps
-        *this = Vector3(rhs);
+        x = rhs.x;
+        y = rhs.y;
+        z = rhs.z;
         return *this;
     }
 
-    Vector3 operator+=(const Vector3 &rhs)
+    Vector3 operator+=(const Vector3& rhs)
     {
         x += rhs.x;
         y += rhs.y;
@@ -104,11 +106,14 @@ typedef struct Vector4
             return *this;
         }
         // Should probably use std copy in here but this will do for now chaps
-        *this = Vector4(rhs);
+        x = rhs.x;
+        y = rhs.y;
+        z = rhs.z;
+        w = rhs.w;
         return *this;
     }
 
-    Vector4 operator+=(const Vector4 & rhs)
+    Vector4 operator+=(const Vector4& rhs)
     {
         x += rhs.x;
         y += rhs.y;
