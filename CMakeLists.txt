@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Mikompilation src/main.cpp)
 
-add_subdirectory(src/engine)
+add_subdirectory(engine)
 
-target_link_libraries(Mikompilation PUBLIC ${EXTRA_LIBS})
+target_link_libraries(Mikompilation PUBLIC ${EXTRA_LIBS} engine)
 
 target_include_directories(Mikompilation PUBLIC
         "${PROJECT_BINARY_DIR}"
