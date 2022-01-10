@@ -6,6 +6,8 @@ void sceVu0AddVector(Vector4 *out, Vector4 *v1, Vector4 *v2);
 void sceVu0ApplyMatrix(Vector4 *out, Matrix4x4 *m1, Matrix4x4 *m2);
 void sceVu0CameraMatrix(Matrix4x4 *out, Vector4 *factor, Vector4 *v1, Vector4 *v2);
 void sceVu0ClampVector(float minValue, float maxValue, Vector4 *out, Vector4 *v2);
+int sceVu0ClipScreen(Vector4 *v1);
+int sceVu0ClipScreen3(Vector4 *v1, Vector4 *v2, Vector4 *v3);
 void sceVu0CopyVector(Vector4 *out, Vector4 *v1);
 void sceVu0CopyVectorXYZ(Vector4 *out, Vector4 *v1);
 void sceVu0DivVector(float scale, Vector4 *v1, Vector4 *v2);
@@ -29,6 +31,7 @@ void sceVu0RotMatrix(Matrix4x4 *out, Matrix4x4 *m1, Vector4 *rotAngles);
 void sceVu0RotMatrixX(float rotAngle, Matrix4x4 *out, Matrix4x4 *m1);
 void sceVu0RotMatrixY(float rotAngle, Matrix4x4 *out, Matrix4x4 *m1);
 void sceVu0RotMatrixZ(float rotAngle, Matrix4x4 *out, Matrix4x4 *m1);
+void sceVu0RotTransPers(Matrix4x4 *out, Matrix4x4 *m1, Matrix4x4 *m2);
 void sceVu0ScaleVector(float factor, Vector4 *out, Vector4 *v1);
 void sceVu0ScaleVectorXYZ(float factor, Vector4 *out, Vector4 *v1);
 void sceVu0SubVector(Vector4 *out, Vector4 *v1, Vector4 *v2);
@@ -39,10 +42,5 @@ void sceVu0ViewClipMatrix(float param_1, float param_2, float param_3, float par
 
 // Left to implement
 // int sceVu0ClipAll(float *param_1,float *param_2,float *param_3,float *param_4,int param_5);
-// int sceVu0ClipScreen(float *param_1)
-// int sceVu0ClipScreen3(float *param_1,float *param_2,float *param_3);
-// void sceVu0RotMatrixY(long param_1,long param_2);
-// void sceVu0RotMatrixZ(long param_1,long param_2);
-// void sceVu0RotTransPers(Matrix4x4 *param_1,Matrix4x4 *param_2,Matrix4x4 *param_3);
 // void sceVu0RotTransPersN(Matrix4x4 *out,Matrix4x4 *param_2,Matrix4x4 *param_3,int numArr);
 // void sceVu0ViewScreenMatrix(float param_1,float param_2,float param_3,float param_4,float param_5,float param_6,float param_7,float param_8,Matrix4x4 *param_9)

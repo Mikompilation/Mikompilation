@@ -72,6 +72,20 @@ void sceVu0ClampVector(float minValue, float maxValue, Vector4 *out, Vector4 *v2
   out->w = v2->w;
 }
 
+int sceVu0ClipScreen(Vector4 *v1)
+{
+  return (int) (((v1->w - 0.0 == 0.0 || v1->y - 0.0 == 0.0) || v1->x - 0.0 == 0.0) || (4096.0 - v1->y == 0.0 || 4096.0 - v1->x == 0.0)) << 6;
+}
+
+int sceVu0ClipScreen3(Vector4 *v1, Vector4 *v2, Vector4 *v3)
+{
+  return (int) (((((((v1->w - 0.0 == 0.0 || v1->y - 0.0 == 0.0) || v1->x - 0.0 == 0.0) || (4096.0 - v1->y == 0.0 || 4096.0 - v1->x == 0.0)) || ((v2->w - 0.0 == 0.0 || v2->y - 0.0 == 0.0) || v2->x - 0.0 == 0.0))
+                  || (4096.0 - v2->y == 0.0 || 4096.0 - v2->x == 0.0))
+                 || ((v3->w - 0.0 == 0.0 || v3->y - 0.0 == 0.0) || v3->x - 0.0 == 0.0))
+                || (4096.0 - v3->y == 0.0 || 4096.0 - v3->x == 0.0))
+      << 6;
+}
+
 void sceVu0CopyVector(Vector4 *out, Vector4 *v1)
 {
   out->x = v1->x;
@@ -283,9 +297,50 @@ void sceVu0RotMatrixX(float rotAngle, Matrix4x4 *out, Matrix4x4 *m1)
   rotMatrix.Matrix[2].y = sinAngle;
   rotMatrix.Matrix[2].z = cosAngle;
 
-  for (int i = 4; i != 0; i--)
-  {
-  }
+  sceVu0MulMatrix(out, m1, &rotMatrix);
+}
+
+void sceVu0RotMatrixY(float rotAngle, Matrix4x4 *out, Matrix4x4 *m1)
+{
+  float cosAngle = cosf(rotAngle);
+  float sinAngle = sinf(rotAngle);
+
+  Matrix4x4 rotMatrix = MatrixIdentity();
+
+  rotMatrix.Matrix[0].x = cosAngle;
+  rotMatrix.Matrix[0].z = sinAngle;
+
+  rotMatrix.Matrix[2].x = -sinAngle;
+  rotMatrix.Matrix[2].z = cosAngle;
+
+  sceVu0MulMatrix(out, m1, &rotMatrix);
+}
+
+void sceVu0RotMatrixZ(float rotAngle, Matrix4x4 *out, Matrix4x4 *m1)
+{
+  float cosAngle = cosf(rotAngle);
+  float sinAngle = sinf(rotAngle);
+
+  Matrix4x4 rotMatrix = MatrixIdentity();
+
+  rotMatrix.Matrix[0].x = cosAngle;
+  rotMatrix.Matrix[0].y = -sinAngle;
+
+  rotMatrix.Matrix[1].x = sinAngle;
+  rotMatrix.Matrix[1].y = cosAngle;
+
+  sceVu0MulMatrix(out, m1, &rotMatrix);
+}
+
+void sceVu0RotTransPers(Matrix4x4 *out, Matrix4x4 *m1, Matrix4x4 *m2)
+{
+  float factor = m1->Matrix[0].w * m2->Matrix[0].x + m1->Matrix[1].w *  m2->Matrix[0].y + m1->Matrix[2].w * m2->Matrix[0].z + m1->Matrix[3].w * m2->Matrix[0].w;
+
+  factor = 1.0 / factor;
+  out->Matrix[0].x = (m1->Matrix[0].x * m2->Matrix[0].x + m1->Matrix[1].x * m2->Matrix[0].y + m1->Matrix[2].x * m2->Matrix[0].z + m1->Matrix[3].x * m2->Matrix[0].w) * factor;
+  out->Matrix[0].y = (m1->Matrix[0].y * m2->Matrix[0].x + m1->Matrix[1].y * m2->Matrix[0].y + m1->Matrix[2].y * m2->Matrix[0].z + m1->Matrix[3].y * m2->Matrix[0].w) * factor;
+  out->Matrix[0].z = (m1->Matrix[0].z * m2->Matrix[0].x + m1->Matrix[1].z * m2->Matrix[0].y + m1->Matrix[2].z * m2->Matrix[0].z + m1->Matrix[3].z * m2->Matrix[0].w) * factor;
+  out->Matrix[0].w = m1->Matrix[0].w * m2->Matrix[0].x + m1->Matrix[1].w * m2->Matrix[0].y + m1->Matrix[2].w * m2->Matrix[0].z + m1->Matrix[3].w * m2->Matrix[0].w;
 }
 
 void sceVu0RotMatrix(Matrix4x4 *out, Matrix4x4 *m1, Vector4 *rotAngles)
