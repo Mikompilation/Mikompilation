@@ -4,7 +4,7 @@
 
 // Original Game Methods
 
-void sgdRemap(SGDFILEHEADER* pSGDHead);
+void sgdRemap(SGDFILEHEADER *pSGDHead);
 
 /* Not yet implemented */
 // void sgdEnableOptimizeTexture(int);
@@ -23,10 +23,10 @@ void sgdRemap(SGDFILEHEADER* pSGDHead);
 
 // Custom Decompilation Methods
 
-bool isValidSGDFile(SGDFILEHEADER* pSGDHead);
+bool isValidSGDFile(SGDFILEHEADER *pSGDHead);
 
-void initializeVectorInfo(SGDFILEHEADER* pSGDHead);
+void initializeVectorInfo(SGDFILEHEADER *pSGDHead);
 
-void initializeParentVectorInfo(SGDFILEHEADER* pSGDHead);
+void initializeParentVectorInfo(SGDFILEHEADER *pSGDHead);
 
-void initializeSGDProcUnitHeader(SGDFILEHEADER* pSGDHead);
+void initializeSGDProcUnitHeader(SGDFILEHEADER *pSGDHead);
