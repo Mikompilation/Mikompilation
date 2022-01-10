@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "../math/Math.h"
+#include "../math/PS2Math.h"
 
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
 
