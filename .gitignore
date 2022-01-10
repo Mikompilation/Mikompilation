@@ -471,3 +471,4 @@ cmake-build-debug/*
 out/* 
 build/*
 bin/*
+engine/cmake-build-debug/

@@ -1,4 +1,4 @@
-#include "../Header/sceVu0.h"
+#include "sceVu0.h"
 
 void sceVu0AddVector(Vector4 *out, Vector4 *v1, Vector4 *v2)
 {
@@ -164,11 +164,8 @@ void sceVu0InversMatrix(Matrix4x4 *m1, Matrix4x4 *m2)
   m1->Matrix[2].w = 0.0;
 
   m1->Matrix[3].x = 0.0 - (m2->Matrix[0].x * m2->Matrix[3].x + m2->Matrix[0].y * m2->Matrix[3].y + m2->Matrix[0].z * m2->Matrix[3].z);
-
   m1->Matrix[3].y = 0.0 - (m2->Matrix[1].x * m2->Matrix[3].x + m2->Matrix[1].y * m2->Matrix[3].y + m2->Matrix[1].z * m2->Matrix[3].z);
-
   m1->Matrix[3].z = 0.0 - (m2->Matrix[2].x * m2->Matrix[3].x + m2->Matrix[2].y * m2->Matrix[3].y + m2->Matrix[2].z * m2->Matrix[3].z);
-
   m1->Matrix[3].w = m2->Matrix[3].w;
 }
 
@@ -198,7 +195,7 @@ void sceVu0LightColorMatrix(Matrix4x4 *m1, Vector4 *v1, Vector4 *v2, Vector4 *v3
 
 void sceVu0MulMatrix(Matrix4x4 *out, Matrix4x4 *m1, Matrix4x4 *m2)
 {
-  for (int i = 4; i != 0; i--)
+  for (int i = 0; i < 4; i++)
   {
     out->Matrix[i].x = m1->Matrix[0].x * m2->Matrix[i].x + m1->Matrix[1].x * m2->Matrix[i].y + m1->Matrix[2].x * m2->Matrix[i].z + m1->Matrix[3].x * m2->Matrix[i].w;
     out->Matrix[i].y = m1->Matrix[0].y * m2->Matrix[i].x + m1->Matrix[1].y * m2->Matrix[i].y + m1->Matrix[2].y * m2->Matrix[i].z + m1->Matrix[3].y * m2->Matrix[i].w;
@@ -374,14 +371,17 @@ void sceVu0UnitMatrix(Matrix4x4 *out)
   out->Matrix[3].y = 0.0;
   out->Matrix[3].z = 0.0;
   out->Matrix[3].w = 1.0;
+
   out->Matrix[2].x = 0.0;
   out->Matrix[2].y = 0.0;
   out->Matrix[2].z = 1.0;
   out->Matrix[2].w = 0.0;
+
   out->Matrix[1].x = 0.0;
   out->Matrix[1].y = 1.0;
   out->Matrix[1].z = 0.0;
   out->Matrix[1].w = 0.0;
+
   out->Matrix[0].x = 1.0;
   out->Matrix[0].y = 0.0;
   out->Matrix[0].z = 0.0;

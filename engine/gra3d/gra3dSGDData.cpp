@@ -1,4 +1,4 @@
-#include "../Header/gra3dSGDData.h"
+#include "gra3dSGDData.h"
 
 uint GetGlobalBufferSize() {
     return 2000;

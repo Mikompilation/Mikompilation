@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "Math.h"
+#include "../math/Math.h"
 
 // This is what I have in my Fatal Frame 1 Ghidra project - weirdbeard
 typedef struct cam_wrk

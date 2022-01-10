@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "Math.h"
+#include "../math/Math.h"
 
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
 
