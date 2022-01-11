@@ -24,6 +24,8 @@
 - ingame_wrk
 - outgame_wrk
 - cam_custom_wrk
+- ani_mdl
+- ani_mdl_wrk
 - bgst_wrk
 - hole_wrk
 - room_wrk
@@ -31,6 +33,8 @@
 - btl_wrk
 - gus_wrk
 - ene_wrk
+- ene_display
+- ene_child_ctrl
 - map_wrk
 - ap_wrk
 - fly_wrk
@@ -109,9 +113,13 @@ SetPlyrPosAfterDOpen
 
 GetPlyrAcsLightPos
 
-/// Appears in Ghidra’s funk “To take 3 parameters. IE, the cartesian plane. The parameters are a last position equation from what I can tell
+/// Posotion of feet model
 
 GetPlyrFootPos
+
+ /// Checks player position relative to the floor?
+
+ PlyrHeightCtrl
 
  /// Active room file.
 
