@@ -2,12 +2,8 @@
 // C++
 #include <iostream>
 #include <string>
-// GLFW
-#include <GLFW/glfw3.h>
-// Dear ImGui
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
-#include "imgui.h"
+
+#include "window.h"
 
 int windowWidth = 1200, windowHeight = 800;
 float backgroundR = 0.1f,
