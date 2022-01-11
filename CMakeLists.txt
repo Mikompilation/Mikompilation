@@ -8,7 +8,7 @@ add_subdirectory(engine)
 
 include(third-party/third-party.cmake)
 
-add_executable(Mikompilation src/main.cpp ${IMGUI_BACKEND_SOURCES})
+add_executable(Mikompilation src/main.cpp ${IMGUI_BACKEND_SOURCES} src/imgui_render.cpp src/imgui_render.h src/glf3_render.cpp src/glf3_render.h extractor/extractor.h extractor/extractor.cpp)
 
 target_include_directories(engine PUBLIC ${CMAKE_CURRENT_SOURE_DIR}/camera ${CMAKE_CURRENT_SOURE_DIR}/gra3d ${CMAKE_CURRENT_SOURE_DIR}/math ${IMGUI_BACKEND_HEADERS})
 
