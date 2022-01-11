@@ -8,7 +8,7 @@ add_subdirectory(engine)
 
 include(third-party/third-party.cmake)
 
-add_executable(Mikompilation src/main.cpp ${IMGUI_BACKEND_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/header)
+add_executable(Mikompilation src/main.cpp ${IMGUI_BACKEND_SOURCES} src/imgui_render.cpp src/imgui_render.h src/glf3_render.cpp src/glf3_render.h extractor/extractor.h extractor/extractor.cpp)
 
 target_link_libraries(Mikompilation PUBLIC ${EXTRA_LIBS} engine ${THIRD_PARTY_DEPS})
 
