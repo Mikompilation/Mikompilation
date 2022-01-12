@@ -25,6 +25,18 @@ void MainWindow::Update()
 
     NewFrame();
 
+    if (ImGui::Button("Choose Elf File"))
+    {
+      ImGuiFileDialog::Instance()->OpenDialog("Choose Elf File", "Choose File", ".elf", ".");
+      if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+      {
+        // action if OK
+        if (ImGuiFileDialog::Instance()->IsOk())
+        {
+          filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+        }
+      }
+    }
     Render(window);
 
     EndFrame();
