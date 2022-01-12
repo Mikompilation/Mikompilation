@@ -4,14 +4,14 @@ project(Mikompilation CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(SOURCES src/main.cpp src/window.cpp src/imgui_render.cpp src/glf3_render.cpp extractor/extractor.cpp)
-
 add_subdirectory(engine)
 
-include(third-party/third-party.cmake)
+add_subdirectory(third-party)
 
-add_executable(Mikompilation ${SOURCES} ${IMGUI_BACKEND_SOURCES})
+set(SOURCES src/main.cpp src/window.cpp src/imgui_render.cpp src/glf3_render.cpp extractor/extractor.cpp)
 
-target_link_libraries(Mikompilation PUBLIC ${EXTRA_LIBS} engine ${THIRD_PARTY_DEPS})
+add_executable(Mikompilation ${SOURCES})
 
-target_include_directories(Mikompilation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/header "${PROJECT_BINARY_DIR}" ${EXTRA_INCLUDES} )
+target_link_libraries(Mikompilation PUBLIC ThirdParty engine)
+
+target_include_directories(Mikompilation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/header ${EXTRA_INCLUDES} )
