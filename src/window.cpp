@@ -44,6 +44,6 @@ void MainWindow::Update()
     glfwPollEvents();
   }
 
-  teardown(window);
   Terminate();
+  teardown(window);
 }
