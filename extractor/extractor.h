@@ -1,12 +1,13 @@
-const int PS2_SECTOR_SIZE = 0x800;
-const int NUM_FILES = 1;
+#include <string>
+#include <filesystem>
 
-typedef struct ZeroFile
-{
+const int PS2_SECTOR_SIZE = 0x800;
+const int NUM_FILES_US = 0x769;
+
+typedef struct ZeroFile {
   unsigned int address;
   unsigned int size;
 };
 
-class extractor
-{
-};
+char *ReadFullFile(const char *filename);
+void ExtractGameFilesFromBank(const char *imgHdFile, const char *imgBdFile, std::filesystem::path outputFolder);
