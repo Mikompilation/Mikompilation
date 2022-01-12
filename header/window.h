@@ -12,11 +12,21 @@
 
 namespace fs = std::filesystem;
 
+struct File 
+{
+  fs::path path;
+  fs::path fileName;
+};
+
 class MainWindow
 {
  private:
   int windowWidth = 1200, windowHeight = 800;
-  fs::path filePath;
+
+  File bdPath;
+  File hdPath;
+  File elfPath;
+
   GLFWwindow *window;
 
  public:

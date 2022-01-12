@@ -25,25 +25,59 @@ void MainWindow::Update()
 
     NewFrame();
 
+    ImGui::Begin("File Picker");
+
     if (ImGui::Button("Choose Elf File"))
     {
-      ImGuiFileDialog::Instance()->OpenDialog("Choose Elf File", "Choose File", ".elf", ".");
-      if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+      ImGuiFileDialog::Instance()->OpenDialog("ChooseElfFile", "Choose File", ".elf", ".");
+      if (ImGuiFileDialog::Instance()->Display("ChooseElfFile"))
       {
         // action if OK
         if (ImGuiFileDialog::Instance()->IsOk())
         {
-          filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+          elfPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
+          elfPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
         }
+        ImGuiFileDialog::Instance()->Close();
       }
     }
-    Render(window);
 
-    EndFrame();
-    glfwSwapBuffers(window);
-    glfwPollEvents();
+      if (ImGui::Button("Choose Img_hd File"))
+      {
+        ImGuiFileDialog::Instance()->OpenDialog("ChooseImgHDFile", "Choose File", ".bin", ".");
+        if (ImGuiFileDialog::Instance()->Display("ChooseImgHDFile"))
+        {
+          // action if OK
+          if (ImGuiFileDialog::Instance()->IsOk())
+          {
+            hdPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
+            hdPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
+          }
+          ImGuiFileDialog::Instance()->Close();
+        }
+      }
+
+      if (ImGui::Button("Choose Img_bd File"))
+      {
+        ImGuiFileDialog::Instance()->OpenDialog("ChooseImgBdFile", "Choose File", ".bin", ".");
+        if (ImGuiFileDialog::Instance()->Display("ChooseImgBdFile"))
+        {
+          // action if OK
+          if (ImGuiFileDialog::Instance()->IsOk())
+          {
+            bdPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
+            bdPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
+          }
+          ImGuiFileDialog::Instance()->Close();
+        }
+      }
+      ImGui::End();
+      Render(window);
+      EndFrame();
+      glfwSwapBuffers(window);
+      glfwPollEvents();
   }
 
-  Terminate();
-  teardown(window);
+    Terminate();
+    teardown(window);
 }
