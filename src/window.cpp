@@ -27,57 +27,42 @@ void MainWindow::Update()
 
     ImGui::Begin("File Picker");
 
-    if (ImGui::Button("Choose Elf File"))
+    if (ImGui::Button("Choose Img_hd File"))
     {
-      ImGuiFileDialog::Instance()->OpenDialog("ChooseElfFile", "Choose File", ".elf", ".");
-      if (ImGuiFileDialog::Instance()->Display("ChooseElfFile"))
+      ImGuiFileDialog::Instance()->OpenDialog("ChooseImgHDFile", "Choose File", ".bin", ".");
+      if (ImGuiFileDialog::Instance()->Display("ChooseImgHDFile"))
       {
         // action if OK
         if (ImGuiFileDialog::Instance()->IsOk())
         {
-          elfPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
-          elfPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
+          hdPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
+          hdPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
         }
         ImGuiFileDialog::Instance()->Close();
       }
     }
 
-      if (ImGui::Button("Choose Img_hd File"))
+    if (ImGui::Button("Choose Img_bd File"))
+    {
+      ImGuiFileDialog::Instance()->OpenDialog("ChooseImgBdFile", "Choose File", ".bin", ".");
+      if (ImGuiFileDialog::Instance()->Display("ChooseImgBdFile"))
       {
-        ImGuiFileDialog::Instance()->OpenDialog("ChooseImgHDFile", "Choose File", ".bin", ".");
-        if (ImGuiFileDialog::Instance()->Display("ChooseImgHDFile"))
+        // action if OK
+        if (ImGuiFileDialog::Instance()->IsOk())
         {
-          // action if OK
-          if (ImGuiFileDialog::Instance()->IsOk())
-          {
-            hdPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
-            hdPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
-          }
-          ImGuiFileDialog::Instance()->Close();
+          bdPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
+          bdPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
         }
+        ImGuiFileDialog::Instance()->Close();
       }
-
-      if (ImGui::Button("Choose Img_bd File"))
-      {
-        ImGuiFileDialog::Instance()->OpenDialog("ChooseImgBdFile", "Choose File", ".bin", ".");
-        if (ImGuiFileDialog::Instance()->Display("ChooseImgBdFile"))
-        {
-          // action if OK
-          if (ImGuiFileDialog::Instance()->IsOk())
-          {
-            bdPath.path = ImGuiFileDialog::Instance()->GetCurrentPath();
-            bdPath.fileName = ImGuiFileDialog::Instance()->GetCurrentFileName();
-          }
-          ImGuiFileDialog::Instance()->Close();
-        }
-      }
-      ImGui::End();
-      Render(window);
-      EndFrame();
-      glfwSwapBuffers(window);
-      glfwPollEvents();
+    }
+    ImGui::End();
+    Render(window);
+    EndFrame();
+    glfwSwapBuffers(window);
+    glfwPollEvents();
   }
 
-    Terminate();
-    teardown(window);
+  Terminate();
+  teardown(window);
 }
