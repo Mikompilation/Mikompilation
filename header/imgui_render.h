@@ -4,7 +4,6 @@
 #include "imgui.h"
 
 void InitializeImGui(GLFWwindow *window );
-void Render(GLFWwindow *window);
 void NewFrame();
 void EndFrame();
 void Terminate();

@@ -1,35 +1,24 @@
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <filesystem>
 #include <GLFW/glfw3.h>
+#include <filesystem>
+#include <iostream>
+#include <string>
 
+#include "../header/file_picker.h"
+#include "ImGuiFileDialog.h"
+#include "glf3_render.h"
 #include "imgui.h"
 #include "imgui_render.h"
-#include "glf3_render.h"
-#include "ImGuiFileDialog.h"
-
-namespace fs = std::filesystem;
-
-struct File 
-{
-  fs::path path;
-  fs::path fileName;
-};
 
 class MainWindow
 {
  private:
   int windowWidth = 1200, windowHeight = 800;
-
-  File bdPath;
-  File hdPath;
-  File elfPath;
-
   GLFWwindow *window;
+  FilePicker *filePicker;
 
  public:
-  bool Init(); 
+  bool Init();
   void Update();
 };
