@@ -10,13 +10,16 @@
 #include "glf3_render.h"
 #include "imgui.h"
 #include "imgui_render.h"
+#include "glf3_render.h"
+#include "ImGuiFileDialog.h"
+#include "../header/file_picker.h"
 
 class MainWindow
 {
  private:
   int windowWidth = 1200, windowHeight = 800;
   GLFWwindow *window;
-  FilePicker *filePicker;
+  FilePicker* filePicker;
 
  public:
   bool Init();
