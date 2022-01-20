@@ -1,9 +1,3 @@
-
-## Goals:
-### Finding Active ghost position in memory.
-### Find Miku’s position in memory
-### Find any controls over Camera and Miku position
-
 ### Pointers:
 
 - Fatal Frame is programmed in C
@@ -23,6 +17,7 @@
 - Ghosts that randomly appear in the scene as "Capturable ghost events" apper as `JIDOU ENE`
 - These types appear to have an int index to indicate the amount of that type you've encountered in the current game. This does get saved to the card.
 - `JIBAKU` in english could stand for, ghost bount to a specific physical location (usu. where death occured)
+- Toshu stands for house master and is referring to the Himuro house master.
 
 ### Structs:
 
