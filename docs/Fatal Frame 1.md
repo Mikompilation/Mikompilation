@@ -17,6 +17,13 @@
 - Zero Hour in Fatal Frame 1 is a special mode the game’s in that has it’s own collision detection and battle functions.
 - 0x3420bc is the active camera in memory in Fatal Frame 2
 
+### Information about enemies
+- Enemies have several listed types that can be seen using the debug menu ene type display
+- Most fightable enemies will appear as `JIBAKU ENE` but there is so far discovered another special type `FYYU ENE`
+- Ghosts that randomly appear in the scene as "Capturable ghost events" apper as `JIDOU ENE`
+- These types appear to have an int index to indicate the amount of that type you've encountered in the current game. This does get saved to the card.
+- `JIBAKU` in english could stand for, ghost bount to a specific physical location (usu. where death occured)
+
 ### Structs:
 
 - plyer_wrk
