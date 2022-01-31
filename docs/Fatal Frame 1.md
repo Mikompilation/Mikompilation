@@ -21,13 +21,13 @@
 
 ### Information about GameMode and Ingame_Wrk
 - Field 0: Apears to be a bit mask that has at least 16 bytes. It seems to be one of the main mechanisims for setting game modes and has several interesting effects depending on what's written to it
-- Filed 0 does not have an effect on the title screen aside from value 1536 playing the first cutscene
+- Field 0 does not have an effect on the title screen aside from value 1536 playing the first cutscene
 - 1536: inGame mode. Writing it from the title screen seems to play the opening cutscene then just, goes back to the title screen as if it was trying to start a game then failed
 - 1537: Debug menu Battle mode. If in game. Whatever room you're in will activate in battle mode but by itself will not spawn a ghost. This means all doors are sealed and you're effectively softlocked until you exit with the menu which takes you back to battle mode's main screen
 - 0: will start night 1 if ingame first. From the title screen it appears to do nothing
 - 1: Will start battle mode fist mission and spwan you in the room with koji
 - Field 1: Appears to also be a bitmask? Or some kind of uint / int value. Writing 1 will set the game to first cutscene / zero hour but only if you're already in a game. It has no effect on the Title screen
-- Field 7 is not active during zero hour. It seems to denote that this is a loaded save file? `010000000000` wull be set if a game is loaded
+- Field 7 is not active during zero hour. It seems to denote that this is a loaded save file? `010000000000` will be set if a game is loaded
 
 ### Structs:
 
