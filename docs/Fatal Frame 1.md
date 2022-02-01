@@ -27,7 +27,8 @@
 - 0: will start night 1 if ingame first. From the title screen it appears to do nothing
 - 1: Will start battle mode fist mission and spwan you in the room with koji
 - Field 1: Appears to also be a bitmask? Or some kind of uint / int value. Writing 1 will set the game to first cutscene / zero hour but only if you're already in a game. It has no effect on the Title screen
-- Field 7 is not active during zero hour. It seems to denote that this is a loaded save file? `010000000000` will be set if a game is loaded
+- Field 7 is not active during zero hour. It seems to denote the hour or event the game is in. The values change depending on what part of the game is active
+- Field 8 also is not active during zero hour. It seems to have a similar loaded functionality
 
 ### Structs:
 
