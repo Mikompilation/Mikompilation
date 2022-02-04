@@ -1,10 +1,10 @@
 ### Pointers:
 
 - Fatal Frame is programmed in C
-- When a variable ends with _num, it is most likely a size for an array 
-- All chXXX_Y_ are an array of 15, 31 
-- When a variable contains _WRK, it is most likely a struct 
-- When a variable contains _CTRL, it is most likely an enum for control 
+  - When a variable ends with _num, it is most likely a size for an array
+    - All chXXX_Y_ are an array of 15, 31
+      - When a variable contains _WRK, it is most likely a struct
+- When a variable contains _CTRL, it is most likely an enum for control
 - When a variable contains cmp, it is most likely indicating a function for compressed da 
 - sce is Sony computer entertainment. All of those functions are referring to the ps2 sdk
 - All Rooms have global ids or file numbers but local instructions
@@ -22,10 +22,10 @@
 ### Information about GameMode and Ingame_Wrk
 - Field 0: Apears to be a bit mask that has at least 16 bytes. It seems to be one of the main mechanisims for setting game modes and has several interesting effects depending on what's written to it
 - Field 0: Does not have an effect on the title screen aside from value `1536` playing the first cutscene
-- `1536`: inGame mode. Writing it from the title screen seems to play the opening cutscene then just, goes back to the title screen as if it was trying to start a game then failed.
-- `1537`: Debug menu Battle mode. If in game. Whatever room you're in will activate in battle mode but by itself will not spawn a ghost. This means all doors are sealed and you're effectively softlocked until you exit with the menu which takes you back to battle mode's main screen
-- 0: will start night 1 if ingame first. From the title screen it appears to do nothing
-- 1: Will start battle mode fist mission and spwan you in the room with koji
+  - `1536`: inGame mode. Writing it from the title screen seems to play the opening cutscene then just, goes back to the title screen as if it was trying to start a game then failed.
+  - `1537`: Debug menu Battle mode. If in game. Whatever room you're in will activate in battle mode but by itself will not spawn a ghost. This means all doors are sealed and you're effectively softlocked until you exit with the menu which takes you back to battle mode's main screen
+  - `0`: will start night 1 if ingame first. From the title screen it appears to do nothing
+  - `1`: Will start battle mode fist mission and spwan you in the room with koji
 - Field 1: Appears to also be a bitmask? Or some kind of uint / int value. Writing 1 will set the game to first cutscene / zero hour but only if you're already in a game. It has no effect on the Title screen
 - Field 7 is not active during zero hour. It seems to denote the hour or event the game is in. The values change depending on what part of the game is active
 - Field 8 also is not active during zero hour. It seems to have a similar loaded functionality
