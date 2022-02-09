@@ -1,4 +1,5 @@
-#include "gra3dSGDData.h"
+#include "sgdLoader.h"
+#include "sgdGlobals.h"
 
 uint GetGlobalBufferSize()
 {
@@ -159,7 +160,7 @@ void initializeSGDType(SGDFILEHEADER *pSGDHead)
   }
 }
 
-void sgdRemap(SGDFILEHEADER *pSGDHead)
+void SgMapUnit(SGDFILEHEADER *pSGDHead)
 {
   if (!isValidSGDFile(pSGDHead))
   {
@@ -195,4 +196,13 @@ void sgdRemap(SGDFILEHEADER *pSGDHead)
 
   initializeSGDProcUnitHeader(pSGDHead);
   initializeSGDType(pSGDHead);
+
+  if (pSGDHead->field_0x6 == 0) {
+   int sVar9 = 0;
+    for (SGDMATERIAL * uVar11 = pSGDHead->pMaterial; (int)uVar11 < (int)pSGDHead->pVectorInfo; uVar11 += sizeof(SGDMATERIAL)) {
+      sVar9 += 1;
+    }
+    pSGDHead->field_0x6 = sVar9;
+    pSGDHead->field_0x5 = PresetChk;
+  }
 }

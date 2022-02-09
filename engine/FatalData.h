@@ -1,5 +1,6 @@
 #pragma once
-#include "PS2Math.h"
+
+#include "../common/math/VectorMath.h"
 #include <iostream>
 
 // Note that in Fatal Frame engine. _wrk will always imply a struct

@@ -1,12 +1,12 @@
 #pragma once
-#include "../math/PS2Math.h"
+
+#include "../../common/math/VectorMath.h"
 #include <cstdint>
 
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
 
 typedef uint8_t uint8;
 typedef unsigned int uint;
-typedef unsigned int undefined4;
 typedef unsigned int undefined4;
 
 typedef struct VertexPoint {
@@ -59,10 +59,10 @@ typedef struct SGDPROCUNITHEADER {
   SGDPROCUNITHEADER *pNext;
   int iCategory;
   uint procInfo;
-  char a;
+  uint8_t a;
   uint8_t mtype;
-  char b;
-  char c;
+  uint8_t b;
+  uint8_t c;
 };
 
 typedef struct SGDFILEHEADER {
@@ -78,4 +78,17 @@ typedef struct SGDFILEHEADER {
 
   /// There are as many iterations as uiNumBlock
   SGDPROCUNITHEADER *pProcUnit[];
+};
+
+typedef struct SgLightCoord {
+  uint8_t unknown1[0x60];
+  Vector4 pos0;
+  Vector4 pos1;
+  Vector4 pos2;
+  Vector4 intens;
+  Vector4 intens_b;
+  Vector4 WDLightMtx;
+  Vector4 SLightMtx;
+  Vector4 v1;
+  Vector4 v2;
 };

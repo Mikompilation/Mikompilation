@@ -8,7 +8,7 @@ add_subdirectory(engine)
 
 add_subdirectory(third-party)
 
-set(SOURCES src/main.cpp src/window.cpp src/imgui_render.cpp src/glf3_render.cpp extractor/extractor.cpp src/file_picker.cpp)
+set(SOURCES src/main.cpp src/window.cpp src/imgui_render.cpp src/glf3_render.cpp extractor/extractor.cpp src/file_picker.cpp common/flags.h common/logging/printing.cpp common/logging/printing.h)
 
 add_executable(Mikompilation ${SOURCES})
 
