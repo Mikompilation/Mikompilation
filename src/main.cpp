@@ -18,7 +18,7 @@ int Gmain()
   while (!isRunning)
   {
 	  // I wOnDer hOw lOnG itS bEeN. Since my brother and i... Began to see things. Other people can't see. *Fatal Frame noises*
-    //fmvPlayed = playFmv(0);
+    //fmvPlayed = playFmv(0); // This says it's of type long?
       while (fmvPlayed)
       {
         // ToDo call all main and init functions in here
