@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVu0.cpp)
 set(HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVu0.h ${CMAKE_CURRENT_SOURCE_DIR}/FatalData.h ${CMAKE_CURRENT_SOURCE_DIR}/camera/Camera.h
 ${CMAKE_CURRENT_SOURCE_DIR}/sgd/sgdTypes.h ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVU0.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/math/VectorMath.h
         sgd/sgdRender.cpp sgd/sgdRender.h sgd/sgdGlobals.cpp sgd/sgdGlobals.h sgd/sgdLoader.cpp sgd/sgdLoader.h)
 
 add_library(engine EXCLUDE_FROM_ALL ${SOURCES} ${HEADERS})
