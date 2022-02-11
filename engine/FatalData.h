@@ -8,28 +8,6 @@
 typedef struct plyr_wrk {
 };
 
-// Look for positon and queued action as well as potential future position in here.
-typedef struct ene_wrk {
-  unsigned int unknown;
-
-  char u0;
-  char u1;
-  char u2;
-  char u3;
-
-  short Health;
-  char junk[34];
-  Vector4 position;
-
-  float couldBeAFloat;
-  float couldBeAFloat1;
-
-  // Pine testing shows at least an int value that doesn't appear the same on every ghost.
-  // It kinda looks like a pointer to a struct and Ghidra decomp seems to support it being a pointer.
-  // This is 0 when the enemy is not in scene. This is representing field 176
-  unsigned short *probablyAStructPointer;
-};
-
 // Assuming there's any data on flying ghost position and queued in here we care about.
 typedef struct fly_wrk {
 };
