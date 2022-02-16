@@ -1,9 +1,9 @@
 #pragma once
-#include <iostream>
-#include "../math/VectorMath.h"
+
+#include "math/VectorMath.h"
 
 // This is what I have in my Fatal Frame 1 Ghidra project - weirdbeard
-typedef struct cam_wrk
+struct cam_wrk
 {
 	Vector4 position;
 	Vector4 rotation;

@@ -22,7 +22,10 @@ set(SOURCES
 
 add_executable(Mikompilation ${SOURCES})
 
-target_link_libraries(Mikompilation PUBLIC ui)
+
+target_link_libraries(Mikompilation PUBLIC
+        ui
+        )
 
 target_include_directories(Mikompilation PUBLIC
         ui/

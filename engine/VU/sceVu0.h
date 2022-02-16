@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../common/math/VectorMath.h"
+#include "math/VectorMath.h"
 
 void sceVu0AddVector(Vector4 *out, Vector4 *v1, Vector4 *v2);
 void sceVu0ApplyMatrix(Vector4 *out, Matrix4x4 *m1, Matrix4x4 *m2);

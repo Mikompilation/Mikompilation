@@ -1,6 +1,5 @@
 #include "EnemyData.h"
 
-
 void Enemy::InitEneWrk(unsigned int id)
 {
     memset(&enemies[id], 0, 0x430);

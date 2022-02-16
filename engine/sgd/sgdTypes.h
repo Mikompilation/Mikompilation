@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../common/math/VectorMath.h"
+#include "math/VectorMath.h"
 #include <cstdint>
 
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
