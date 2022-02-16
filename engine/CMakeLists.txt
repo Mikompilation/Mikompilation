@@ -1,14 +1,32 @@
-Project(engine)
-cmake_minimum_required(VERSION 3.20.2)
+set(ENGINE_SOURCES
+        math/sceVu0.cpp
+        enemy/EnemyData.cpp
+        sgd/sgdGlobals.cpp
+        sgd/sgdRender.cpp
+        sgd/sgdLoader.cpp
+        )
 
-set(CMAKE_CXX_STANDARD 17)
+set(ENGINE_HEADERS
+        math/sceVu0.h
+        FatalData.h
+        camera/Camera.h
+        sgd/sgdTypes.h
+        math/sceVU0.h
+        sgd/sgdRender.cpp
+        sgd/sgdRender.h
+        sgd/sgdGlobals.cpp
+        sgd/sgdGlobals.h
+        sgd/sgdLoader.cpp
+        sgd/sgdLoader.h)
 
-set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVu0.cpp ${CMAKE_CURRENT_SOURCE_DIR}/enemy/EnemyData.cpp)
-set(HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVu0.h ${CMAKE_CURRENT_SOURCE_DIR}/FatalData.h ${CMAKE_CURRENT_SOURCE_DIR}/camera/Camera.h
-${CMAKE_CURRENT_SOURCE_DIR}/sgd/sgdTypes.h ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVU0.h
-        sgd/sgdRender.cpp sgd/sgdRender.h sgd/sgdGlobals.cpp sgd/sgdGlobals.h sgd/sgdLoader.cpp sgd/sgdLoader.h)
+add_library(engine EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 
-add_library(engine EXCLUDE_FROM_ALL ${SOURCES} ${HEADERS})
+target_include_directories(engine PUBLIC
+        ${CMAKE_CURRENT_SOURE_DIR}/camera
+        ${CMAKE_CURRENT_SOURE_DIR}/sgd
+        ${CMAKE_CURRENT_SOURE_DIR}/math
+        ${CMAKE_CURRENT_SOURCE_DIR}/enemy)
 
-target_include_directories(engine PUBLIC ${CMAKE_CURRENT_SOURE_DIR}/camera ${CMAKE_CURRENT_SOURE_DIR}/gra3d ${CMAKE_CURRENT_SOURE_DIR}/math ${CMAKE_CURRENT_SOURCE_DIR}/enemy)
+target_link_libraries(engine PUBLIC common)
+
 set_target_properties(engine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")

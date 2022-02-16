@@ -1,12 +1,10 @@
 #include "sgdTypes.h"
 
 void *SgLightParallelp;
-void *SgLightSpotp;
 void *SgLightPointp;
-void *SgWSMtx;
-void *DAT_70000300;
-void *DAT_70000370;
-void *DAT_700003f0;
+
+SgLightSpot *SgLightSpotp;
+Matrix4x4 SgWSMtx;
 
 int SgPointGroupNum, SgPointNum, SgSpotGroupNum, SgSpotNum = 0;
 
@@ -15,9 +13,15 @@ SgLightCoord *SgLightCoordp;
 SGDPROCUNITHEADER *vuvnprim;
 SGDPROCUNITHEADER *nextprim;
 SGDCOORDINATE *lcp;
+SgLightSpot DAT_70000370;
+
 int blocksm = 0;
 int write_counter = 0;
 bool PresetChk = false;
 
-Matrix4x4 Matrix4x4_70000430;
-Matrix4x4 Matrix4x4_70000090;
+Matrix4x4 shadow_prim;
+Matrix4x4 shadow_prim_post;
+
+// Unknown Globals
+void *DAT_70000300;
+void *DAT_700003f0;

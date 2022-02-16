@@ -2,6 +2,6 @@
 
 #include "../math/VectorMath.h"
 
-void printVectorC(Vector4* vector, const char* details);
+int printVectorC(Vector4* vector, const char* message);
 
-void printLMatC(Vector4 *pVector4);
+int printLMatC(Vector4 *pVector4, const char* message);

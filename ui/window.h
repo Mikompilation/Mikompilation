@@ -1,18 +1,7 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
-#include <filesystem>
-#include <iostream>
-#include <string>
-
-#include "../header/file_picker.h"
-#include "ImGuiFileDialog.h"
-#include "glf3_render.h"
-#include "imgui.h"
+#include "file_picker.h"
 #include "imgui_render.h"
-#include "glf3_render.h"
-#include "ImGuiFileDialog.h"
-#include "../header/file_picker.h"
 
 class MainWindow
 {

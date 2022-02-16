@@ -1,6 +1,32 @@
 #include "printing.h"
 
-void printVectorC(Vector4 *vector, const char *details)
+int printVectorC(Vector4 *vector, const char *message)
 {
-  printf("%s (%ff,%ff,%ff,%ff)\n", details, vector->x, vector->y, vector->z, vector->w);
+  return printf("%s (%ff,%ff,%ff,%ff)\n", message, vector->x, vector->y, vector->z, vector->w);
+}
+
+int printLMatC(Vector4 *pVector4, const char *message)
+{
+  Vector4 *pVVar1;
+  Vector4 *pVVar2;
+  int iVar3;
+  float fVar5;
+
+  printf("%s", message);
+  int i = 2;
+
+  fVar5 = pVector4->x;
+  Vector4 *currVector;
+
+  while (i > 0)
+  {
+    i += -1;
+    pVVar1 = pVector4 + 1;
+    pVVar2 = pVector4 + 2;
+    pVector4 = (Vector4 *) &pVector4->y;
+    iVar3 = printf("%f %f %f\n", (double) fVar5, (double) pVVar1->x, (double) pVVar2->x);
+    fVar5 = *(float *) pVector4;
+  }
+
+  return iVar3;
 }

@@ -1,10 +1,10 @@
 #include "window.h"
 
-// ToDo rename to main() after things have been moved around abit
+// TODO: rename to main() after things have been moved around a bit
 int main(int argc, char *argv[])
 {
-  bool isRunning;
-  bool fmvPlayed;
+  bool isRunning = true;
+  bool fmvPlayed = true;
   //InitSystems();
   MainWindow window;
   window.Init();
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     //fmvPlayed = playFmv(0); // This says it's of type long?
     while (fmvPlayed)
     {
-      // ToDo call all main and init functions in here
+      // TODO: call all main and init functions in here
       // GameMain();
       // DrawGS(); // Would be called sceGsSyncPath();
       // DrawAll2DMes_P2();

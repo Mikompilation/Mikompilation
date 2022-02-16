@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <GLFW/glfw3.h>
+#include "GLFW/glfw3.h"
 
 const int windowWidth = 1200, windowHeight = 800;
 const float backgroundR = 0.1f,

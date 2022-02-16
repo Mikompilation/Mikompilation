@@ -2,7 +2,7 @@
 #include<iostream>
 
 // Look for positon and queued action as well as potential future position in here.
-typedef struct ene_wrk {
+struct ene_wrk {
   unsigned int unknown;
 
   char u0;

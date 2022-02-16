@@ -4,7 +4,7 @@
 const int PS2_SECTOR_SIZE = 0x800;
 const int NUM_FILES_US = 0x769;
 
-typedef struct ZeroFile {
+struct ZeroFile {
   unsigned int address;
   unsigned int size;
 };
