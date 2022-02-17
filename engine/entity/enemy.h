@@ -1,7 +1,6 @@
 #include "math/VectorMath.h"
 #include<iostream>
 
-// Look for positon and queued action as well as potential future position in here.
 struct ene_wrk {
   unsigned int unknown;
 

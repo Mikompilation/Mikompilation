@@ -1,3 +1,5 @@
+set(THIRDPARTY_LIB "ThirdParty" CACHE STRING "Library name for ThirdParty")
+
 # GLFW
 set(GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
@@ -25,10 +27,15 @@ set(SOURCES
 
 add_library(ThirdParty EXCLUDE_FROM_ALL ${SOURCES})
 
-target_include_directories(ThirdParty PUBLIC
+set(ThirdParty_INCLUDE_DIRS
+        ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
         ${CMAKE_CURRENT_SOURCE_DIR}/ImGuiFileDialog
+        CACHE PATH "Path for the library ThirdParty")
+
+target_include_directories(ThirdParty PUBLIC
+        ${ThirdParty_INCLUDE_DIRS}
         )
 
 target_link_libraries(ThirdParty PUBLIC glfw OpenGL::GL)

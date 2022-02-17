@@ -1,11 +1,11 @@
-#include "EnemyData.h"
+#include "enemy.h"
 
 void Enemy::InitEneWrk(unsigned int id)
 {
     memset(&enemies[id], 0, 0x430);
     //InitMoveBox();
     //enemies[id].field_0x28 = param1;
-    //enemies[id].field_0x33c = 0x3f800000;
+    //enemies[id].field_0x33c = 1.0f;
     //enemies[id].field_0x413 = 0xff;
     //enemies[id].field_0x412 = 0xff;
 

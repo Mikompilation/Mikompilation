@@ -14,6 +14,8 @@ add_subdirectory(render)
 
 add_subdirectory(extractor)
 
+add_subdirectory(game)
+
 add_subdirectory(ui)
 
 set(SOURCES
@@ -22,11 +24,10 @@ set(SOURCES
 
 add_executable(Mikompilation ${SOURCES})
 
-
 target_link_libraries(Mikompilation PUBLIC
-        ui
+        ${UI_LIB}
         )
 
 target_include_directories(Mikompilation PUBLIC
-        ui/
+        ${UI_INCLUDE_DIRS}
         )
