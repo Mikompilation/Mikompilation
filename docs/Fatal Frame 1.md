@@ -35,6 +35,7 @@
 - plyer_wrk
 - stage_wrk
 - ingame_wrk
+- event_stts
 - outgame_wrk
 - cam_custom_wrk
 - ani_mdl
@@ -61,6 +62,14 @@
 - GuardGhostAppearMain
 - RareGhostMain
 - PuzzleGhost
+
+### Plyr Wrk:
+- Field 0, `0x00252a90`:
+  - `0x0`, `0x100`: Normal Mode changed to 0x100 after Hour 0 ghost and after first fight with Koji
+  - `0x10`. `0x110`: Viewfinder Mode Normal Mode changed to 0x110 after Hour 0 ghost and after first fight with Koji
+  - `0x2008`: Opening Door
+  - `0x801`: Taking Damage
+  - `0x1111`: Defeated Ghost.
 
 ### Zero Hour: 
 
@@ -181,3 +190,7 @@ FloatGhostAppearPosSet
 /// Updates register a0 with the ghost’s rotation. This is never referred to in Miku’s functions
 
 SetRot360
+
+// Does what it says on the tin.
+
+PlayMpegEvent

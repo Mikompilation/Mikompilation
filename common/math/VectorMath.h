@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-typedef struct Vector3 {
+struct Vector3 {
   float x;
   float y;
   float z;
@@ -61,7 +61,7 @@ typedef struct Vector3 {
   }
 };
 
-typedef struct Vector4 {
+struct Vector4 {
   float x;
   float y;
   float z;
@@ -125,13 +125,13 @@ typedef struct Vector4 {
   }
 };
 
-// ToDo: Add implementation of Matrix structures
+// TODO: Add implementation of Matrix structures
 
-typedef struct Matrix4x4 {
+struct Matrix4x4 {
   Vector4 Matrix[4];
 };
 
-typedef struct Matrix4x3 {
+struct Matrix4x3 {
   Vector4 Matrix[3];
 };
 
@@ -146,3 +146,6 @@ inline Matrix4x4 MatrixIdentity()
 
   return result;
 }
+
+void MulMatrix(Matrix4x4 *out, Matrix4x4 *m1, Matrix4x4 *m2);
+void CopyMatrix(Matrix4x4 *src, Matrix4x4 *out);

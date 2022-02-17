@@ -1,5 +1,6 @@
 #pragma once
-#include "../math/PS2Math.h"
+
+#include "math/VectorMath.h"
 #include <cstdint>
 
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
@@ -7,9 +8,8 @@ constexpr auto SGD_VALID_VERSIONID = 0x1050;
 typedef uint8_t uint8;
 typedef unsigned int uint;
 typedef unsigned int undefined4;
-typedef unsigned int undefined4;
 
-typedef struct VertexPoint {
+struct VertexPoint {
   Vector4 vuMatrix;
   Vector3 vuVector3;
   uint8 vertexId;
@@ -18,17 +18,17 @@ typedef struct VertexPoint {
   uint8 c;
 };
 
-typedef struct VERTEXLIST {
+struct VERTEXLIST {
   int iNumVertex;
 };
 
-typedef struct RotationAxis {
+struct RotationAxis {
   Vector4 x;
   Vector4 y;
   Vector4 z;
 };
 
-typedef struct SGDCOORDINATE {
+struct SGDCOORDINATE {
   RotationAxis rotationAxis;
   Vector4 coordinates;
   float fCoordArray[8][4];
@@ -39,33 +39,33 @@ typedef struct SGDCOORDINATE {
   undefined4 field_0xdc;
 };
 
-typedef struct SGDMATERIAL {
+struct SGDMATERIAL {
   char a[0xb0];
 };
 
-typedef struct SGDVECTORBSP {
+struct SGDVECTORBSP {
   uint iChildType;
   VertexPoint *pChildLeft;
   VertexPoint *pChildRight;
   VERTEXLIST *pParent;
 };
 
-typedef struct SGDVECTORINFO {
+struct SGDVECTORINFO {
   uint iNumBlockInfo;
   SGDVECTORBSP sgdVectorBsp[];
 };
 
-typedef struct SGDPROCUNITHEADER {
+struct SGDPROCUNITHEADER {
   SGDPROCUNITHEADER *pNext;
   int iCategory;
   uint procInfo;
-  char a;
+  uint8_t a;
   uint8_t mtype;
-  char b;
-  char c;
+  uint8_t b;
+  uint8_t c;
 };
 
-typedef struct SGDFILEHEADER {
+struct SGDFILEHEADER {
   uint uiVersionId;
   bool fileInitialized;
   char field_0x5;
@@ -78,4 +78,25 @@ typedef struct SGDFILEHEADER {
 
   /// There are as many iterations as uiNumBlock
   SGDPROCUNITHEADER *pProcUnit[];
+};
+
+struct SgLightCoord {
+  uint8_t unknown1[0x60];
+  Vector4 pos0;
+  Vector4 pos1;
+  Vector4 pos2;
+  Vector4 intens;
+  Vector4 intens_b;
+  Vector4 WDLightMtx[3];
+  Vector4 SLightMtx[3];
+};
+
+struct SgLightSpot {
+  int u1;
+  int u2;
+  int u3;
+  int u4;
+  Vector4 btimes;
+  Vector4 DColor[3];
+  Vector4 SColor[3];
 };

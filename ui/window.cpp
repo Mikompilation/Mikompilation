@@ -1,4 +1,6 @@
 #include "window.h"
+#include "imgui.h"
+#include "glf3_render.h"
 
 bool MainWindow::Init()
 {

@@ -1,9 +1,5 @@
-#include "gra3dSGDData.h"
-
-uint GetGlobalBufferSize()
-{
-  return 2000;
-}
+#include "sgdLoader.h"
+#include "sgdGlobals.h"
 
 bool isValidSGDFile(SGDFILEHEADER *pSGDHead)
 {
@@ -91,11 +87,10 @@ void initializeParentVectorInfo(SGDFILEHEADER *pSGDHead)
     return;
   }
 
-  //MappingVertexList(pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent, pSGDHead->pVectorInfo);
+  MappingVertexList(pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent, pSGDHead->pVectorInfo);
 
-  //MappingVertexList((VERTEXLIST *) (&pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent +
-  //                                  pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent->iNumVertex * 2),
-  //                  pSGDHead->pVectorInfo);
+  MappingVertexList((VERTEXLIST *) (&pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent +
+                                    pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent->iNumVertex * 2), pSGDHead->pVectorInfo);
 }
 
 void initializeSGDProcUnitHeader(SGDFILEHEADER *pSGDHead)
@@ -141,13 +136,13 @@ void initializeSGDType(SGDFILEHEADER *pSGDHead)
           previousPH = pPUHead;
           break;
         case 1:
-          //MappingMeshData(pPUHead, previousPH, pSGDHead);
+          MappingMeshData(pPUHead, previousPH, pSGDHead);
           break;
         case 2:
           pPUHead->procInfo = (uint) (pSGDHead->pMaterial + pPUHead->procInfo);
           break;
         case 10:
-          //RebuildTRI2Files(pPUHead);
+          RebuildTRI2Files(pPUHead);
           break;
         default:
           break;
@@ -159,7 +154,7 @@ void initializeSGDType(SGDFILEHEADER *pSGDHead)
   }
 }
 
-void sgdRemap(SGDFILEHEADER *pSGDHead)
+void SgMapUnit(SGDFILEHEADER *pSGDHead)
 {
   if (!isValidSGDFile(pSGDHead))
   {
@@ -195,4 +190,13 @@ void sgdRemap(SGDFILEHEADER *pSGDHead)
 
   initializeSGDProcUnitHeader(pSGDHead);
   initializeSGDType(pSGDHead);
+
+  if (pSGDHead->field_0x6 == 0) {
+   int i = 0;
+    for (SGDMATERIAL * uVar11 = pSGDHead->pMaterial; (int)uVar11 < (int)pSGDHead->pVectorInfo; uVar11 += sizeof(SGDMATERIAL)) {
+      i += 1;
+    }
+    pSGDHead->field_0x6 = (uint8_t)i;
+    pSGDHead->field_0x5 = PresetChk;
+  }
 }

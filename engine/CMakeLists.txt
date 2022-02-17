@@ -1,16 +1,31 @@
-Project(engine)
-cmake_minimum_required(VERSION 3.20.2)
+set(ENGINE_LIB "engine" CACHE STRING "Library name for ENGINE")
 
-set(CMAKE_CXX_STANDARD 17)
+set(ENGINE_SOURCES
+        VU/sceVu0.cpp
+        entity/enemy.cpp
+        sgd/sgdGlobals.cpp
+        sgd/sgdRender.cpp
+        sgd/sgdLoader.cpp
+        )
 
-set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/gra3d/gra3dSGDData.cpp ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVu0.cpp)
-set(HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVu0.h ${CMAKE_CURRENT_SOURCE_DIR}/FatalData.h ${CMAKE_CURRENT_SOURCE_DIR}/camera/Camera.h
-${CMAKE_CURRENT_SOURCE_DIR}/gra3d/sgdtypes.h ${CMAKE_CURRENT_SOURCE_DIR}/gra3d/gra3dSGDData.h ${CMAKE_CURRENT_SOURCE_DIR}/math/sceVU0.h
-${CMAKE_CURRENT_SOURCE_DIR}/math/PS2Math.h
-)
+set(ENGINE_HEADERS
+        entity/enemy.h
+        camera/camera.h
+        VU/sceVU0.h
+        sgd/sgdTypes.h
+        sgd/sgdRender.h
+        sgd/sgdGlobals.h
+        sgd/sgdLoader.h
+        )
 
-add_library(engine EXCLUDE_FROM_ALL ${SOURCES} ${HEADERS})
+add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 
-target_include_directories(engine PUBLIC ${CMAKE_CURRENT_SOURE_DIR}/camera ${CMAKE_CURRENT_SOURE_DIR}/gra3d ${CMAKE_CURRENT_SOURE_DIR}/math)
+set(ENGINE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "Path for the library ENGINE")
 
-set_target_properties(engine PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+target_include_directories(${ENGINE_LIB} PUBLIC
+        ${ENGINE_INCLUDE_DIRS}
+        )
+
+target_link_libraries(${ENGINE_LIB} PUBLIC ${COMMON_LIB})
+
+set_target_properties(${ENGINE_LIB} PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")

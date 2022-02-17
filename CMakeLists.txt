@@ -1,17 +1,33 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.20.2)
 
 project(Mikompilation CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
+add_subdirectory(common)
+
 add_subdirectory(engine)
 
 add_subdirectory(third-party)
 
-set(SOURCES src/main.cpp src/window.cpp src/imgui_render.cpp src/glf3_render.cpp extractor/extractor.cpp src/file_picker.cpp)
+add_subdirectory(render)
+
+add_subdirectory(extractor)
+
+add_subdirectory(game)
+
+add_subdirectory(ui)
+
+set(SOURCES
+        src/main.cpp
+        )
 
 add_executable(Mikompilation ${SOURCES})
 
-target_link_libraries(Mikompilation PUBLIC ThirdParty engine)
+target_link_libraries(Mikompilation PUBLIC
+        ${UI_LIB}
+        )
 
-target_include_directories(Mikompilation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/header ${EXTRA_INCLUDES} )
+target_include_directories(Mikompilation PUBLIC
+        ${UI_INCLUDE_DIRS}
+        )
