@@ -9,9 +9,9 @@ set(ENGINE_SOURCES
         )
 
 set(ENGINE_HEADERS
+        VU/sceVu0.h
         entity/enemy.h
         camera/camera.h
-        VU/sceVU0.h
         sgd/sgdTypes.h
         sgd/sgdRender.h
         sgd/sgdGlobals.h
