@@ -11,4 +11,7 @@ const float backgroundR = 0.1f,
 static void glfw_error_callback(int error, const char *description);
 static void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void teardown(GLFWwindow *window);
+void startNewFrame();
+void endFrame(GLFWwindow *window);
+void drawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat edgeLength);
 GLFWwindow* InitializeWindow();

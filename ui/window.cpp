@@ -13,8 +13,6 @@ bool MainWindow::Init()
 
   InitializeImGui(window);
 
-  glClearColor(backgroundR, backgroundG, backgroundB, 1.0f);
-
   this->filePicker = new FilePicker(std::vector{
       SelectFile{".bin", "IMG_HD"},
       SelectFile{".bin", "IMG_BD"}});
@@ -26,16 +24,17 @@ void MainWindow::Update()
 {
   while (!glfwWindowShouldClose(window))
   {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+      startNewFrame();
 
-    NewFrame();
+      NewFrame();
 
-    this->filePicker->Render();
+      drawCube(400, 320, -500, 200);
 
-    EndFrame();
+      this->filePicker->Render();
 
-    glfwSwapBuffers(window);
-    glfwPollEvents();
+      EndFrame();
+
+      endFrame(window);
   }
 
   Terminate();
