@@ -6,6 +6,7 @@ set(ENGINE_SOURCES
         sgd/sgdGlobals.cpp
         sgd/sgdRender.cpp
         sgd/sgdLoader.cpp
+        fs/file.cpp
         )
 
 set(ENGINE_HEADERS
@@ -16,6 +17,8 @@ set(ENGINE_HEADERS
         sgd/sgdRender.h
         sgd/sgdGlobals.h
         sgd/sgdLoader.h
+        fs/file.h
+        fs/fileLoadGlobals.h
         )
 
 add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})

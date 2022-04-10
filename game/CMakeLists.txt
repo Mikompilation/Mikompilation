@@ -10,7 +10,7 @@ set(GAME_SOURCES
 
 set(GAME_HEADERS
         game_main.h
-        )
+        gphase.h)
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})
 
