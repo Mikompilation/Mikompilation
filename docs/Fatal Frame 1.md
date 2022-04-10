@@ -73,124 +73,122 @@
 
 ### Zero Hour: 
 
-/// Mafuyu game logic
+* Mafuyu game logic
 
 ZeroHourAppearMain
 
-/// Function called in Battle after finding Mr. Takamine’s note book
+* Function called in Battle after finding Mr. Takamine’s note book
 
 ZeroGhostBattleJudge
 
 ### Finder:
 
-/// The function that activates finder mode
+* The function that activates finder mode
 
 FinderInSet
 
-/// The function that ends finder mode
+* The function that ends finder mode
 
 FinderOutSet
 
- /// What appears to be the actual viewfinder mode. It seems to loop and handles all logic in viewfinder mode.
+ * What appears to be the actual viewfinder mode. It seems to loop and handles all logic in viewfinder mode.
 
 FinderModeCameraControl
 
-/// Could be the actual controls as well
+* Could be the actual controls as well
 
 PlyrFinderCtrl
 
-/// Could refer to active camera position 
+* Could refer to active camera position 
 
 GetCamI2DPos
 
 ### Player data
 
-/// Appears to refer to a cartesian vector “Undefined8” in ghidra terms could be referring to that. Plyr_wrk appears in many functions and appears to be some kind of byte array storing data about Miku in the game world.
+* Appears to refer to a cartesian vector “Undefined8” in ghidra terms could be referring to that. Plyr_wrk appears in many functions and appears to be some kind of byte array storing data about Miku in the game world.
 
 PlyrPosSet
 
- /// Refers to rotate limit check function. Refers to GetDoorMtnDat which im assuming is supposed to check if theres a door and adjust Mikus position accordingly
+ * Refers to rotate limit check function. Refers to GetDoorMtnDat which im assuming is supposed to check if theres a door and adjust Mikus position accordingly
 
 PlyrPosAdj
 
-/// Could be a corrective function?
+* Could be a corrective function?
 
 PlyrPosReSet
 
-/// Im assuming is checking if battle.
+* Im assuming is checking if battle.
 
 PlyrBattleChk
 
-/// Related to player control?
+* Related to player control?
 
 PlyrChargeCtrl
 
-/// Should be self descriptive. Set's player door related positioning
+* Should be self descriptive. Set's player door related positioning
 
 SetDoorOpenPlyrPos
 
 SetPlyrPosAfterDOpen
 
-/// Position of flashlight beam?
+* Position of flashlight beam?
 
 GetPlyrAcsLightPos
 
-/// Posotion of feet model
+* Posotion of feet model
 
 GetPlyrFootPos
 
- /// Checks player position relative to the floor?
+ * Checks player position relative to the floor?
 
  PlyrHeightCtrl
 
- /// Active room file.
+ * Active room file.
 
 GetPlayerRoom
 
-/// Runs and processes mode checks. Has what Ghidras identified as a switch case for each mode“PlyrNormalCtrl, FinderCtrl, DmgCtrl”And other logic 
+* Runs and processes mode checks. Has what Ghidras identified as a switch case for each mode“PlyrNormalCtrl, FinderCtrl, DmgCtrl”And other logic 
 
 PlyrCtrlMain
 
-/// Appears to copy values into an array and preform vector equations on that to gauge Mikus distance from an object. I could use it to detect her distance from the enemy. Note that this function is not active during Zero Hour. It seems to be a constantly looping function to detect if Miku specifically will collide with objects. Why Mafuyu doesnt get this is a mystery
+* Appears to copy values into an array and preform vector equations on that to gauge Mikus distance from an object. I could use it to detect her distance from the enemy. Note that this function is not active during Zero Hour. It seems to be a constantly looping function to detect if Miku specifically will collide with objects. Why Mafuyu doesnt get this is a mystery
 
 GetDistPlyr
 
 ### Generic position
 
-/// To check if the passed rotation isnt out of bounds. Ghidra is strangely saying this just takes a float parameter but Id assume we would have a vector for Quaternion equations.
+* To check if the passed rotation isnt out of bounds. Ghidra is strangely saying this just takes a float parameter but Id assume we would have a vector for Quaternion equations.
 
 RotLimitChk
 
-/// Potentially an equation that takes a last position and factors that into the current one. Can I set any value or will this break? Most of the code appears to be Ghidra funk though.
+* Potentially an equation that takes a last position and factors that into the current one. Can I set any value or will this break? Most of the code appears to be Ghidra funk though.
 
 sceVu0AddVector
 
 ### Enemy functions
 
-/// Takes an array of Fly_Wrk struct and Ene_wrk structs. Extracts one from Fly_wrk
+* Takes an array of Fly_Wrk struct and Ene_wrk structs. Extracts one from Fly_wrk
 
 EneCtrlMain
 
-/// refers to the Himuro Family Master. More specifically his sword he attacks with. Im assuming its to calculate Sword Hit Box if (uVar2 == 0x25) checks if he's active
+* refers to the Himuro Family Master. More specifically his sword he attacks with. Im assuming its to calculate Sword Hit Box if (uVar2 == 0x25) checks if he's active
 
 GetToushuKatanaPos
 
-/// “InWall or Object”?
+* “InWall or Object”?
 
 FloatGhostPosType
 
-/// "X, Y, Z”
+* "X, Y, Z”
 
 FloatGhostSetPos
 
-/// Set’s if in wall or object though I’m assuming.
+* Set’s if in wall or object though I’m assuming.
 
 FloatGhostAppearPosSet
 
-/// Updates register a0 with the ghost’s rotation. This is never referred to in Miku’s functions
+* Updates register a0 with the ghost’s rotation. This is never referred to in Miku’s functions
 
 SetRot360
-
-// Does what it says on the tin.
 
 PlayMpegEvent

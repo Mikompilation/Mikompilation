@@ -11,6 +11,7 @@ class MainWindow
   FilePicker* filePicker;
 
  public:
+  MainWindow(GLFWwindow *window);
   bool Init();
   void Update();
 };

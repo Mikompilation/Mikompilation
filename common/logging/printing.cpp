@@ -30,3 +30,8 @@ int printLMatC(Vector4 *pVector4, const char *message)
 
   return iVar3;
 }
+
+void printNotImplemented(const char* methodName, const char* fileName)
+{
+    printf("The method %s located in the file %s is not yet implemented.", methodName, fileName);
+}

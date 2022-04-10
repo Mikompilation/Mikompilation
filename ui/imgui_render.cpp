@@ -1,9 +1,5 @@
 #include "imgui_render.h"
 
-
-bool show_demo_window = false;
-bool show_another_window = false;
-
 void InitializeImGui(GLFWwindow *window)
 {
   IMGUI_CHECKVERSION();

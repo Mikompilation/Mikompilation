@@ -1,5 +1,7 @@
 #include "game_main.h"
+#include "gphase.h"
 
-void game_main()
+void gameMain()
 {
+  InitGPhaseSys();
 }

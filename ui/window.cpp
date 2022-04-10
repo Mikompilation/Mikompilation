@@ -2,10 +2,13 @@
 #include "imgui.h"
 #include "glf3_render.h"
 
+MainWindow::MainWindow(GLFWwindow *window)
+{
+  this->window = window;
+}
+
 bool MainWindow::Init()
 {
-  window = InitializeWindow();
-
   if (window == NULL)
   {
     return false;
@@ -22,21 +25,9 @@ bool MainWindow::Init()
 
 void MainWindow::Update()
 {
-  while (!glfwWindowShouldClose(window))
-  {
-      startNewFrame();
+  NewFrame();
 
-      NewFrame();
+  this->filePicker->Render();
 
-      drawCube(400, 320, -500, 200);
-
-      this->filePicker->Render();
-
-      EndFrame();
-
-      endFrame(window);
-  }
-
-  Terminate();
-  teardown(window);
+  EndFrame();
 }

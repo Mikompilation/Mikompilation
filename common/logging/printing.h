@@ -5,3 +5,5 @@
 int printVectorC(Vector4* vector, const char* message);
 
 int printLMatC(Vector4 *pVector4, const char* message);
+
+void printNotImplemented(const char* methodName, const char* fileName);
