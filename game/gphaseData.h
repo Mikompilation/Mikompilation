@@ -23,6 +23,7 @@ enum GPHASE_LAYER : int
 /// Game Phases (GPHASE) of the game. Used to layout the game logic and group functions goals.
 enum GPHASE_ID : int
 {
+  DEFAULT = -1,
   SUPER,
   BOOT_INIT,
   AUTOLOAD_MAIN,
@@ -115,7 +116,7 @@ enum GPHASE_ID : int
 
 struct GPHASE_STRUCT {
   GPHASE_LAYER layer;
-  int unknown_0x4;
-  GPHASE_ID gphaseId;
+  GPHASE_ID field_0x4;
+  GPHASE_ID field_0x8;
   int unknown_0xC;
 };

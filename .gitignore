@@ -472,3 +472,5 @@ out/*
 build/*
 bin/*
 engine/cmake-build-debug/
+
+tools/ExportStruct/cmake-build-debug/
