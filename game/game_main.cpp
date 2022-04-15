@@ -4,4 +4,9 @@
 void gameMain()
 {
   InitGPhaseSys();
+
+  do
+  {
+    GPhaseSysMain();
+  } while (!shutDownGame);
 }

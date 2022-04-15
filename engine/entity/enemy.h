@@ -1,5 +1,5 @@
 #include "math/VectorMath.h"
-#include<iostream>
+#include <iostream>
 
 struct ene_wrk {
   unsigned int unknown;

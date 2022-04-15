@@ -1,3 +1,3 @@
 #pragma once
 
-bool dbg_flg = false;
+inline bool dbg_flg = false;

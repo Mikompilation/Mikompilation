@@ -26,8 +26,10 @@ add_executable(Mikompilation ${SOURCES})
 
 target_link_libraries(Mikompilation PUBLIC
         ${UI_LIB}
+        ${GAME_LIB}
         )
 
 target_include_directories(Mikompilation PUBLIC
         ${UI_INCLUDE_DIRS}
+        ${GAME_INCLUDE_DIRS}
         )

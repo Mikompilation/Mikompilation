@@ -4,6 +4,12 @@
 
 using namespace std;
 
+const char* FILE_NAME = "";
+
+const int NUM_ELEMENTS = 94;
+
+const int OFFSET_ADDRESS = 0x218758;
+
 struct StructToConvert
 {
   int a;
@@ -12,13 +18,13 @@ struct StructToConvert
   int d;
 };
 
-char *readFullFile(const char *filename, int offsetAddress, int numElements)
+StructToConvert* readFullFile()
 {
-  std::ifstream infile(filename, std::ios::binary);
+  std::ifstream infile(FILE_NAME, std::ios::binary);
 
-  infile.seekg(offsetAddress, std::ios::beg);
+  infile.seekg(OFFSET_ADDRESS, std::ios::beg);
 
-  int length = sizeof(StructToConvert) * numElements;
+  int length = sizeof(StructToConvert) * NUM_ELEMENTS;
 
   char *buffer = new char[length];
 
@@ -26,20 +32,20 @@ char *readFullFile(const char *filename, int offsetAddress, int numElements)
 
   infile.close();
 
-  return buffer;
+  return (StructToConvert*) buffer;
 }
 
-void printStructCode(const StructToConvert* structToConvert, int numElements)
+void printStructCode(const StructToConvert* structToConvert)
 {
-  printf("GPHASE_STRUCT gphase_tbl[%d] = \n{", numElements);
+  printf("GPHASE_STRUCT gphase_tbl[%d] = \n{", NUM_ELEMENTS);
 
-  for(int i = 0; i < numElements; i++)
+  for(int i = 0; i < NUM_ELEMENTS; i++)
   {
     printf("\n\t{");
     printf("\n\t\t(GPHASE_LAYER) %d,", structToConvert[i].a);
     printf("\n\t\t(GPHASE_ID) %d,", structToConvert[i].b);
     printf("\n\t\t(GPHASE_ID) %d,", structToConvert[i].c);
-    printf("\n\t\t%d", structToConvert[i].d);
+    printf("\n\t\t(GPHASE_ID) %d", structToConvert[i].d);
     printf("\n\t},");
   }
 
@@ -48,9 +54,9 @@ void printStructCode(const StructToConvert* structToConvert, int numElements)
 
 int main(int argc, char *argv[])
 {
-  StructToConvert* structToConvert = (StructToConvert*) readFullFile("YOUR FILE WITH PATH HERE", 0x00000000, 0);
+  StructToConvert* structToConvert = readFullFile();
 
-  printStructCode(structToConvert, 0);
+  printStructCode(structToConvert);
 
   return 0;
 }

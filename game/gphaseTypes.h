@@ -1,3 +1,5 @@
+#pragma once
+
 /// Regroups game logic into game modes or utilities.
 enum GPHASE_LAYER : int
 {
@@ -20,7 +22,8 @@ enum GPHASE_LAYER : int
   MISSION
 };
 
-/// Game Phases (GPHASE) of the game. Used to layout the game logic and group functions goals.
+/// Game Phases (GPHASE) of the game.
+/// Used to layout the game logic and group functions goals.
 enum GPHASE_ID : int
 {
   DEFAULT = -1,
@@ -62,7 +65,7 @@ enum GPHASE_ID : int
   STORY_ENE_DEAD,
   STORY_PUZZLE,
   STORY_SAVEPOINT,
-  STORY_MOVIE_ROOM_SEL,
+  STORY_MOVIE_ROOM_SELECTION,
   GAME_OVER_MENU_TOP,
   GAME_OVER_MENU_LOAD,
   GAME_OVER_MENU_ALBUM,
@@ -81,11 +84,11 @@ enum GPHASE_ID : int
   TITLE_ALBUM,
   TITLE_GALLERY,
   TITLE_OPTION,
-  TITLE_CHAPTER_SEL,
+  TITLE_CHAPTER_SELECTION,
   STORY_LOAD_MISSION,
   STORY_LOAD_MISSION_EVENT,
   STORY_LOAD_MISSION_SAVE,
-  STORY_GAME_OVER_EFF,
+  STORY_GAME_OVER_EFFECT,
   STORY_GAME_OVER_FADE,
   STORY_GAME_OVER_MOVIE_PRELOAD,
   STORY_SCENE_PRELOAD,
@@ -114,9 +117,9 @@ enum GPHASE_ID : int
   MISSION_SAVE
 };
 
-struct GPHASE_STRUCT {
+struct GPHASE_INFO {
   GPHASE_LAYER layer;
-  GPHASE_ID field_0x4;
-  GPHASE_ID field_0x8;
-  int unknown_0xC;
+  GPHASE_ID nextGPhase;
+  GPHASE_ID preFuncArgument;
+  GPHASE_ID afterFuncArgument;
 };

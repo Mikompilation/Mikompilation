@@ -8,12 +8,14 @@ set(GAME_INCLUDE_DIRS
 set(GAME_SOURCES
         game_main.cpp
         gphase.cpp
+        gameFunctions.cpp
         )
 
 set(GAME_HEADERS
         game_main.h
         gphase.h
-        gphaseData.h
+        gphaseTypes.h
+        gameFunctions.h
         )
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})

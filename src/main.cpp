@@ -1,5 +1,7 @@
+#include <thread>
 #include "window.h"
 #include "glf3_render.h"
+#include "game_main.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +10,8 @@ int main(int argc, char *argv[])
   MainWindow mainWindow(glfwWindow);
   mainWindow.Init();
 
+  std::thread gameThread(gameMain);
+
   while (!glfwWindowShouldClose(glfwWindow))
   {
     startNewFrame();
@@ -15,6 +19,10 @@ int main(int argc, char *argv[])
     mainWindow.Update();
     endFrame(glfwWindow);
   }
+
+  shutDownGame = true;
+
+  gameThread.join();
 
   Terminate();
   teardown(glfwWindow);
