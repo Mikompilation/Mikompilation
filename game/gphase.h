@@ -1,35 +1,12 @@
 #pragma once
 
 #include "gphaseTypes.h"
-#include "gameFunctions.h"
-
-inline const int gphase_num = 94;
 
 inline const int gphase_sys_num = 6;
 inline GPHASE_ID gphase_sys[gphase_sys_num];
 inline int gphase_flags[gphase_sys_num];
 
 inline GPHASE_ID next_gphase[6];
-
-inline void (*ini_func[gphase_num])() =
-    {
-        init_super
-};
-
-inline void (*end_func[gphase_num])() =
-    {
-        end_super
-};
-
-inline GPHASE_ID (*pre_func[gphase_num])(GPHASE_ID) =
-    {
-        pre_super
-};
-
-inline GPHASE_ID (*after_func[gphase_num])(GPHASE_ID) =
-    {
-        after_super
-};
 
 inline const GPHASE_INFO gphase_tbl[94] =
     {

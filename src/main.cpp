@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
   MainWindow mainWindow(glfwWindow);
   mainWindow.Init();
 
-  std::thread gameThread(gameMain);
+  std::thread gameThread(game_main);
 
   while (!glfwWindowShouldClose(glfwWindow))
   {

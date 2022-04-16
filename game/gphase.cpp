@@ -1,4 +1,5 @@
 #include "gphase.h"
+#include "gphase_data.h"
 #include <stdio.h>
 
 void InitGPhaseSys()
