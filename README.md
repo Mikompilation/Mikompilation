@@ -1,7 +1,7 @@
 # Mikompilation
 [![Build Mikompilation](https://github.com/wagrenier/Mikompilation/actions/workflows/Build.yml/badge.svg)](https://github.com/wagrenier/Mikompilation/actions/workflows/Build.yml)
 
-Decompilation project for the Fatal Frame 2 : Crimson Butterfly (Project Zero 2/零～紅い蝶) game engine. Our goal is to have a fully playable port on PC and maybe on future platforms too.
+Decompilation project for the Fatal Frame 2 : Crimson Butterfly；Project Zero 2；<ruby>零<rt>ぜろ</rt></ruby>～<ruby>紅い蝶<rt>あかいちょう</rt> game engine. Our goal is to have a fully playable port on PC and maybe on future platforms too.
 
 Mainly a project to learn about reversing and coding in OpenGL.
 
