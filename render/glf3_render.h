@@ -13,5 +13,5 @@ static void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 void teardown(GLFWwindow *window);
 void startNewFrame();
 void endFrame(GLFWwindow *window);
-void drawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat edgeLength);
+void drawPixelBuffer();
 GLFWwindow* InitializeWindow();

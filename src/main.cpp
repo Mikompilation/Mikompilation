@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
   while (!glfwWindowShouldClose(glfwWindow))
   {
     startNewFrame();
-    drawCube(400, 320, -500, 200);
+    drawPixelBuffer();
     mainWindow.Update();
     endFrame(glfwWindow);
   }
