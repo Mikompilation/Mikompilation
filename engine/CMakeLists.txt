@@ -31,4 +31,4 @@ target_include_directories(${ENGINE_LIB} PUBLIC
 
 target_link_libraries(${ENGINE_LIB} PUBLIC ${COMMON_LIB})
 
-set_target_properties(${ENGINE_LIB} PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+set_target_properties(${ENGINE_LIB} PROPERTIES LINK_FLAGS "-m32")

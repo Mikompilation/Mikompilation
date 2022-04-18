@@ -18,4 +18,4 @@ set(UI_HEADERS
 
 add_library(${UI_LIB} EXCLUDE_FROM_ALL ${UI_SOURCES} ${UI_HEADERS})
 
-target_link_libraries(${UI_LIB} PUBLIC ${THIRDPARTY_LIB} ${RENDER_LIB})
+target_link_libraries(${UI_LIB} PUBLIC ${THIRDPARTY_LIB})

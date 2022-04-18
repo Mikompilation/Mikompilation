@@ -1,6 +1,5 @@
 #include "window.h"
 #include "imgui.h"
-#include "glf3_render.h"
 
 MainWindow::MainWindow(GLFWwindow *window)
 {
