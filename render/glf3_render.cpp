@@ -61,7 +61,7 @@ static void framebuffer_size_callback(GLFWwindow *window, int width, int height)
   SCREEN_WIDTH = width;
   SCREEN_HEIGHT = height;
 
-  delete PixelBuffer;
+  delete[] PixelBuffer;
   PixelBuffer = new GLubyte[SCREEN_WIDTH * SCREEN_HEIGHT * 3];
   glViewport(0, 0, width, height);
 }
@@ -89,17 +89,24 @@ void endFrame(GLFWwindow *window)
   glfwPollEvents();
 }
 
+void setPixel(int width, int height, GLubyte r, GLubyte g, GLubyte b)
+{
+  if (width > SCREEN_WIDTH || height > SCREEN_HEIGHT || PixelBuffer == nullptr)
+  {
+    return;
+  }
+
+  int position = (width + height * SCREEN_WIDTH) * 3;
+  PixelBuffer[position] = r;
+  PixelBuffer[position + 1] = g;
+  PixelBuffer[position + 2] = b;
+}
+
 void drawPixelBuffer()
 {
-  for (int y = 0; y < SCREEN_HEIGHT; y++)
+  if (PixelBuffer == nullptr)
   {
-    for (int x = 0; x < SCREEN_WIDTH; x++)
-    {
-      int position = (x + y * SCREEN_WIDTH) * 3;
-      PixelBuffer[position] = rand();
-      PixelBuffer[position + 1] = rand();
-      PixelBuffer[position + 2] = rand();
-    }
+    return;
   }
 
   glDrawPixels(SCREEN_WIDTH, SCREEN_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, PixelBuffer);

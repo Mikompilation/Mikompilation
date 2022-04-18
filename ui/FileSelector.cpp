@@ -1,14 +1,14 @@
-#include "FilePicker.h"
+#include "FileSelector.h"
 #include "ImGuiFileDialog.h"
 
-FilePicker::FilePicker(std::vector<SelectFile> selectFile)
+FileSelector::FileSelector(std::vector<SelectFile> selectFile)
 {
   this->filesToSelect = selectFile;
 }
 
-void FilePicker::Update()
+void FileSelector::Update()
 {
-  ImGui::Begin("File Picker");
+  ImGui::Begin("File Selector");
 
   for (auto fileToSelect : this->filesToSelect)
   {
@@ -28,7 +28,7 @@ void FilePicker::Update()
   ImGui::End();
 }
 
-void FilePicker::RenderFileSelector(SelectFile fileToSelect)
+void FileSelector::RenderFileSelector(SelectFile fileToSelect)
 {
   std::string windowKey = "Choose" + fileToSelect.fileName;
   ImGuiFileDialog::Instance()->OpenDialog(windowKey, "Choose File " + fileToSelect.fileName, fileToSelect.fileExtension.c_str(), ".");
@@ -41,7 +41,7 @@ void FilePicker::RenderFileSelector(SelectFile fileToSelect)
   this->CloseFileSelector();
 }
 
-void FilePicker::CloseFileSelector()
+void FileSelector::CloseFileSelector()
 {
   if (ImGuiFileDialog::Instance()->IsOk())
   {

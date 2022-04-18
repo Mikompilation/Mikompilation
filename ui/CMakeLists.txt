@@ -6,14 +6,14 @@ set(UI_INCLUDE_DIRS
 
 set(UI_SOURCES
         imgui_render.cpp
-        FilePicker.cpp
+        FileSelector.cpp
         MainWindow.cpp
         TopMenuBar.cpp
         )
 
 set(UI_HEADERS
         imgui_render.h
-        FilePicker.h
+        FileSelector.h
         MainWindow.h
         TopMenuBar.h
         )

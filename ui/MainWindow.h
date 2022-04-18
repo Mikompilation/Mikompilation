@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FilePicker.h"
+#include "FileSelector.h"
 #include "TopMenuBar.h"
 #include "imgui_render.h"
 
@@ -8,7 +8,7 @@ class MainWindow
 {
  private:
   GLFWwindow *window;
-  FilePicker* filePicker;
+  FileSelector * filePicker;
   TopMenuBar* topMenuBar;
 
  public:

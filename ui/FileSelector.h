@@ -15,7 +15,7 @@ struct File {
   fs::path fileName;
 };
 
-class FilePicker
+class FileSelector
 {
  private:
   std::vector<SelectFile> filesToSelect;
@@ -24,7 +24,7 @@ class FilePicker
   void CloseFileSelector();
 
  public:
-  FilePicker(std::vector<SelectFile> selectFile);
-  void Update();
   std::vector<File> files;
+  FileSelector(std::vector<SelectFile> selectFile);
+  void Update();
 };
