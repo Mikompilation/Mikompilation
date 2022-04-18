@@ -1,4 +1,4 @@
-#include "window.h"
+#include "MainWindow.h"
 #include "imgui.h"
 
 MainWindow::MainWindow(GLFWwindow *window)
@@ -19,6 +19,8 @@ bool MainWindow::Init()
       SelectFile{".bin", "IMG_HD"},
       SelectFile{".bin", "IMG_BD"}});
 
+  this->topMenuBar = new TopMenuBar;
+
   return true;
 }
 
@@ -26,7 +28,8 @@ void MainWindow::Update()
 {
   NewFrame();
 
-  this->filePicker->Render();
+  this->filePicker->Update();
+  this->topMenuBar->Update();
 
   EndFrame();
 }

@@ -25,6 +25,6 @@ class FilePicker
 
  public:
   FilePicker(std::vector<SelectFile> selectFile);
-  void Render();
+  void Update();
   std::vector<File> files;
 };

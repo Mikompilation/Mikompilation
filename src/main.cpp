@@ -1,7 +1,7 @@
-#include <thread>
-#include "window.h"
-#include "glf3_render.h"
+#include "MainWindow.h"
 #include "game_main.h"
+#include "glf3_render.h"
+#include <thread>
 
 int main(int argc, char *argv[])
 {

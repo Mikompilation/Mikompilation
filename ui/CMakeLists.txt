@@ -6,14 +6,16 @@ set(UI_INCLUDE_DIRS
 
 set(UI_SOURCES
         imgui_render.cpp
-        file_picker.cpp
-        window.cpp
+        FilePicker.cpp
+        MainWindow.cpp
+        TopMenuBar.cpp
         )
 
 set(UI_HEADERS
         imgui_render.h
-        file_picker.h
-        window.h
+        FilePicker.h
+        MainWindow.h
+        TopMenuBar.h
         )
 
 add_library(${UI_LIB} EXCLUDE_FROM_ALL ${UI_SOURCES} ${UI_HEADERS})

@@ -1,4 +1,4 @@
-#include "file_picker.h"
+#include "FilePicker.h"
 #include "ImGuiFileDialog.h"
 
 FilePicker::FilePicker(std::vector<SelectFile> selectFile)
@@ -6,7 +6,7 @@ FilePicker::FilePicker(std::vector<SelectFile> selectFile)
   this->filesToSelect = selectFile;
 }
 
-void FilePicker::Render()
+void FilePicker::Update()
 {
   ImGui::Begin("File Picker");
 

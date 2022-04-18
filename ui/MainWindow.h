@@ -1,14 +1,15 @@
 #pragma once
 
-#include "file_picker.h"
+#include "FilePicker.h"
+#include "TopMenuBar.h"
 #include "imgui_render.h"
 
 class MainWindow
 {
  private:
-  int windowWidth = 1200, windowHeight = 800;
   GLFWwindow *window;
   FilePicker* filePicker;
+  TopMenuBar* topMenuBar;
 
  public:
   MainWindow(GLFWwindow *window);
