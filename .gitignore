@@ -474,3 +474,5 @@ bin/*
 engine/cmake-build-debug/
 
 tools/ExportStruct/cmake-build-debug/
+
+tools/Extractor/cmake-build-debug/

@@ -12,8 +12,6 @@ add_subdirectory(third-party)
 
 add_subdirectory(render)
 
-add_subdirectory(extractor)
-
 add_subdirectory(game)
 
 add_subdirectory(ui)
