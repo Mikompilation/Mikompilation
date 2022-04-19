@@ -10,10 +10,13 @@ set(RENDER_SOURCES
 
 set(RENDER_HEADERS
         glf3_render.h
+        stb_image.h
+        shader.h
         )
 
 add_library(${RENDER_LIB} EXCLUDE_FROM_ALL ${RENDER_SOURCES} ${RENDER_HEADERS})
 
+target_include_directories(${RENDER_LIB} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
 target_link_libraries(${RENDER_LIB} PUBLIC ${THIRDPARTY_LIB})
 
-target_include_directories(${RENDER_LIB} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -1,9 +1,27 @@
 #include "glf3_render.h"
 
-int SCREEN_WIDTH = 640;
-int SCREEN_HEIGHT = 480;
+#include "shader.h"
+#include "stb_image.h"
 
-GLubyte * PixelBuffer = new GLubyte[SCREEN_WIDTH * SCREEN_HEIGHT * 3];
+unsigned int VBO, VAO, EBO;
+unsigned int texture1;
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 600;
+
+float vertices[] = {
+    // positions          // colors           // texture coords
+    0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // top right
+    0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,// bottom left
+    -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // top left
+};
+
+unsigned int indices[] = {
+    0, 1, 3, // first triangle
+    1, 2, 3  // second triangle
+};
+
+GLubyte *PixelBuffer = new GLubyte[SCREEN_WIDTH * SCREEN_HEIGHT * 3];
 
 GLFWwindow *InitializeWindow()
 {
@@ -14,16 +32,21 @@ GLFWwindow *InitializeWindow()
     return NULL;
   }
 
-  GLFWwindow *window;
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  // Initialize the library
-  if (!glfwInit())
+  GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Mikompilation", NULL, NULL);
+
+  glfwMakeContextCurrent(window);
+
+  glewExperimental = GL_TRUE;
+  GLenum err = glewInit();
+
+  if (GLEW_OK != err)
   {
-    return NULL;
+    fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
   }
-
-  // Create a windowed mode window and its OpenGL context
-  window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Mikompilation", NULL, NULL);
 
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -32,21 +55,34 @@ GLFWwindow *InitializeWindow()
   int screenWidth, screenHeight;
   glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
 
-  if (!window)
-  {
-    glfwTerminate();
-    return NULL;
-  }
+  glViewport(0.0f, 0.0f, screenWidth, screenHeight);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1000);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
 
-  // Make the window's context current
-  glfwMakeContextCurrent(window);
+  glGenVertexArrays(1, &VAO);
+  glGenBuffers(1, &VBO);
+  glGenBuffers(1, &EBO);
 
-  glViewport(0.0f, 0.0f, screenWidth, screenHeight);  // specifies the part of the window to which OpenGL will draw (in pixels), convert from normalised to pixels
-  glMatrixMode(GL_PROJECTION);                        // projection matrix defines the properties of the camera that views the objects in the world coordinate frame. Here you typically set the zoom factor, aspect ratio and the near and far clipping planes
-  glLoadIdentity();                                   // replace the current matrix with the identity matrix and starts us a fresh because matrix transforms such as glOrpho and glRotate cumulate, basically puts us at (0, 0, 0)
-  glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1000);// essentially set coordinate system
-  glMatrixMode(GL_MODELVIEW);                         // (default matrix mode) modelview matrix defines how your objects are transformed (meaning translation, rotation and scaling) in your world
-  glLoadIdentity();                                   // same as above comment
+  glBindVertexArray(VAO);
+
+  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+  // position attribute
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(0);
+  // color attribute
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+  glEnableVertexAttribArray(1);
+  // texture coord attribute
+  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+  glEnableVertexAttribArray(2);
 
   return window;
 }
@@ -100,6 +136,54 @@ void setPixel(int width, int height, GLubyte r, GLubyte g, GLubyte b)
   PixelBuffer[position] = r;
   PixelBuffer[position + 1] = g;
   PixelBuffer[position + 2] = b;
+}
+
+void loadTexture()
+{
+  Shader ourShader("D:\\Programming\\Git\\Github\\Mikompilation\\render\\shader.vs", "D:\\Programming\\Git\\Github\\Mikompilation\\render\\shader.fs");
+
+  glGenTextures(1, &texture1);
+  glBindTexture(GL_TEXTURE_2D, texture1);
+
+  // set the texture wrapping/filtering options (on the currently bound texture object)
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+  // load and generate the texture
+  int width, height, nrChannels;
+
+  stbi_set_flip_vertically_on_load(true);
+
+  unsigned char *data = stbi_load("D:\\Programming\\Git\\Github\\Mikompilation\\ressources\\tecmo.png", &width, &height, &nrChannels, 0);
+
+  if (data)
+  {
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+  }
+  else
+  {
+    std::cout << "Failed to load texture" << std::endl;
+  }
+
+  stbi_image_free(data);
+
+  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float)));
+  glEnableVertexAttribArray(2);
+
+  ourShader.use();
+  // either set it manually like so:
+  glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+}
+
+void drawTexture()
+{
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, texture1);
+  glBindVertexArray(VAO);
+  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
 void drawPixelBuffer()
