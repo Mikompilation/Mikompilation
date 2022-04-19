@@ -1,5 +1,4 @@
 #include "enemy.h"
-#include <memory.h>
 
 void Enemy::InitEneWrk(unsigned int id)
 {

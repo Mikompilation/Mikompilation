@@ -37,13 +37,6 @@ struct SGDCOORDINATE {
   undefined4 field_0xd4;
   undefined4 field_0xd8;
   undefined4 field_0xdc;
-
-  int getInt()
-  {
-    // Return something in here.
-    return 0;
-  }
-
 };
 
 struct SGDMATERIAL {
@@ -72,8 +65,7 @@ struct SGDPROCUNITHEADER {
   uint8_t c;
 };
 
-struct SGDFILEHEADER
-{
+struct SGDFILEHEADER {
   uint uiVersionId;
   bool fileInitialized;
   char field_0x5;
