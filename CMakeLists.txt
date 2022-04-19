@@ -8,9 +8,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(common)
 
-add_subdirectory(engine)
-
 add_subdirectory(third-party)
+
+add_subdirectory(engine)
 
 add_subdirectory(render)
 
