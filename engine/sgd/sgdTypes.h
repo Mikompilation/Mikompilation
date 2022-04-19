@@ -9,7 +9,8 @@ typedef uint8_t uint8;
 typedef unsigned int uint;
 typedef unsigned int undefined4;
 
-struct VertexPoint {
+struct VertexPoint
+{
   Vector4 vuMatrix;
   Vector3 vuVector3;
   uint8 vertexId;
@@ -18,17 +19,20 @@ struct VertexPoint {
   uint8 c;
 };
 
-struct VERTEXLIST {
+struct VERTEXLIST
+{
   int iNumVertex;
 };
 
-struct RotationAxis {
+struct RotationAxis
+{
   Vector4 x;
   Vector4 y;
   Vector4 z;
 };
 
-struct SGDCOORDINATE {
+struct SGDCOORDINATE
+{
   RotationAxis rotationAxis;
   Vector4 coordinates;
   float fCoordArray[8][4];
@@ -39,23 +43,27 @@ struct SGDCOORDINATE {
   undefined4 field_0xdc;
 };
 
-struct SGDMATERIAL {
+struct SGDMATERIAL
+{
   char a[0xb0];
 };
 
-struct SGDVECTORBSP {
+struct SGDVECTORBSP
+{
   uint iChildType;
   VertexPoint *pChildLeft;
   VertexPoint *pChildRight;
   VERTEXLIST *pParent;
 };
 
-struct SGDVECTORINFO {
+struct SGDVECTORINFO
+{
   uint iNumBlockInfo;
   SGDVECTORBSP sgdVectorBsp[];
 };
 
-struct SGDPROCUNITHEADER {
+struct SGDPROCUNITHEADER
+{
   SGDPROCUNITHEADER *pNext;
   int iCategory;
   uint procInfo;
@@ -65,7 +73,8 @@ struct SGDPROCUNITHEADER {
   uint8_t c;
 };
 
-struct SGDFILEHEADER {
+struct SGDFILEHEADER
+{
   uint uiVersionId;
   bool fileInitialized;
   char field_0x5;
@@ -80,7 +89,8 @@ struct SGDFILEHEADER {
   SGDPROCUNITHEADER *pProcUnit[];
 };
 
-struct SgLightCoord {
+struct SgLightCoord
+{
   uint8_t unknown1[0x60];
   Vector4 pos0;
   Vector4 pos1;
@@ -91,7 +101,8 @@ struct SgLightCoord {
   Vector4 SLightMtx[3];
 };
 
-struct SgLightSpot {
+struct SgLightSpot
+{
   int u1;
   int u2;
   int u3;

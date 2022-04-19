@@ -137,7 +137,13 @@ void ExtractGameFilesFromBank(const char *imgHdFile, const char *imgBdFile, std:
 
 int main(int argc, char *argv[])
 {
-  ExtractZero2GameFiles("D:\\DecompressFiles\\IMG_BD_US.BIN", "D:\\DecompressFiles\\Fatal Frame 2 Undub\\full\\SLUS_207.66", "D:\\DecompressFiles\\Zero2_US\\cpp_version");
+  if (argc < 4)
+  {
+    printf("ERROR NOT ENOUGH ARGUMENTS\n To use: <full path to IMG_BD.BIN> <full path to SLUS_207.66> <Your output folder>");
+    return -1;
+  }
+  
+  ExtractZero2GameFiles(argv[1], argv[2], argv[3]);
 
   return 0;
 }
