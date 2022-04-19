@@ -1,15 +1,18 @@
 #include "game_main.h"
 #include "gphase.h"
 #include "logging/printing.h"
+#include "controller/GameInput.h"
 
 const char* code_file = "game_main.cpp";
 
 void game_main()
 {
+  Input::GameInput *controller = new Input::Controller(0);
   InitGPhaseSys();
 
   do
   {
+    controller->Update();
     GPhaseSysMain();
   } while (!shutDownGame);
 }
