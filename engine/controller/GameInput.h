@@ -6,7 +6,7 @@
 namespace Input
 {
 
-enum Buttons : int
+enum Buttons : uint8_t
 {
   CROSS,
   TRIANGLE,

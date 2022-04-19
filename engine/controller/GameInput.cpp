@@ -61,5 +61,7 @@ void Input::Controller::Update()
   int count;
   const ControllerJoystickAxis* axes = (ControllerJoystickAxis*) glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
 
+  Buttons button = (Buttons) (uint8_t) glfwGetJoystickButtons(GLFW_JOYSTICK_1, &count);
+
   printf("[GameInput] Controller %d sticks L X: %.3f, L Y: %.3f, R X: %.3f, R Y: %.3f; Pressure triggers L: %.3f, R: %.3f\n", this->GetInputId(), axes->LeftX, axes->LeftY, axes->RightX, axes->RightY, axes->LeftTrigger, axes->RightTrigger);
 }
