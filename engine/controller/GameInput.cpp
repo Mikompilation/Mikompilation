@@ -21,6 +21,16 @@ Input::InputType Input::GameInput::GetInputType()
   return this->inputType;
 }
 
+void Input::GameInput::SetIsConnected(bool isConnected)
+{
+  this->isConnected = isConnected;
+}
+
+bool Input::GameInput::IsConnected()
+{
+  return this->isConnected;
+}
+
 Input::Controller::Controller(int inputId)
 {
   int present = glfwJoystickPresent(inputId);
@@ -29,6 +39,7 @@ Input::Controller::Controller(int inputId)
 
   printf("[GameInput] Controller %d is %d named %s\n", inputId, present, name);
 
+  this->SetIsConnected(present == 1);
   this->SetInputId(inputId);
   this->SetInputType(CONTROLLER);
 }
@@ -40,6 +51,13 @@ int Input::Controller::PollInput(int key)
 
 void Input::Controller::Update()
 {
+  if (!this->IsConnected())
+  {
+    printf("[GameInput] Controller %d is not connected", this->GetInputId());
+
+    return;
+  }
+
   int count;
   const ControllerJoystickAxis* axes = (ControllerJoystickAxis*) glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
 

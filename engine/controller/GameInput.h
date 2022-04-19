@@ -49,8 +49,13 @@ class GameInput
  private:
   int inputId;
   InputType inputType;
+  bool isConnected;
+
+ protected:
+  void SetIsConnected(bool isConnected);
 
  public:
+  bool IsConnected();
   InputType GetInputType();
   void SetInputType(InputType inputType);
   void SetInputId(int inputId);
