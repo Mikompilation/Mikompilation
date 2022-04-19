@@ -78,3 +78,5 @@ class Controller : public GameInput
 };
 
 };
+
+inline Input::GameInput *mainGameInput;
