@@ -1,7 +1,10 @@
 #pragma once
 
 #include <iostream>
+#include <filesystem>
 #include <map>
+
+namespace fs = std::filesystem;
 
 namespace Input
 {
@@ -68,12 +71,13 @@ class Controller : public GameInput
 {
  private:
   int buttonPressure;
+  fs::path mappingPath = "../bin/data/gamecontrollerdb.txt";
 
-  /// PS2 controller is wired backwards:
+  /// PS2 controller is wired backwards on the y axis:
   ///     RANGE   -> [255, 128, 0]
   ///     REST    -> 128
-  ///     0       -> UP
-  ///     [0, +]  -> DOWN
+  ///     0       -> UP, RIGHT
+  ///     [0, +]  -> DOWN, LEFT
   int absAxis = 128;
 
  public:

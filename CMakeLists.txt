@@ -4,6 +4,8 @@ project(Mikompilation CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 add_subdirectory(common)
 
 add_subdirectory(engine)
@@ -33,3 +35,7 @@ target_include_directories(Mikompilation PUBLIC
         ${GAME_INCLUDE_DIRS}
         ${RENDER_INCLUDE_DIRS}
         )
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/data $<TARGET_FILE_DIR:${PROJECT_NAME}>/data)
