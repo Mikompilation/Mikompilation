@@ -53,12 +53,12 @@ class GameInput
 
  protected:
   void SetIsConnected(bool isConnected);
+  void SetInputType(InputType inputType);
+  void SetInputId(int inputId);
 
  public:
   bool IsConnected();
   InputType GetInputType();
-  void SetInputType(InputType inputType);
-  void SetInputId(int inputId);
   int GetInputId();
   virtual int PollInput(int key) = 0;
   virtual void Update() = 0;
