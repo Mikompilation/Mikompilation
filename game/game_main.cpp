@@ -7,7 +7,8 @@ const char* code_file = "game_main.cpp";
 
 void game_main()
 {
-  mainGameInput = new Input::Controller(0);
+  Input::InitInput(Input::CONTROLLER);
+
   InitGPhaseSys();
 
   do

@@ -1,6 +1,22 @@
 #include "GameInput.h"
 #include "GLFW/glfw3.h"
+#include "file/file_util.h"
 #include <fstream>
+
+void Input::InitInput(Input::InputType inputType)
+{
+  char *controllerMappingFile = ReadFullFile("resources/gamecontrollerdb.txt");
+
+  glfwUpdateGamepadMappings(controllerMappingFile);
+
+  delete[] controllerMappingFile;
+
+  switch (inputType)
+  {
+    CONTROLLER:
+    default: mainGameInput = new Input::Controller(0);
+  }
+}
 
 int Input::GameInput::GetInputId()
 {
@@ -36,20 +52,9 @@ Input::Controller::Controller(int inputId)
 {
   int present = glfwJoystickPresent(inputId);
 
-  auto name = glfwGetJoystickName(inputId);
+  auto name = glfwGetGamepadName(inputId);
 
-  std::fstream file(fs::absolute(mappingPath));
-
-  file.seekg(0, file.end);
-  int fileLength = file.tellg();
-  file.seekg(0, file.beg);
-  std::string mapping;
-  mapping.reserve(fileLength);
-  file.read(mapping.data(), fileLength);
-
-  glfwUpdateGamepadMappings(mapping.data());
-
-  printf("[GameInput] Controller %d is %d named %s\n", inputId, present, name);
+  printf("[GameInput] Controller [%d] %s is connected: %s\n", inputId, name, present == 1 ? "true" : "false");
 
   this->SetIsConnected(present == 1);
   this->SetInputId(inputId);
@@ -71,9 +76,9 @@ void Input::Controller::Update()
   }
 
   int count;
-  const ControllerJoystickAxis* axes = (ControllerJoystickAxis*) glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
+  const ControllerJoystickAxis *axes = (ControllerJoystickAxis *) glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
 
-  uint8_t* button = (uint8_t*)glfwGetJoystickButtons(GLFW_JOYSTICK_1, &count); 
+  uint8_t *button = (uint8_t *) glfwGetJoystickButtons(GLFW_JOYSTICK_1, &count);
 
-  printf("[GameInput] Controller %d sticks L X: %.3f, L Y: %.3f, R X: %.3f, R Y: %.3f; Pressure triggers L: %.3f, R: %.3f\n", this->GetInputId(), axes->LeftX, axes->LeftY, axes->RightX, axes->RightY, axes->LeftTrigger, axes->RightTrigger, "\r");
+  printf("[GameInput] Controller %d sticks L X: %.3f, L Y: %.3f, R X: %.3f, R Y: %.3f; Pressure triggers L: %.3f, R: %.3f\n", this->GetInputId(), axes->LeftX, axes->LeftY, axes->RightX, axes->RightY, axes->LeftTrigger, axes->RightTrigger);
 }

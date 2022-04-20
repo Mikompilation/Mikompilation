@@ -1,33 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <filesystem>
-#include <map>
-
-namespace fs = std::filesystem;
-
 namespace Input
 {
-
-enum Buttons : uint8_t
-{
-  CROSS,
-  TRIANGLE,
-  CIRCLE,
-  SQUARE,
-  DPAD_UP,
-  DPAD_DOWN,
-  DPAD_LEFT,
-  DPAD_RIGHT
-};
-
-enum ABS : int
-{
-  LSTICK_XAXIS,
-  LSTICK_YAXIS,
-  RSTICK_XAXIS,
-  RSTICK_YAXIS
-};
 
 enum InputType : int
 {
@@ -45,7 +19,7 @@ struct ControllerJoystickAxis
   float RightY;
 };
 
-static std::map<Buttons, std::string> controlNames;
+void InitInput(Input::InputType inputType);
 
 class GameInput
 {
@@ -70,8 +44,6 @@ class GameInput
 class Controller : public GameInput
 {
  private:
-  int buttonPressure;
-  fs::path mappingPath = "../bin/data/gamecontrollerdb.txt";
 
   /// PS2 controller is wired backwards on the y axis:
   ///     RANGE   -> [255, 128, 0]
