@@ -9,6 +9,7 @@ set(UI_SOURCES
         FileSelector.cpp
         MainWindow.cpp
         TopMenuBar.cpp
+        MemoryViewer.cpp
         )
 
 set(UI_HEADERS
@@ -16,6 +17,7 @@ set(UI_HEADERS
         FileSelector.h
         MainWindow.h
         TopMenuBar.h
+        MemoryViewer.h
         )
 
 add_library(${UI_LIB} EXCLUDE_FROM_ALL ${UI_SOURCES} ${UI_HEADERS})
