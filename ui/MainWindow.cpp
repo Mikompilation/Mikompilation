@@ -19,6 +19,8 @@ bool MainWindow::Init()
       SelectFile{".bin", "IMG_HD"},
       SelectFile{".bin", "IMG_BD"}});
 
+  this->memoryViewer = new MemoryViewer();
+
   this->topMenuBar = new TopMenuBar;
 
   return true;
@@ -38,7 +40,15 @@ void MainWindow::Update()
     this->filePicker->Update();
   }
 
-  this->topMenuBar->Update();
+  if (this->topMenuBar->shouldDisplayMemoryViewer)
+  {
+    this->memoryViewer->Update();
+  }
+
+  if (this->topMenuBar->shouldDisplay)
+  {
+    this->topMenuBar->Update();
+  }
 
   EndFrame();
 }

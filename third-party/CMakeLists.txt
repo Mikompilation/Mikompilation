@@ -20,7 +20,7 @@ endif()
 
 add_subdirectory(glfw)
 
-set(SOURCES
+set(THIRDPARTY_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/ImGuiFileDialog/ImGuiFileDialog.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_draw.cpp
@@ -31,15 +31,21 @@ set(SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_widgets.cpp
         )
 
+set(THIRDPARTY_HEADERS
+        ${CMAKE_CURRENT_SOURCE_DIR}/imgui_memory_editor/imgui_memory_editor.h
+        )
+
+
+add_library(ThirdParty EXCLUDE_FROM_ALL ${THIRDPARTY_SOURCES} ${THIRDPARTY_HEADERS})
+
 set(ThirdParty_INCLUDE_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
         ${CMAKE_CURRENT_SOURCE_DIR}/ImGuiFileDialog
+        ${CMAKE_CURRENT_SOURCE_DIR}/imgui_memory_editor
         ${CMAKE_CURRENT_SOURCE_DIR}/glew/include
         CACHE PATH "Path for the library ThirdParty")
-
-add_library(ThirdParty EXCLUDE_FROM_ALL ${SOURCES} )
 
 target_include_directories(ThirdParty PUBLIC
         ${ThirdParty_INCLUDE_DIRS}

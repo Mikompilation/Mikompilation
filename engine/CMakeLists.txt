@@ -7,6 +7,7 @@ set(ENGINE_SOURCES
         sgd/sgdRender.cpp
         sgd/sgdLoader.cpp
         fs/file.cpp
+        controller/GameInput.cpp
         )
 
 set(ENGINE_HEADERS
@@ -19,6 +20,7 @@ set(ENGINE_HEADERS
         sgd/sgdLoader.h
         fs/file.h
         fs/fileLoadGlobals.h
+        controller/GameInput.h
         )
 
 add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})
@@ -29,6 +31,6 @@ target_include_directories(${ENGINE_LIB} PUBLIC
         ${ENGINE_INCLUDE_DIRS}
         )
 
-target_link_libraries(${ENGINE_LIB} PUBLIC ${COMMON_LIB})
+target_link_libraries(${ENGINE_LIB} PRIVATE ${COMMON_LIB} ${THIRDPARTY_LIB})
 
 set_target_properties(${ENGINE_LIB} PROPERTIES LINK_FLAGS "-m32")
