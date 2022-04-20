@@ -1,21 +1,23 @@
 #include "game_main.h"
 #include "gphase.h"
 #include "logging/printing.h"
-#include "controller/GameInput.h"
+#include "texture/Texture.h"
 
 const char* code_file = "game_main.cpp";
 
+bool init = false;
+
 void game_main()
 {
-  Input::InitInput(Input::CONTROLLER);
-
-  InitGPhaseSys();
-
-  do
+  if (!init)
   {
-    mainGameInput->Update();
-    GPhaseSysMain();
-  } while (!shutDownGame);
+    InitGPhaseSys();
+    TexInit();
+    init = true;
+  }
+
+  TexDo();
+  //GPhaseSysMain();
 }
 
 void init_super()

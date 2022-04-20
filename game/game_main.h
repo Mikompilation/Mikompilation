@@ -1,8 +1,6 @@
 #pragma once
 #include "gphaseTypes.h"
 
-inline bool shutDownGame = false;
-
 void game_main();
 
 /// Super GPHASE

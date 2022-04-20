@@ -2,7 +2,6 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 
 #ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
@@ -15,6 +14,4 @@ void startNewFrame();
 void endFrame(GLFWwindow *window);
 void loadTexture();
 void drawTexture();
-void setPixel(int width, int height, GLubyte r, GLubyte g, GLubyte b);
-void drawPixelBuffer();
 GLFWwindow* InitializeWindow();

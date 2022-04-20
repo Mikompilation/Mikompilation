@@ -7,7 +7,13 @@ set(ENGINE_SOURCES
         sgd/sgdRender.cpp
         sgd/sgdLoader.cpp
         fs/file.cpp
+        texture/tim2.cpp
         controller/GameInput.cpp
+        texture/Texture.cpp
+        texture/ZeroShader.cpp
+        texture/EBO.cpp
+        texture/VAO.cpp
+        texture/VBO.cpp
         )
 
 set(ENGINE_HEADERS
@@ -21,6 +27,12 @@ set(ENGINE_HEADERS
         fs/file.h
         fs/fileLoadGlobals.h
         controller/GameInput.h
+        texture/tim2.h
+        texture/ZeroShader.h
+        texture/Texture.h
+        texture/EBO.h
+        texture/VAO.h
+        texture/VBO.h
         )
 
 add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})
@@ -31,6 +43,6 @@ target_include_directories(${ENGINE_LIB} PUBLIC
         ${ENGINE_INCLUDE_DIRS}
         )
 
-target_link_libraries(${ENGINE_LIB} PRIVATE ${COMMON_LIB} ${THIRDPARTY_LIB})
+target_link_libraries(${ENGINE_LIB} PUBLIC ${COMMON_LIB} ${THIRDPARTY_LIB})
 
 set_target_properties(${ENGINE_LIB} PROPERTIES LINK_FLAGS "-m32")

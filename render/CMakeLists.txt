@@ -11,7 +11,6 @@ set(RENDER_SOURCES
 set(RENDER_HEADERS
         glf3_render.h
         stb_image.h
-        shader.h
         )
 
 add_library(${RENDER_LIB} EXCLUDE_FROM_ALL ${RENDER_SOURCES} ${RENDER_HEADERS})
