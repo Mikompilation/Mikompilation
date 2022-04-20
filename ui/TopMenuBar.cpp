@@ -1,13 +1,9 @@
 #include "TopMenuBar.h"
 #include "imgui.h"
+#include "imgui_render.h"
 
 void TopMenuBar::Update()
 {
-  if (!shouldDisplay)
-  {
-    return;
-  }
-
   if (ImGui::BeginMainMenuBar())
   {
     if (ImGui::BeginMenu("Menu"))
@@ -21,10 +17,8 @@ void TopMenuBar::Update()
 
     if (ImGui::BeginMenu("Windows"))
     {
-      if(ImGui::RadioButton("File Selector", shouldDisplayFileSelector))
-      {
-        shouldDisplayFileSelector = !shouldDisplayFileSelector;
-      }
+      ToggleButton("File Selector", &shouldDisplayFileSelector);
+      ToggleButton("Memory View", &shouldDisplayMemoryViewer);
 
       ImGui::EndMenu();
     }
