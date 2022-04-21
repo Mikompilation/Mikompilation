@@ -13,10 +13,14 @@ set(COMMON_HEADERS
         file/file_util.h
         )
 
+add_subdirectory(logging/spdlog)
+
 add_library(${COMMON_LIB} EXCLUDE_FROM_ALL ${COMMON_SOURCES} ${COMMON_HEADERS})
 
 target_include_directories(${COMMON_LIB} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         )
+
+target_link_libraries(${COMMON_LIB} PUBLIC spdlog::spdlog)
 
 set(COMMON_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "Path for the library COMMON")
