@@ -1,6 +1,6 @@
-prefix=C:/Program Files (x86)/Mikompilation
+prefix=C:/Users/final/Source/Repos/Mikompilation/out/install/x64-Debug
 exec_prefix=${prefix}
-libdir=C:/Program Files (x86)/Mikompilation/lib
+libdir=C:/Users/final/Source/Repos/Mikompilation/out/install/x64-Debug/lib
 includedir=${prefix}/include
 
 Name: glew
