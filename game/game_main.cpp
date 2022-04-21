@@ -2,22 +2,29 @@
 #include "gphase.h"
 #include "logging/printing.h"
 #include "texture/Texture.h"
+#include "file/file_util.h"
 
 const char* code_file = "game_main.cpp";
 
 bool init = false;
+
+Texture2d* texture2d;
 
 void game_main()
 {
   if (!init)
   {
     InitGPhaseSys();
-    TexInit();
+    auto textureFile = ReadFullFile("resources/testTexture_256x128.tm2");
+    texture2d = new Texture2d((TIM2_FILEHEADER *) textureFile, GL_TEXTURE0);
+    texture2d->InitTexture();
+
+    delete[] textureFile;
     init = true;
   }
 
-  TexDo();
-  //GPhaseSysMain();
+  texture2d->RenderTexture();
+  GPhaseSysMain();
 }
 
 void init_super()

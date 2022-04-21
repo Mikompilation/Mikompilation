@@ -1,15 +1,7 @@
 #include "Texture.h"
 #include "EBO.h"
 #include "VAO.h"
-#include "file/file_util.h"
 #include <algorithm>
-
-VAO *VAO1;
-EBO *EBO1;
-VBO *VBO1;
-Shader *shaderProgram;
-Texture *popCat;
-GLuint uniID;
 
 GLfloat vertices[] =
     {
@@ -45,11 +37,9 @@ void FlipYTexture(unsigned width, unsigned height, unsigned int *data)
   }
 }
 
-Tim2Converted *LoadTim2Texture(const char* file)
+Tim2Converted *LoadTim2Texture(TIM2_FILEHEADER *pTim2FileHeader)
 {
-  char *image = ReadFullFile(file);
-
-  auto ph = (TIM2_PICTUREHEADER *) (sizeof(TIM2_FILEHEADER) + image);
+  auto ph = (TIM2_PICTUREHEADER *) (sizeof(TIM2_FILEHEADER) + (int) pTim2FileHeader);
   unsigned int *texture = new unsigned int[static_cast<int>(ph->ImageHeight) * static_cast<int>(ph->ImageWidth)];
 
   for (int i = 0; i < ph->ImageHeight; i++)
@@ -74,60 +64,12 @@ Tim2Converted *LoadTim2Texture(const char* file)
   return convertedTexture;
 }
 
-void TexInit()
-{
-  shaderProgram = new Shader("D:\\Programming\\Git\\Github\\Mikompilation\\engine\\texture\\shader.vs", "D:\\Programming\\Git\\Github\\Mikompilation\\engine\\texture\\shader.fs");
-
-  // Generates Vertex Array Object and binds it
-  VAO1 = new VAO();
-  VAO1->Bind();
-
-  // Generates Vertex Buffer Object and links it to vertices
-  VBO1 = new VBO(vertices, sizeof(vertices));
-
-  // Generates Element Buffer Object and links it to indices
-  EBO1 = new EBO(indices, sizeof(indices));
-
-  // Links VBO attributes such as coordinates and colors to VAO
-  VAO1->LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-  VAO1->LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-  VAO1->LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-
-  // Unbind all to prevent accidentally modifying them
-  VAO1->Unbind();
-  VBO1->Unbind();
-  EBO1->Unbind();
-
-  // Gets ID of uniform called "scale"
-  uniID = glGetUniformLocation(shaderProgram->ID, "scale");
-
-  // Texture
-  popCat = new Texture("D:\\2.bin", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-  popCat->texUnit(shaderProgram, "tex0", 0);
-}
-
-void TexDo()
-{
-  shaderProgram->Activate();
-
-  // Assigns a value to the uniform; NOTE: Must always be done after activating the Shader Program
-  glUniform1f(uniID, 0.5f);
-
-  // Binds texture so that is appears in rendering
-  popCat->Bind();
-
-  // Bind the VAO so OpenGL knows to use it
-  VAO1->Bind();
-
-  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-}
-
-Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType)
+Texture::Texture(TIM2_FILEHEADER *pTim2FileHeader, GLenum texType, GLenum slot, GLenum format, GLenum pixelType)
 {
   // Assigns the type of the texture ot the texture object
   type = texType;
 
-  Tim2Converted *tim2 = LoadTim2Texture(image);
+  Tim2Converted *tim2 = LoadTim2Texture(pTim2FileHeader);
 
   // Generates an OpenGL texture object
   glGenTextures(1, &ID);
@@ -183,4 +125,57 @@ void Texture::Unbind()
 void Texture::Delete()
 {
   glDeleteTextures(1, &ID);
+}
+
+Texture2d::Texture2d(TIM2_FILEHEADER *pTim2FileHeader, GLenum slot)
+{
+  this->slot = slot;
+  this->pTim2FileHeader = pTim2FileHeader;
+  shaderProgram = new Shader("resources/shader.vs", "resources/shader.fs");
+
+  // Generates Vertex Array Object and binds it
+  VAO1 = new VAO();
+  VAO1->Bind();
+}
+
+void Texture2d::InitTexture()
+{
+  // Generates Vertex Buffer Object and links it to vertices
+  this->VBO1 = new VBO(vertices, sizeof(vertices));
+
+  // Generates Element Buffer Object and links it to indices
+  this->EBO1 = new EBO(indices, sizeof(indices));
+
+  // Links VBO attributes such as coordinates and colors to VAO
+  this->VAO1->LinkAttrib(this->VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+  this->VAO1->LinkAttrib(this->VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+  this->VAO1->LinkAttrib(this->VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+  // Unbind all to prevent accidentally modifying them
+  this->VAO1->Unbind();
+  this->VBO1->Unbind();
+  this->EBO1->Unbind();
+
+  // Gets ID of uniform called "scale"
+  uniID = glGetUniformLocation(this->shaderProgram->ID, "scale");
+
+  // Texture
+  popCat = new Texture(this->pTim2FileHeader, GL_TEXTURE_2D, this->slot, GL_RGBA, GL_UNSIGNED_BYTE);
+  popCat->texUnit(shaderProgram, "tex0", 0);
+}
+
+void Texture2d::RenderTexture()
+{
+  this->shaderProgram->Activate();
+
+  // Assigns a value to the uniform; NOTE: Must always be done after activating the Shader Program
+  glUniform1f(uniID, 0.5f);
+
+  // Binds texture so that is appears in rendering
+  this->popCat->Bind();
+
+  // Bind the VAO so OpenGL knows to use it
+  this->VAO1->Bind();
+
+  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
