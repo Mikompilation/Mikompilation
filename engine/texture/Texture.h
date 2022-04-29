@@ -40,6 +40,6 @@ class Texture2d
   EBO *EBO1;
   VBO *VBO1;
   Shader *shaderProgram;
-  Texture *popCat;
+  Texture *texture;
   GLuint uniID;
 };

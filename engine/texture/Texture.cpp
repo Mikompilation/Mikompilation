@@ -131,11 +131,9 @@ Texture2d::Texture2d(TIM2_FILEHEADER *pTim2FileHeader, GLenum slot)
 {
   this->slot = slot;
   this->pTim2FileHeader = pTim2FileHeader;
-  shaderProgram = new Shader("resources/shader.vs", "resources/shader.fs");
-
-  // Generates Vertex Array Object and binds it
-  VAO1 = new VAO();
-  VAO1->Bind();
+  this->shaderProgram = new Shader("resources/shader.vs", "resources/shader.fs");
+  this->VAO1 = new VAO();
+  this->VAO1->Bind();
 }
 
 void Texture2d::InitTexture()
@@ -157,25 +155,18 @@ void Texture2d::InitTexture()
   this->EBO1->Unbind();
 
   // Gets ID of uniform called "scale"
-  uniID = glGetUniformLocation(this->shaderProgram->ID, "scale");
+  this->uniID = glGetUniformLocation(this->shaderProgram->ID, "scale");
 
   // Texture
-  popCat = new Texture(this->pTim2FileHeader, GL_TEXTURE_2D, this->slot, GL_RGBA, GL_UNSIGNED_BYTE);
-  popCat->texUnit(shaderProgram, "tex0", 0);
+  this->texture = new Texture(this->pTim2FileHeader, GL_TEXTURE_2D, this->slot, GL_RGBA, GL_UNSIGNED_BYTE);
+  this->texture->texUnit(this->shaderProgram, "tex0", 0);
 }
 
 void Texture2d::RenderTexture()
 {
   this->shaderProgram->Activate();
-
-  // Assigns a value to the uniform; NOTE: Must always be done after activating the Shader Program
-  glUniform1f(uniID, 0.5f);
-
-  // Binds texture so that is appears in rendering
-  this->popCat->Bind();
-
-  // Bind the VAO so OpenGL knows to use it
+  glUniform1f(this->uniID, 0.5f);
+  this->texture->Bind();
   this->VAO1->Bind();
-
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
