@@ -476,3 +476,7 @@ engine/cmake-build-debug/
 tools/ExportStruct/cmake-build-debug/
 
 tools/Extractor/cmake-build-debug/
+
+third-party/glew/build/cmake/cmake-build-debug/
+
+.vscode/

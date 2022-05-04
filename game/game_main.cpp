@@ -1,25 +1,26 @@
 #include "game_main.h"
 #include "gphase.h"
 #include "logging/printing.h"
-#include "controller/GameInput.h"
+#include "player/plyr_mdl.h"
 
 const char* code_file = "game_main.cpp";
 
+bool soft_reset_disable;
+
+void game_init()
+{
+  InitGPhaseSys();
+}
+
 void game_main()
 {
-  Input::InitInput(Input::CONTROLLER);
-
-  InitGPhaseSys();
-
-  do
-  {
-    mainGameInput->Update();
-    GPhaseSysMain();
-  } while (!shutDownGame);
+  GPhaseSysMain();
 }
 
 void init_super()
 {
+  InitCostume();
+  soft_reset_disable = false;
   printNotImplemented("init_super", code_file);
 }
 

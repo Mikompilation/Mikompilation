@@ -1,7 +1,7 @@
+#pragma once
+#include "glf3_render.h"
 #include "MainWindow.h"
 #include "game_main.h"
-#include "glf3_render.h"
-#include <thread>
 
 int main(int argc, char *argv[])
 {
@@ -9,20 +9,15 @@ int main(int argc, char *argv[])
 
   MainWindow mainWindow(glfwWindow);
   mainWindow.Init();
-
-  std::thread gameThread(game_main);
+  game_init();
 
   while (!glfwWindowShouldClose(glfwWindow))
   {
     startNewFrame();
-    drawPixelBuffer();
+    game_main();
     mainWindow.Update();
     endFrame(glfwWindow);
   }
-
-  shutDownGame = true;
-
-  gameThread.join();
 
   Terminate();
   teardown(glfwWindow);

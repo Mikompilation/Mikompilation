@@ -8,6 +8,12 @@ set(GLFW_INSTALL        OFF CACHE BOOL "" FORCE)
 
 find_package(OpenGL REQUIRED)
 
+set( GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE )
+set( GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE )
+set( GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE )
+
+add_subdirectory(glew/build/cmake)
+
 if( MSVC )
     SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup" )
 endif()
@@ -38,10 +44,12 @@ set(ThirdParty_INCLUDE_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
         ${CMAKE_CURRENT_SOURCE_DIR}/ImGuiFileDialog
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui_memory_editor
+        ${CMAKE_CURRENT_SOURCE_DIR}/glew/include
         CACHE PATH "Path for the library ThirdParty")
 
 target_include_directories(ThirdParty PUBLIC
         ${ThirdParty_INCLUDE_DIRS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/glew/include
         )
 
-target_link_libraries(ThirdParty PUBLIC glfw OpenGL::GL)
+target_link_libraries(ThirdParty PUBLIC glew_s OpenGL::GL glfw)
