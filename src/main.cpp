@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 
   MainWindow mainWindow(glfwWindow);
   mainWindow.Init();
+  game_init();
 
   while (!glfwWindowShouldClose(glfwWindow))
   {

@@ -1,34 +1,26 @@
 #include "game_main.h"
 #include "gphase.h"
 #include "logging/printing.h"
-#include "texture/Texture.h"
-#include "file/file_util.h"
+#include "player/plyr_mdl.h"
 
 const char* code_file = "game_main.cpp";
 
-bool init = false;
+bool soft_reset_disable;
 
-Texture2d* texture2d;
+void game_init()
+{
+  InitGPhaseSys();
+}
 
 void game_main()
 {
-  if (!init)
-  {
-    InitGPhaseSys();
-    auto textureFile = ReadFullFile("resources/testTexture_256x128.tm2");
-    texture2d = new Texture2d((TIM2_FILEHEADER *) textureFile, GL_TEXTURE0);
-    texture2d->InitTexture();
-
-    delete[] textureFile;
-    init = true;
-  }
-
-  texture2d->RenderTexture();
   GPhaseSysMain();
 }
 
 void init_super()
 {
+  InitCostume();
+  soft_reset_disable = false;
   printNotImplemented("init_super", code_file);
 }
 

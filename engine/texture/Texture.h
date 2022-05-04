@@ -12,6 +12,26 @@ struct Tim2Converted
   char *image;
 };
 
+struct TextureVertex
+{
+  GLfloat coordX;
+  GLfloat coordY;
+  GLfloat coordZ;
+  GLfloat r;
+  GLfloat g;
+  GLfloat b;
+  GLfloat texCoordX;
+  GLfloat texCoordY;
+};
+
+struct TextureInfo
+{
+  int numVertex;
+  TextureVertex* vertices;
+  int numIndex;
+  GLuint* indices;
+};
+
 Tim2Converted *LoadTim2Texture(TIM2_FILEHEADER *pTim2FileHeader);
 
 class Texture
@@ -30,7 +50,7 @@ class Texture2d
 {
  public:
   Texture2d(TIM2_FILEHEADER* pTim2FileHeader, GLenum slot);
-  void InitTexture();
+  void InitTexture(TextureInfo* textureInfo);
   void RenderTexture();
 
  private:

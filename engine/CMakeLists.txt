@@ -14,6 +14,7 @@ set(ENGINE_SOURCES
         texture/EBO.cpp
         texture/VAO.cpp
         texture/VBO.cpp
+        texture/Texture.cpp
         )
 
 set(ENGINE_HEADERS
@@ -33,6 +34,7 @@ set(ENGINE_HEADERS
         texture/EBO.h
         texture/VAO.h
         texture/VBO.h
+        texture/Texture.h
         )
 
 add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})

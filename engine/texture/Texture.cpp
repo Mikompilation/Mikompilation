@@ -3,21 +3,6 @@
 #include "VAO.h"
 #include <algorithm>
 
-GLfloat vertices[] =
-    {
-        //     COORDINATES                    /        COLORS      /             TexCoord  //
-        -0.5f, -0.5f, 0.0f,     1.0f, 0.0f, 0.0f,	0.0f, 0.0f, // Lower left corner
-        -0.5f,  0.5f, 0.0f,     0.0f, 1.0f, 0.0f,	0.0f, 1.0f, // Upper left corner
-        0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 1.0f,	1.0f, 1.0f, // Upper right corner
-        0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,	1.0f, 0.0f  // Lower right corner
-};
-
-GLuint indices[] =
-    {
-        0, 2, 1, // Upper triangle
-        0, 3, 2 // Lower triangle
-};
-
 void FlipYTexture(unsigned width, unsigned height, unsigned int *data)
 {
   auto row_offset = [&](unsigned row) {
@@ -86,10 +71,6 @@ Texture::Texture(TIM2_FILEHEADER *pTim2FileHeader, GLenum texType, GLenum slot, 
   glTexParameteri(texType, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(texType, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-  // Extra lines in case you choose to use GL_CLAMP_TO_BORDER
-  // float flatColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
-  // glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, flatColor);
-
   // Assigns the image to the OpenGL Texture object
   glTexImage2D(texType, 0, GL_RGBA, tim2->Width, tim2->Height, 0, format, pixelType, tim2->image);
 
@@ -102,13 +83,8 @@ Texture::Texture(TIM2_FILEHEADER *pTim2FileHeader, GLenum texType, GLenum slot, 
 
 void Texture::texUnit(Shader* shader, const char* uniform, GLuint unit)
 {
-  // Gets the location of the uniform
   GLuint texUni = glGetUniformLocation(shader->ID, uniform);
-
-  // Shader needs to be activated before changing the value of a uniform
   shader->Activate();
-
-  // Sets the value of the uniform
   glUniform1i(texUni, unit);
 }
 
@@ -131,33 +107,26 @@ Texture2d::Texture2d(TIM2_FILEHEADER *pTim2FileHeader, GLenum slot)
 {
   this->slot = slot;
   this->pTim2FileHeader = pTim2FileHeader;
-  this->shaderProgram = new Shader("resources/shader.vs", "resources/shader.fs");
+  this->shaderProgram = new Shader("resources/shader.vert", "resources/shader.frag");
   this->VAO1 = new VAO();
   this->VAO1->Bind();
 }
 
-void Texture2d::InitTexture()
+void Texture2d::InitTexture(TextureInfo* textureInfo)
 {
-  // Generates Vertex Buffer Object and links it to vertices
-  this->VBO1 = new VBO(vertices, sizeof(vertices));
+  this->VBO1 = new VBO((GLfloat*) textureInfo->vertices, sizeof(TextureVertex) * textureInfo->numVertex);
+  this->EBO1 = new EBO(textureInfo->indices, sizeof(GLuint) * textureInfo->numIndex);
 
-  // Generates Element Buffer Object and links it to indices
-  this->EBO1 = new EBO(indices, sizeof(indices));
-
-  // Links VBO attributes such as coordinates and colors to VAO
   this->VAO1->LinkAttrib(this->VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
   this->VAO1->LinkAttrib(this->VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
   this->VAO1->LinkAttrib(this->VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
-  // Unbind all to prevent accidentally modifying them
   this->VAO1->Unbind();
   this->VBO1->Unbind();
   this->EBO1->Unbind();
 
-  // Gets ID of uniform called "scale"
   this->uniID = glGetUniformLocation(this->shaderProgram->ID, "scale");
 
-  // Texture
   this->texture = new Texture(this->pTim2FileHeader, GL_TEXTURE_2D, this->slot, GL_RGBA, GL_UNSIGNED_BYTE);
   this->texture->texUnit(this->shaderProgram, "tex0", 0);
 }
