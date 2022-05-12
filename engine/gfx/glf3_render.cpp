@@ -1,10 +1,7 @@
 #include "glf3_render.h"
-#include <cstdint>
+#include "GFX_CONFIG.h"
 #include <cstdio>
 #include <iostream>
-
-int SCREEN_WIDTH = 1920;
-int SCREEN_HEIGHT = 1080;
 
 GLFWwindow *InitializeWindow()
 {
@@ -72,7 +69,7 @@ void teardown(GLFWwindow *window)
 
 void startNewFrame()
 {
-  glClearColor(100.0f, 0.0f, 0.0f, 1.0f );
+  //glClearColor(100.0f, 0.0f, 0.0f, 1.0f );
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   glPushMatrix();
 }

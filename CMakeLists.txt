@@ -12,8 +12,6 @@ add_subdirectory(third-party)
 
 add_subdirectory(engine)
 
-add_subdirectory(render)
-
 add_subdirectory(game)
 
 add_subdirectory(ui)
@@ -27,13 +25,13 @@ add_executable(Mikompilation ${SOURCES})
 target_link_libraries(Mikompilation PUBLIC
         ${UI_LIB}
         ${GAME_LIB}
-        ${RENDER_LIB}
+        ${ENGINE_LIB}
         )
 
 target_include_directories(Mikompilation PUBLIC
         ${UI_INCLUDE_DIRS}
         ${GAME_INCLUDE_DIRS}
-        ${RENDER_INCLUDE_DIRS}
+        ${ENGINE_INCLUDE_DIRS}
         )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
