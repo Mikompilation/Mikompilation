@@ -8,8 +8,8 @@ ZeroTexture::Texture2d* zero_texture_2;
 
 void InitLogo()
 {
-  auto tecmoTextureFile = ReadFullFile("D:\\2.bin");
-  auto zeroTextureFile = ReadFullFile("D:\\3.bin");
+  auto tecmoTextureFile = ReadFullFile("game_files/2.bin");
+  auto zeroTextureFile = ReadFullFile("game_files/3.bin");
 
   tecmo_texture = new ZeroTexture::Texture2d((TIM2_FILEHEADER*) tecmoTextureFile, &logodat[0], GL_TEXTURE0);
   zero_texture = new ZeroTexture::Texture2d((TIM2_FILEHEADER*) zeroTextureFile, &logodat[1], GL_TEXTURE0);

@@ -68,7 +68,7 @@ TextureInfo* MapTexturePoints(const SPRT_DAT* spriteData)
 {
   TextureInfo *texInfo = new TextureInfo;
   texInfo->vertices = new TextureVertex[4];
-  texInfo->numVertex = 10;
+  texInfo->numVertex = 4;
   texInfo->numIndex = 6;
   texInfo->indices = indices;
 
@@ -197,9 +197,9 @@ void ZeroTexture::Texture2d::InitTexture()
   this->VAO1->LinkAttrib(this->VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
   this->VAO1->LinkAttrib(this->VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
-  this->VAO1->Unbind();
-  this->VBO1->Unbind();
-  this->EBO1->Unbind();
+  //this->VAO1->Unbind();
+  //this->VBO1->Unbind();
+  //this->EBO1->Unbind();
 
   this->uniID = glGetUniformLocation(this->shaderProgram->ID, "scale");
 
@@ -212,9 +212,9 @@ void ZeroTexture::Texture2d::InitTexture()
 
 void ZeroTexture::Texture2d::RenderTexture()
 {
-  glActiveTexture(this->slot);
-  this->shaderProgram->Activate();
-  glUniform1f(this->uniID, 0.5f);
+  //glActiveTexture(this->slot);
+  //this->shaderProgram->Activate();
+  //glUniform1f(this->uniID, 0.5f);
   this->texture->Bind();
   this->VAO1->Bind();
   glDrawElements(GL_TRIANGLES, this->textureInfo->numIndex, GL_UNSIGNED_INT, 0);
