@@ -2,7 +2,7 @@
 
 #include "texture/Sprite.h"
 
-inline SPRT_DAT menudat[1] = {
+inline SPRT_DAT menudat[2] = {
     /// Sprite for Main menu
     {
         0x2006180665322BC0,
