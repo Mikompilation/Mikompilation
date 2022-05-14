@@ -53,9 +53,19 @@ void FlipYTexture(unsigned width, unsigned height, unsigned int *data)
   }
 }
 
+float ConvertPixelToNdcX(float x)
+{
+  float adjustmentX = PS2_RESOLUTION_X_FLOAT / 2;
+  return (x - adjustmentX) / adjustmentX;
+}
+
+float ConvertPixelToNdcY(float y)
+{
+  return 1.0f - (((2.0f * y)) / PS2_RESOLUTION_Y_FLOAT);
+}
+
 TextureInfo* MapTexturePoints(const SPRT_DAT* spriteData)
 {
-  // Set up the TextureInfo
   TextureInfo *texInfo = new TextureInfo;
   texInfo->vertices = new TextureVertex[4];
   texInfo->numVertex = 10;
@@ -63,71 +73,53 @@ TextureInfo* MapTexturePoints(const SPRT_DAT* spriteData)
   texInfo->indices = indices;
 
   // Set the color for each Vertex
+  for (int i = 0; i < texInfo->numVertex; i++)
+  {
+    texInfo->vertices[i].r = 0.0f;
+    texInfo->vertices[i].g = 0.0f;
+    texInfo->vertices[i].b = 0.0f;
+  }
 
-  // Lower left corner
-  texInfo->vertices[0].r = 1.0f;
-  texInfo->vertices[0].g = 0.0f;
-  texInfo->vertices[0].b = 0.0f;
-
-  // Upper left corner
-  texInfo->vertices[1].r = 0.0f;
-  texInfo->vertices[1].g = 1.0f;
-  texInfo->vertices[1].b = 0.0f;
-
-  // Upper right corner
-  texInfo->vertices[2].r = 0.0f;
-  texInfo->vertices[2].g = 0.0f;
-  texInfo->vertices[2].b = 1.0f;
-
-  // Lower right corner
-  texInfo->vertices[3].r = 1.0f;
-  texInfo->vertices[3].g = 1.0f;
-  texInfo->vertices[3].b = 1.0f;
-
-  // Calculate location on screen
-  float adjustmentX = PS2_RESOLUTION_X_FLOAT / 2;
-  float adjustmentY = PS2_RESOLUTION_Y_FLOAT / 2;
-
-  //ndc.x = ((2.0 * screen.x) - (2.0 * x)) / w) - 1.0
-  //ndc.y = ((2.0 * screen.y) - (2.0 * y)) / h) - 1.0
+  // Calculate location on screen,
+  // convert from pixel coord to ndc coord
 
   // Upper left corner
-  texInfo->vertices[0].coordX = ((float)spriteData->offset_frame_x - adjustmentX) / adjustmentX;
-  texInfo->vertices[0].coordY = ((float)spriteData->offset_frame_y - adjustmentY) / adjustmentY;
+  texInfo->vertices[0].coordX = ConvertPixelToNdcX((float)spriteData->offset_frame_x);
+  texInfo->vertices[0].coordY = ConvertPixelToNdcY((float)spriteData->offset_frame_y);
   texInfo->vertices[0].coordZ = 0.0f;
 
   // Bottom left corner
-  texInfo->vertices[1].coordX = ((float)spriteData->offset_frame_x - adjustmentX) / adjustmentX;
-  texInfo->vertices[1].coordY = ((float)spriteData->offset_frame_y - adjustmentY + (float)spriteData->size_frame_y) / adjustmentY;
+  texInfo->vertices[1].coordX = ConvertPixelToNdcX((float)spriteData->offset_frame_x);
+  texInfo->vertices[1].coordY = ConvertPixelToNdcY((float)spriteData->offset_frame_y + (float)spriteData->size_frame_y);
   texInfo->vertices[1].coordZ = 0.0f;
 
   // Bottom right corner
-  texInfo->vertices[2].coordX = ((float)spriteData->offset_frame_x - adjustmentX + (float)spriteData->size_frame_x) / adjustmentX;
-  texInfo->vertices[2].coordY = ((float)spriteData->offset_frame_y - adjustmentY + (float)spriteData->size_frame_y) / adjustmentY;
+  texInfo->vertices[2].coordX = ConvertPixelToNdcX((float)spriteData->offset_frame_x + (float)spriteData->size_frame_x);
+  texInfo->vertices[2].coordY = ConvertPixelToNdcY((float)spriteData->offset_frame_y + (float)spriteData->size_frame_y);
   texInfo->vertices[2].coordZ = 0.0f;
 
   // Upper right corner
-  texInfo->vertices[3].coordX = ((float)spriteData->offset_frame_x - adjustmentX + (float)spriteData->size_frame_x) / adjustmentX;
-  texInfo->vertices[3].coordY = ((float)spriteData->offset_frame_y - adjustmentY) / adjustmentY;
+  texInfo->vertices[3].coordX = ConvertPixelToNdcX((float)spriteData->offset_frame_x + (float)spriteData->size_frame_x);
+  texInfo->vertices[3].coordY = ConvertPixelToNdcY((float)spriteData->offset_frame_y);
   texInfo->vertices[3].coordZ = 0.0f;
 
   // Calculate Texture frame Coordinate
 
   // Upper left corner
   texInfo->vertices[0].texCoordX = 0.0f;
-  texInfo->vertices[0].texCoordY = 1.0f;
+  texInfo->vertices[0].texCoordY = 0.0f;
 
   // Bottom left corner
   texInfo->vertices[1].texCoordX = 0.0f;
-  texInfo->vertices[1].texCoordY = 0.0f;
+  texInfo->vertices[1].texCoordY = 1.0f;
 
   // Bottom right corner
   texInfo->vertices[2].texCoordX = 1.0f;
-  texInfo->vertices[2].texCoordY = 0.0f;
+  texInfo->vertices[2].texCoordY = 1.0f;
 
   // Upper right corner
   texInfo->vertices[3].texCoordX = 1.0f;
-  texInfo->vertices[3].texCoordY = 1.0f;
+  texInfo->vertices[3].texCoordY = 0.0f;
 
   return texInfo;
 }
@@ -190,13 +182,14 @@ ZeroTexture::Texture2d::Texture2d(TIM2_FILEHEADER *pTim2FileHeader, SPRT_DAT *sp
   this->pTim2FileHeader = pTim2FileHeader;
   this->spriteData = spriteData;
   this->textureInfo = MapTexturePoints(this->spriteData);
-  this->shaderProgram = new Shader("resources/shader.vert", "resources/shader.frag");
-  this->VAO1 = new VAO();
-  this->VAO1->Bind();
 }
 
 void ZeroTexture::Texture2d::InitTexture()
 {
+  this->shaderProgram = new Shader("resources/shader.vert", "resources/shader.frag");
+  this->VAO1 = new VAO();
+  this->VAO1->Bind();
+
   this->VBO1 = new VBO((GLfloat*) textureInfo->vertices, sizeof(TextureVertex) * textureInfo->numVertex);
   this->EBO1 = new EBO(textureInfo->indices, sizeof(GLuint) * textureInfo->numIndex);
 
@@ -213,14 +206,27 @@ void ZeroTexture::Texture2d::InitTexture()
   Tim2Converted *tim2 = LoadTim2Texture(pTim2FileHeader, this->spriteData);
 
   this->texture = new Texture(tim2->image, (int)tim2->Width, (int)tim2->Height, GL_TEXTURE_2D, this->slot, GL_RGBA, GL_UNSIGNED_BYTE);
+
   this->texture->texUnit(this->shaderProgram, "tex0", 0);
 }
 
 void ZeroTexture::Texture2d::RenderTexture()
 {
+  glActiveTexture(this->slot);
   this->shaderProgram->Activate();
   glUniform1f(this->uniID, 0.5f);
   this->texture->Bind();
   this->VAO1->Bind();
-  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+  glDrawElements(GL_TRIANGLES, this->textureInfo->numIndex, GL_UNSIGNED_INT, 0);
+}
+
+ZeroTexture::Texture* Generate2dTexture(TIM2_FILEHEADER* pTim2FileHeader, SPRT_DAT *spriteData, GLenum slot)
+{
+  auto textureInfo = MapTexturePoints(spriteData);
+
+  Tim2Converted *tim2 = LoadTim2Texture(pTim2FileHeader, spriteData);
+
+  auto texture = new ZeroTexture::Texture(tim2->image, (int)tim2->Width, (int)tim2->Height, GL_TEXTURE_2D, slot, GL_RGBA, GL_UNSIGNED_BYTE);
+
+  return nullptr;
 }

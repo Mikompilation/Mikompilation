@@ -9,6 +9,8 @@ set(GAME_SOURCES
         game_main.cpp
         gphase.cpp
         player/plyr_mdl.cpp
+        logo/logo_main.cpp
+        menu/menu_main.cpp
         )
 
 set(GAME_HEADERS
@@ -17,6 +19,8 @@ set(GAME_HEADERS
         gphaseTypes.h
         gphase_data.h
         player/plyr_mdl.h
+        logo/logo_main.h
+        menu/menu_main.h
         )
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})
