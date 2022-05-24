@@ -55,6 +55,11 @@ void end_super()
   return;
 }
 
+void NewGameMain()
+{
+  return;
+}
+
 GPHASE_ID pre_super(GPHASE_ID gphaseId)
 {
   printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
