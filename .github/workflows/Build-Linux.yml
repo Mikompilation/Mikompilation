@@ -29,7 +29,11 @@ jobs:
       run: |
         sudo apt-get install -y gcc-multilib g++-multilib
         sudo apt-get install -y xorg-dev
+<<<<<<< HEAD
         sudo apt-get install -y mesa-common-dev libgl-dev libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxext-dev libxfixes-dev libgl1-mesa-dev libegl1-mesa-dev 
+=======
+        sudo apt-get install -y mesa-common-dev libgl-dev libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxext-dev libxfixes-dev libgl1-mesa-dev libegl1-mesa-dev freeglut3 freeglut3-dev
+>>>>>>> 01e134f (Update Build-Linux.yml)
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
