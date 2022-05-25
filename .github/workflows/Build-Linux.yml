@@ -16,13 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - uses: samarthj/arch-pkgbuild-action@v2.4
+    - uses: 2m/arch-pkgbuild-builder@v1.18
       with:
-          pkgbuild_root: Artifacts
-          aur_username: bleh
-          aur_email: bleh
-          aur_ssh_private_key: bleh
-          dry_run: true
+          target: 'pkgbuild'
+          pkgname: Artifacts
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_MODULE_PATH=/usr/lib/x86_64-linux-gnu/mesa/
