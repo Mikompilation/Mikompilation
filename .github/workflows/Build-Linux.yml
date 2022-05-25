@@ -1,3 +1,5 @@
+name: Build-Linux Mikompilation
+
 on:
   push:
     branches: [ main ]
@@ -9,14 +11,14 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04       
+    runs-on: ubuntu-latest      
 
     steps:
     - uses: actions/checkout@v2
     
     - uses: samarthj/arch-pkgbuild-action@v2.4
       with:
-          pkgbuild_root: artifacts/PKGBUILD
+          pkgbuild_root: artifacts
           dry_run: true
 
     - name: Configure CMake
