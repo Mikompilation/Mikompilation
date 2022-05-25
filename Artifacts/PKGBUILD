@@ -1,0 +1,61 @@
+# Maintainer: rafaelff <rafaelff@gnome.org>, WeirdBeard <obarrtimothy@gmail.com>
+# Contributor: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Themaister <maister@archlinux.us>
+
+pkgname=Mikompilation
+pkgver=0.1
+pkgrel=1
+pkgdesc='A Fatal Frame PC Port'
+arch=('i686' 'x86_64')
+license=(
+  GPL2
+  GPL3
+  LGPL2.1
+  LGPL3
+)
+
+depends=(
+  gcc
+  lib32-glew
+  lib32-mesa
+)
+makedepends=(
+  cmake
+  git
+  xorgproto
+  ninja
+  swig
+  python
+  vulkan-headers
+)
+provides=(Mikompilation)
+conflicts=(Mikompilation)
+source=(
+git+https://github.com/wagrenier/Mikompilation.git
+)
+sha256sums=(SKIP)
+
+prepare()
+{
+  export CFLAGS+=" -m32"
+  export CXXFLAGS+=" -m32"
+  export LDFLAGS+=" -m32"
+  export PKG_CONFIG_PATH='/usr/lib32/pkgconfig'
+}
+
+build()
+{
+  cd Mikompilation
+  mkdir -p build && cd build
+
+  cmake .. -GNinja 
+  ninja -j$(nproc)
+}
+
+package()
+{
+    echo "Success"
+}
+
+# vim: ts=2 sw=2 et:
+sha256sums=('SKIP')
