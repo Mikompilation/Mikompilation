@@ -1,0 +1,26 @@
+pkgbase = Mikompilation
+	pkgdesc = A Fatal Frame PC Port
+	pkgver = 0.1
+	pkgrel = 1
+	arch = i686
+	arch = x86_64
+	license = GPL2
+	license = GPL3
+	license = LGPL2.1
+	license = LGPL3
+	makedepends = cmake
+	makedepends = git
+	makedepends = xorgproto
+	makedepends = ninja
+	makedepends = swig
+	makedepends = python
+	makedepends = vulkan-headers
+	depends = gcc
+	depends = lib32-glew
+	depends = lib32-mesa
+	provides = Mikompilation
+	conflicts = Mikompilation
+	source = git+https://github.com/wagrenier/Mikompilation.git
+	sha256sums = SKIP
+
+pkgname = Mikompilation
