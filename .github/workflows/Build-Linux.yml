@@ -18,7 +18,7 @@ jobs:
     
     - uses: samarthj/arch-pkgbuild-action@v2.4
       with:
-          pkgbuild_root: artifacts
+          pkgbuild_root: Artifacts
           dry_run: true
 
     - name: Configure CMake
