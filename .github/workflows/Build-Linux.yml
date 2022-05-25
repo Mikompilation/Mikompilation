@@ -23,7 +23,6 @@ jobs:
     
     - name: Install Dependencies
       run: |
-        xvfb-run glxinfo
         sudo apt-get install -y gcc-multilib g++-multilib
         sudo apt-get install -y xorg-dev
         sudo apt-get install -y mesa-common-dev libgl-dev libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxext-dev libxfixes-dev libgl1-mesa-dev libegl1-mesa-dev 
