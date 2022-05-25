@@ -9,6 +9,11 @@ project(Mikompilation CXX)
 set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+=======
+if (UNIX)
+        set(CMAKE_CXX_FLAGS "-m32")
+        set(CMAKE_C_FLAGS "-m32")
+endif()
 
 add_subdirectory(common)
 
