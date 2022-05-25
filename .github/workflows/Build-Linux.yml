@@ -1,8 +1,30 @@
-name: Build-Linux Mikompilation
-uses: samarthj/arch-pkgbuild-action@v2.4
-with:
-  pkgbuild_root: artifacts
-  aur_username: bleh
-  aur_email: bleh
-  aur_ssh_private_key: bleh
-  dry_run: true
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04       
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - uses: samarthj/arch-pkgbuild-action@v2.4
+      with:
+          pkgbuild_root: artifacts/PKGBUILD
+          dry_run: true
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_MODULE_PATH=/usr/lib/x86_64-linux-gnu/mesa/
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      run: ctest -C ${{env.BUILD_TYPE}}
