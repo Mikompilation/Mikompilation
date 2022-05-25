@@ -197,36 +197,19 @@ void ZeroTexture::Texture2d::InitTexture()
   this->VAO1->LinkAttrib(this->VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
   this->VAO1->LinkAttrib(this->VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
-  //this->VAO1->Unbind();
-  //this->VBO1->Unbind();
-  //this->EBO1->Unbind();
-
   this->uniID = glGetUniformLocation(this->shaderProgram->ID, "scale");
 
-  Tim2Converted *tim2 = LoadTim2Texture(pTim2FileHeader, this->spriteData);
+  this->tim2 = LoadTim2Texture(pTim2FileHeader, this->spriteData);
 
-  this->texture = new Texture(tim2->image, (int)tim2->Width, (int)tim2->Height, GL_TEXTURE_2D, this->slot, GL_RGBA, GL_UNSIGNED_BYTE);
+  this->texture = new Texture(this->tim2->image, (int)this->tim2->Width, (int)tim2->Height, GL_TEXTURE_2D, this->slot, GL_RGBA, GL_UNSIGNED_BYTE);
 
   this->texture->texUnit(this->shaderProgram, "tex0", 0);
 }
 
 void ZeroTexture::Texture2d::RenderTexture()
 {
-  //glActiveTexture(this->slot);
-  //this->shaderProgram->Activate();
-  //glUniform1f(this->uniID, 0.5f);
+  glActiveTexture(this->slot);
   this->texture->Bind();
   this->VAO1->Bind();
   glDrawElements(GL_TRIANGLES, this->textureInfo->numIndex, GL_UNSIGNED_INT, 0);
-}
-
-ZeroTexture::Texture* Generate2dTexture(TIM2_FILEHEADER* pTim2FileHeader, SPRT_DAT *spriteData, GLenum slot)
-{
-  auto textureInfo = MapTexturePoints(spriteData);
-
-  Tim2Converted *tim2 = LoadTim2Texture(pTim2FileHeader, spriteData);
-
-  auto texture = new ZeroTexture::Texture(tim2->image, (int)tim2->Width, (int)tim2->Height, GL_TEXTURE_2D, slot, GL_RGBA, GL_UNSIGNED_BYTE);
-
-  return nullptr;
 }

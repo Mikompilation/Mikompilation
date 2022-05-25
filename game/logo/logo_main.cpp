@@ -22,6 +22,7 @@ void InitLogo()
   delete[] tecmoTextureFile;
   delete[] zeroTextureFile;
 }
+
 void RenderLogo(bool isProjectLogo)
 {
   if (!isProjectLogo)

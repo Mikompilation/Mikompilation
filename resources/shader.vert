@@ -24,7 +24,7 @@ void main()
 	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
 
 	// Assigns the colors from the Vertex Data to "color"
-	//color = aColor;
+	color = aColor;
 
 	// Assigns the texture coordinates from the Vertex Data to "texCoord"
 	texCoord = aTex;

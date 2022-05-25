@@ -49,6 +49,7 @@ class Texture2d
 
  private:
   TIM2_FILEHEADER* pTim2FileHeader;
+  Tim2Converted *tim2;
   SPRT_DAT* spriteData;
   TextureInfo* textureInfo;
   GLenum slot;
@@ -66,4 +67,3 @@ TextureInfo* MapTexturePoints(const SPRT_DAT* spriteData);
 Tim2Converted *LoadTim2Texture(TIM2_FILEHEADER *pTim2FileHeader, const SPRT_DAT *sprtDat);
 float ConvertPixelToNdcX(float x);
 float ConvertPixelToNdcY(float y);
-ZeroTexture::Texture* Generate2dTexture(TIM2_FILEHEADER* pTim2FileHeader, SPRT_DAT *spriteData, GLenum slot);

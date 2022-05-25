@@ -34,8 +34,8 @@ void InitMenu()
   menu_6_texture->InitTexture();
   menu_7_texture->InitTexture();
 
-  //delete[] menuTextureFile;
-  //delete[] menuTextureFile2;
+  delete[] menuTextureFile;
+  delete[] menuTextureFile2;
 }
 
 void RenderMenu()
