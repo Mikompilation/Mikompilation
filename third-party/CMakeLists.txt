@@ -6,8 +6,8 @@ set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL        OFF CACHE BOOL "" FORCE)
 
-find_package(OpenGL REQUIRED)
 find_package(GLEW OPTIONAL_COMPONENTS)
+find_package(OpenGL REQUIRED)
 
 set( GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE )
 set( GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE )
@@ -55,4 +55,10 @@ target_include_directories(ThirdParty PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/glew/include
         )
 
+if (UNIX)
+target_link_libraries(ThirdParty PUBLIC GLEW::GLEW OpenGL::GL glfw)
+
+else()
 target_link_libraries(ThirdParty PUBLIC glew_s OpenGL::GL glfw)
+
+endif()
