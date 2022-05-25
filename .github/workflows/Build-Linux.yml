@@ -19,6 +19,9 @@ jobs:
     - uses: samarthj/arch-pkgbuild-action@v2.4
       with:
           pkgbuild_root: Artifacts
+          aur_username: bleh
+          aur_email: bleh
+          aur_ssh_private_key: bleh
           dry_run: true
 
     - name: Configure CMake
