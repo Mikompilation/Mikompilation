@@ -1,6 +1,4 @@
-name: Build-Linux Mikompilation
-
-- name: Archlinux PKGBUILD
+- name: Build-Linux Mikompilation
   uses: samarthj/arch-pkgbuild-action@v2.4
 with:
   pkgbuild_root: artifacts/PKGBUILD
