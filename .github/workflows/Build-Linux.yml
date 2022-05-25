@@ -19,7 +19,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt update
-        sudo apt install libc6-dev-i386 libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libx11-dev libxext-dev libxmu-dev libxi-dev libgl1-mesa-dev
+        sudo apt install libc6-dev-i386 libglew-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libx11-dev libxext-dev libxmu-dev libxi-dev libgl1-mesa-dev
         sudo apt-get install -y gcc-multilib g++-multilib 
 
     - name: Configure CMake
