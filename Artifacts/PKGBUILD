@@ -18,10 +18,28 @@ depends=(
   gcc
   lib32-glew
   lib32-mesa
+  lib32-libxdamage
+  lib32-lm_sensors
+  lib32-llvm
+  lib32-llvm-libs
+  llvm-libs
+  lib32-zlib
+  lib32-libxau
+  lib32-bzip2
+  lib32-libssh2
+  lib32-expat
+  lib32-xz
+  lib32-libxrender
+  lib32-libxdmcp
+  lib32-libxshmfence
+  lib32-libpsl
+  lib32-brotli
+  lib32-pcre
 )
 makedepends=(
   cmake
   git
+  clang
   xorgproto
   ninja
   swig
