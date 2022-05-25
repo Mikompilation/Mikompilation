@@ -1,5 +1,7 @@
 #include "sceVu0.h"
 
+#include <cmath>
+
 void sceVu0AddVector(Vector4 *out, Vector4 *v1, Vector4 *v2)
 {
   out->x = v1->x + v2->x;

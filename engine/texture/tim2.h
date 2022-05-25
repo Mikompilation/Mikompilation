@@ -1,10 +1,12 @@
 #pragma once
+#include <iostream>
+#include <cstdint>
 
 typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned short uint16;
 typedef unsigned int u_int;
-typedef unsigned __int64 uint64;
+typedef int64_t uint64;
 
 enum TIM2_gattr_type
 {
