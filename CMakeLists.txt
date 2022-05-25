@@ -16,8 +16,6 @@ add_subdirectory(third-party)
 
 add_subdirectory(engine)
 
-add_subdirectory(render)
-
 add_subdirectory(game)
 
 add_subdirectory(ui)
@@ -31,15 +29,19 @@ add_executable(Mikompilation ${SOURCES})
 target_link_libraries(Mikompilation PUBLIC
         ${UI_LIB}
         ${GAME_LIB}
-        ${RENDER_LIB}
+        ${ENGINE_LIB}
         )
 
 target_include_directories(Mikompilation PUBLIC
         ${UI_INCLUDE_DIRS}
         ${GAME_INCLUDE_DIRS}
-        ${RENDER_INCLUDE_DIRS}
+        ${ENGINE_INCLUDE_DIRS}
         )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                        ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/game_files $<TARGET_FILE_DIR:${PROJECT_NAME}>/game_files)

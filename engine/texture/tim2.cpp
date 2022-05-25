@@ -334,7 +334,7 @@ unsigned int Tim2GetClutColor(TIM2_PICTUREHEADER *pTim2PictureHeader, int clut, 
       break;
   }
 
-  return (unsigned int) ((a << 24) | (g << 16) | (b << 8) | r);
+  return (unsigned int) ((a << 24) | (b << 16) | (g << 8) | r);
 }
 
 /// Get texel data
@@ -420,7 +420,7 @@ unsigned int Tim2GetTextureColor(TIM2_PICTUREHEADER *pTim2PictureHeader, int mip
       g = (unsigned char) ((texelData >> 2) & 0xF8);
       b = (unsigned char) ((texelData >> 7) & 0xF8);
       a = (unsigned char) ((texelData >> 8) & 0x80);
-      return (u_int) ((a << 24) | (g << 16) | (b << 8) | r);
+      return (u_int) ((a << 24) | (b << 16) | (g << 8) | r);
 
     case RGB32:
       return ((0x80 << 24) | (texelData & 0x00FFFFFF));

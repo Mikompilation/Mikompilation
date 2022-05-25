@@ -1,9 +1,9 @@
 #pragma once
 
-#include<string>
-#include<sstream>
-#include<iostream>
-#include<cerrno>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <cerrno>
 #include <GL/glew.h>
 
 std::string get_file_contents(const char* filename);

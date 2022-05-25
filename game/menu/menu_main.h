@@ -1,0 +1,137 @@
+#pragma once
+
+#include "texture/Sprite.h"
+
+inline SPRT_DAT menudat[8] = {
+    /// Sprite for Main menu
+    {
+        0x2006180665322BC0,
+        0x1,
+        0x1,
+        0x1FE,
+        0x1C0,
+        0x0,
+        0x0,
+        0x0,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    },
+    /// Lower Right Main Menu
+    {
+        0x2006188621312FC0,
+        0x1,
+        0x1,
+        0x74,
+        0xFE,
+        0X1FE,
+        0x0,
+        0xC2,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    },
+    /// Upper Right Main Menu
+    {
+        0x2006188621312FC0,
+        0x87,
+        0x1,
+        0x74,
+        0xC2,
+        0X1FE,
+        0x0,
+        0x0,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    },
+    /// Right bottom edge Main Menu
+    {
+        0x2006188621312FC0,
+        0x77,
+        0x1,
+        0xE,
+        0xF2,
+        0X272,
+        0x0,
+        0xC2,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    },
+    /// Right middle edge Main Menu
+    {
+        0x2006188621312FC0,
+        0x87,
+        0xC5,
+        0x78,
+        0xE,
+        0X272,
+        0x0,
+        0x4A,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    },
+    /// Right middle edge Main Menu
+    {
+        0x2006188621312FC0,
+        0x87,
+        0xD5,
+        0x4A,
+        0xE,
+        0X272,
+        0x0,
+        0x0,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    },
+    /// Right middle edge Main Menu
+    {
+        0x20058005DD30ABC0,
+        0x7,
+        0x1,
+        0x5B,
+        0X20,
+        0x0,
+        0x0,
+        0x13,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    },
+    /// Right middle edge Main Menu
+    {
+        0x20058005DD30ABC0,
+        0x7,
+        0x1,
+        0x5B,
+        0x20,
+        0x5B,
+        0x0,
+        0x13,
+        0x0,
+        0x0,
+        0x80,
+        0x0,
+        {0x1, 0x0}
+    }
+};
+
+void InitMenu();
+void RenderMenu();

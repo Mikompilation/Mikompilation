@@ -1,5 +1,5 @@
 #pragma once
-#include "glf3_render.h"
+#include "gfx/glf3_render.h"
 #include "MainWindow.h"
 #include "game_main.h"
 

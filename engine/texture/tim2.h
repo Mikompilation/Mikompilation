@@ -72,6 +72,13 @@ struct TIM2_EXHEADER
   uint Reserved;
 };
 
+struct Tim2Converted
+{
+  int Height;
+  int Width;
+  unsigned int *image;
+};
+
 static const char MipMapHeaderSize[] =
     {
         0,

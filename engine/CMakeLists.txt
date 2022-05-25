@@ -15,6 +15,8 @@ set(ENGINE_SOURCES
         texture/VAO.cpp
         texture/VBO.cpp
         texture/Texture.cpp
+        gfx/glf3_render.cpp
+        texture/Sprite.cpp
         )
 
 set(ENGINE_HEADERS
@@ -35,6 +37,10 @@ set(ENGINE_HEADERS
         texture/VAO.h
         texture/VBO.h
         texture/Texture.h
+        PS2_HARDWARE_CONFIG.h
+        gfx/glf3_render.h
+        gfx/GFX_CONFIG.h
+        texture/Sprite.h
         )
 
 add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})
