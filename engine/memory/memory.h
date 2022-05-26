@@ -3,11 +3,13 @@
 
 #define MB(x) ((size_t) (x) << 20)
 
-static uint32_t ps2MaxRam = MB(32);
-static uint64_t xboxMaxRam = MB(64);
-
+static uint32_t ps2MaxMemory = MB(32);
+static uint32_t xboxMaxMemory = MB(64);
+static uint32_t debugMaxMemory = MB(128);
 
 struct Memory
 {
-  //void malloc();
+   uint32_t* memory;
+   uint32_t malloc(uint32_t mem);
+   void free();
 };
