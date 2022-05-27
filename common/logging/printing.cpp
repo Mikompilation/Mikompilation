@@ -1,4 +1,5 @@
 #include "printing.h"
+#include "spdlog/spdlog.h"
 
 int printVectorC(Vector4 *vector, const char *message)
 {
@@ -31,7 +32,9 @@ int printLMatC(Vector4 *pVector4, const char *message)
   return iVar3;
 }
 
-void printNotImplemented(const char* methodName, const char* fileName)
+void printNotImplemented(const char* loggerName, const char* methodName, const char* fileName)
 {
-    printf("The method %s located in the file %s is not yet implemented.\n", methodName, fileName);
+  
+  const auto logger = spdlog::get(loggerName);
+  logger->info("{} in {} not implemented", methodName, fileName);
 }

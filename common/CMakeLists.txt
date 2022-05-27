@@ -2,6 +2,7 @@ set(COMMON_LIB "common" CACHE STRING "Library name for COMMON")
 
 set(COMMON_SOURCES
         logging/printing.cpp
+        logging/setup.cpp
         math/VectorMath.cpp
         file/file_util.cpp
         )
@@ -10,6 +11,7 @@ set(COMMON_HEADERS
         flags.h
         math/VectorMath.h
         logging/printing.h
+        logging/setup.h
         file/file_util.h
         )
 

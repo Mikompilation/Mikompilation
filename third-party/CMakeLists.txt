@@ -6,12 +6,6 @@ set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL        OFF CACHE BOOL "" FORCE)
 
-find_package(OpenGL REQUIRED)
-
-set( GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE )
-set( GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE )
-set( GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE )
-
 add_subdirectory(glew/build/cmake)
 
 if( MSVC )
@@ -52,4 +46,4 @@ target_include_directories(ThirdParty PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/glew/include
         )
 
-target_link_libraries(ThirdParty PUBLIC glew_s OpenGL::GL glfw)
+target_link_libraries(ThirdParty PUBLIC glew_s glfw)

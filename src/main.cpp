@@ -2,9 +2,12 @@
 #include "gfx/glf3_render.h"
 #include "MainWindow.h"
 #include "game_main.h"
+#include "logging/setup.h"
 
 int main(int argc, char *argv[])
 {
+  SetupLoggers();
+
   GLFWwindow *glfwWindow = InitializeWindow();
 
   MainWindow mainWindow(glfwWindow);

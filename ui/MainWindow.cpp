@@ -15,10 +15,6 @@ bool MainWindow::Init()
 
   InitializeImGui(window);
 
-  this->filePicker = new FileSelector(std::vector{
-      SelectFile{".bin", "IMG_HD"},
-      SelectFile{".bin", "IMG_BD"}});
-
   this->memoryViewer = new MemoryViewer();
 
   this->topMenuBar = new TopMenuBar;
@@ -33,11 +29,6 @@ void MainWindow::Update()
   if (ImGui::IsKeyPressed(GLFW_KEY_HOME, false))
   {
     this->topMenuBar->shouldDisplay = !this->topMenuBar->shouldDisplay;
-  }
-
-  if (this->topMenuBar->shouldDisplayFileSelector)
-  {
-    this->filePicker->Update();
   }
 
   if (this->topMenuBar->shouldDisplayMemoryViewer)

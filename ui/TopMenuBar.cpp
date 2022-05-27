@@ -17,8 +17,7 @@ void TopMenuBar::Update()
 
     if (ImGui::BeginMenu("Windows"))
     {
-      ToggleButton("File Selector", &shouldDisplayFileSelector);
-      ToggleButton("Memory View", &shouldDisplayMemoryViewer);
+      ImGui::Checkbox("Memory View", &shouldDisplayMemoryViewer);
 
       ImGui::EndMenu();
     }

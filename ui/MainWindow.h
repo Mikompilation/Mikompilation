@@ -10,7 +10,6 @@ class MainWindow
  private:
   MemoryViewer *memoryViewer;
   GLFWwindow *window;
-  FileSelector * filePicker;
   TopMenuBar* topMenuBar;
 
  public:
