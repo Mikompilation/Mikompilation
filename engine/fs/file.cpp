@@ -25,15 +25,13 @@ bool isFileLoadEnd(int fileId)
   {
     auto currentThread = threadList[i];
 
-    if (currentThread->joinable())
+    if (!currentThread->joinable())
     {
       i += 1;
       continue;
     }
 
     threadList.erase(threadList.begin() + i);
-
-    delete currentThread;
   }
 
   return gameFiles[fileId].isFileLoadedInMemory;

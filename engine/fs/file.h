@@ -3,8 +3,8 @@
 #include <thread>
 #include <vector>
 
-std::vector<std::thread*> threadList = std::vector<std::thread*>();
+inline std::vector<std::thread*> threadList = std::vector<std::thread*>();
 
-int LoadReq(int fileId, void *memoryAddress);
+int LoadReq(int fileId, void *memoryAddress = nullptr);
 void LoadFile(int fileId);
-bool isFileLoadEnd(int threadId);
+bool isFileLoadEnd(int fileId);

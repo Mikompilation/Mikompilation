@@ -6,7 +6,7 @@ inline const int gphase_sys_num = 6;
 inline GPHASE_ID gphase_sys[gphase_sys_num];
 inline int gphase_flags[gphase_sys_num];
 
-inline GPHASE_ID next_gphase[6];
+inline GPHASE_ID next_gphase[gphase_sys_num];
 
 inline const GPHASE_INFO gphase_tbl[94] =
     {

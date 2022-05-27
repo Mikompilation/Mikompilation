@@ -2,9 +2,11 @@
 #include "GFX_CONFIG.h"
 #include <cstdio>
 #include <iostream>
+#include "spdlog/spdlog.h"
+#include "logging/printing.h"
 
 void GLAPIENTRY
-MessageCallback( GLenum source,
+MessageCallback(GLenum source,
                 GLenum type,
                 GLuint id,
                 GLenum severity,
@@ -12,13 +14,15 @@ MessageCallback( GLenum source,
                 const GLchar* message,
                 const void* userParam )
 {
-  fprintf( stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-          ( type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "" ),
-          type, severity, message );
+  const auto logger = spdlog::get(ENGINE_LOGGER);
+  logger->error("GL CALLBACK: {} type = {:x}, severity = {:x}, message = {}",
+               (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+               type, severity, message);
 }
 
 GLFWwindow *InitializeWindow()
 {
+  const auto engineLogger = spdlog::get(ENGINE_LOGGER);
   glfwSetErrorCallback(glfw_error_callback);
 
   if (!glfwInit())
@@ -32,8 +36,9 @@ GLFWwindow *InitializeWindow()
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
   glEnable(GL_DEBUG_OUTPUT);
   glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-  glEnable              ( GL_DEBUG_OUTPUT );
+  glEnable(GL_DEBUG_OUTPUT );
 
+  engineLogger->info("Creating GLFW window");
 
   GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Mikompilation", NULL, NULL);
 
@@ -46,7 +51,7 @@ GLFWwindow *InitializeWindow()
 
   if (GLEW_OK != err)
   {
-    fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+    engineLogger->critical("GLFW failed to initialize: {}", glewGetErrorString(err));
   }
 
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -61,7 +66,8 @@ GLFWwindow *InitializeWindow()
 
 static void glfw_error_callback(int error, const char *description)
 {
-  std::cerr << "[ERROR] GLFW error: " << error << ", " << description << std::endl;
+  const auto logger = spdlog::get(ENGINE_LOGGER);
+  logger->error("Error {:x} with description {}", error, description);
 }
 
 static void framebuffer_size_callback(GLFWwindow *window, int width, int height)
@@ -83,7 +89,7 @@ void teardown(GLFWwindow *window)
 
 void startNewFrame()
 {
-  //glClearColor(100.0f, 0.0f, 0.0f, 1.0f );
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f );
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
