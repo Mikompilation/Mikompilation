@@ -9,6 +9,38 @@ int LoadReq(int fileId, void *memoryAddress)
     return 0;
   }
 
+  threadList.push_back(new std::thread(LoadFile, fileId));
+
+  return fileId;
+}
+
+bool isFileLoadEnd(int fileId)
+{
+  if (!gameFiles[fileId].isFileLoadedInMemory)
+  {
+    return false;
+  }
+
+  for (int i = 0; i < threadList.size();)
+  {
+    auto currentThread = threadList[i];
+
+    if (currentThread->joinable())
+    {
+      i += 1;
+      continue;
+    }
+
+    threadList.erase(threadList.begin() + i);
+
+    delete currentThread;
+  }
+
+  return gameFiles[fileId].isFileLoadedInMemory;
+}
+
+void LoadFile(int fileId)
+{
   std::string filename = gameFolder.string() + "/" + std::to_string(fileId) + ".bin";
   std::ifstream infile(filename, std::ios::binary);
 
@@ -22,8 +54,7 @@ int LoadReq(int fileId, void *memoryAddress)
 
   infile.close();
 
-  gameFiles[fileId].isFileLoadedInMemory = true;
+  gameFiles[fileId].fileSize = length;
   gameFiles[fileId].fileContent = buffer;
-
-  return 0;
+  gameFiles[fileId].isFileLoadedInMemory = true;
 }
