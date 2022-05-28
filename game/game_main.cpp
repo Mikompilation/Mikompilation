@@ -1,5 +1,7 @@
 #include "game_main.h"
 #include "gphase.h"
+#include "fs/file.h"
+#include "fs/fileLoadGlobals.h"
 #include "logging/printing.h"
 #include "player/plyr_mdl.h"
 
@@ -44,16 +46,30 @@ GPHASE_ID after_super(GPHASE_ID gphaseId)
 
 void end_Boot_Init()
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  return;
 }
 
 void init_Boot_Init()
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  LoadReq(SYSTEM_TEXTURES_PAK2, (void *) 0x1E79B0);
+  LoadReq(GAME_TEXT, (void *) 0xD9EC00);
+  LoadReq(SUBTITLE_TEXT, SubTitleAddr);
 }
 
 GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId)
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  auto isAllFilesLoaded = IsLoadEndAll();
+
+  if (isAllFilesLoaded)
+  {
+    SubTitleAddr = (int *) gameFiles[SUBTITLE_TEXT].fileContent;
+    SetNextGPhase(AUTOLOAD_MAIN);
+  }
+
   return DEFAULT;
+}
+
+int *GetSubTitleAddr()
+{
+  return SubTitleAddr;
 }
