@@ -4,6 +4,7 @@
 #include "gphase.h"
 #include "logging/printing.h"
 #include "player/plyr_mdl.h"
+#include "logo/logo_main.h"
 
 bool soft_reset_disable;
 
@@ -21,7 +22,24 @@ void init_super()
 {
   InitCostume();
   soft_reset_disable = false;
-
+  // InitSystemON();
+  // InitGraph2dBoot();
+  // playPssInit();
+  InitLogo();
+  // LoadingInit();
+  // TitleInit();
+  // InitOptionSetup((OPTION_WRK *) opt_wrk);
+  // ClearFlgCtrlInit();
+  // MemoryCardInit();
+  // MemoryCardDebugReqSizeDisp();
+  // dmaVif1Init();
+  // cddatInit(param 1, param 2, param 3);
+  // InitDrawEnv_FPFv_PA3_iT0PFPA3_i_vT2();
+  // SetPrintWarning();
+  // SetPrintAsset();
+  // gra3dInit();
+  // FinderBankSetup();
+  // SceneEffectInit();
   printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }
 
