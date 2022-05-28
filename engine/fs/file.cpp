@@ -55,6 +55,7 @@ void LoadFile(int fileId)
   {
     auto engineLogger = spdlog::get(ENGINE_LOGGER);
     engineLogger->critical("File {:x} could not be found in your game_files folder", fileId);
+    return;
   }
 
   std::ifstream infile(filename, std::ios::binary);
