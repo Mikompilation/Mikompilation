@@ -4,7 +4,8 @@
 #include "gphase.h"
 #include "logging/printing.h"
 #include "player/plyr_mdl.h"
-#include "logo/logo_main.h"
+#include "menu/logo_main.h"
+#include "menu/title_menu.h"
 
 bool soft_reset_disable;
 
@@ -27,7 +28,7 @@ void init_super()
   // playPssInit();
   InitLogo();
   // LoadingInit();
-  // TitleInit();
+  TitleInit();
   // InitOptionSetup((OPTION_WRK *) opt_wrk);
   // ClearFlgCtrlInit();
   // MemoryCardInit();
@@ -40,7 +41,6 @@ void init_super()
   // gra3dInit();
   // FinderBankSetup();
   // SceneEffectInit();
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }
 
 void end_super()

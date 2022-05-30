@@ -9,7 +9,8 @@ set(GAME_SOURCES
         game_main.cpp
         gphase.cpp
         player/plyr_mdl.cpp
-        logo/logo_main.cpp
+        menu/title_menu.cpp
+        menu/logo_main.cpp
         menu/menu_main.cpp
         )
 
@@ -19,7 +20,8 @@ set(GAME_HEADERS
         gphase_types.h
         gphase_data.h
         player/plyr_mdl.h
-        logo/logo_main.h
+        menu/title_menu.h
+        menu/logo_main.h
         menu/menu_main.h
         )
 
