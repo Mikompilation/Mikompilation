@@ -3,6 +3,7 @@ set(ENGINE_LIB "engine" CACHE STRING "Library name for ENGINE")
 set(ENGINE_SOURCES
         VU/sceVu0.cpp
         entity/enemy.cpp
+        camera/camera.cpp
         sgd/sgdGlobals.cpp
         sgd/sgdRender.cpp
         sgd/sgdLoader.cpp
