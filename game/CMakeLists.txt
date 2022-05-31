@@ -7,19 +7,23 @@ set(GAME_INCLUDE_DIRS
 
 set(GAME_SOURCES
         game_main.cpp
+        ingame.cpp
         gphase.cpp
         system/option.cpp
         system/system.cpp
         scene/scene.cpp
         scene/scene_effect.cpp
+        flag/clear_flg.cpp
         player/plyr_mdl.cpp
         menu/title_menu.cpp
         menu/logo_main.cpp
         menu/menu_main.cpp
+        finder/finder.cpp
         )
 
 set(GAME_HEADERS
         game_main.h
+        ingame.h
         gphase.h
         gphase_types.h
         gphase_data.h
@@ -27,10 +31,12 @@ set(GAME_HEADERS
         system/system.h
         scene/scene.h
         scene/scene_effect.h
+        flag/clear_flg.h
         player/plyr_mdl.h
         menu/title_menu.h
         menu/logo_main.h
         menu/menu_main.h
+        finder/finder.h
         )
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})

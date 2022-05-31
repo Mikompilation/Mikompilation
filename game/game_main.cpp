@@ -9,6 +9,9 @@
 #include "system/option.h"
 #include "system/system.h"
 #include "scene/scene_effect.h"
+#include "flag/clear_flg.h"
+#include "gra3d/gra3d.h"
+#include "finder/finder.h"
 
 bool soft_reset_disable;
 
@@ -27,13 +30,14 @@ void init_super()
   InitCostume();
   soft_reset_disable = false;
   InitSystemON();
+  // DebugMemoryCheck();
   // InitGraph2dBoot();
   // playPssInit();
   InitLogo();
   LoadingInit();
   TitleInit();
   InitOptionSetup(&opt_wrk);
-  // ClearFlgCtrlInit();
+  ClearFlgCtrlInit();
   // MemoryCardInit();
   // MemoryCardDebugReqSizeDisp();
   // dmaVif1Init();
@@ -41,8 +45,8 @@ void init_super()
   // InitDrawEnv();
   // SetPrintWarning();
   // SetPrintAsset();
-  // gra3dInit();
-  // FinderBankSetup();
+  gra3dInit();
+  FinderBankSetup();
   SceneEffectInit();
 }
 
