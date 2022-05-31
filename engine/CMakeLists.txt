@@ -37,6 +37,7 @@ set(ENGINE_HEADERS
         texture/EBO.h
         texture/VAO.h
         texture/VBO.h
+        gra3d/gra3d.h
         texture/Texture.h
         PS2_HARDWARE_CONFIG.h
         gfx/glf3_render.h

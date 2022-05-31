@@ -8,6 +8,7 @@ set(GAME_INCLUDE_DIRS
 set(GAME_SOURCES
         game_main.cpp
         gphase.cpp
+        system/option.cpp
         player/plyr_mdl.cpp
         menu/title_menu.cpp
         menu/logo_main.cpp
@@ -19,6 +20,7 @@ set(GAME_HEADERS
         gphase.h
         gphase_types.h
         gphase_data.h
+        system/option.h
         player/plyr_mdl.h
         menu/title_menu.h
         menu/logo_main.h

@@ -6,6 +6,7 @@
 #include "player/plyr_mdl.h"
 #include "menu/logo_main.h"
 #include "menu/title_menu.h"
+#include "system/option.h"
 
 bool soft_reset_disable;
 
@@ -27,9 +28,9 @@ void init_super()
   // InitGraph2dBoot();
   // playPssInit();
   InitLogo();
-  // LoadingInit();
+  LoadingInit();
   TitleInit();
-  // InitOptionSetup((OPTION_WRK *) opt_wrk);
+  InitOptionSetup(&opt_wrk);
   // ClearFlgCtrlInit();
   // MemoryCardInit();
   // MemoryCardDebugReqSizeDisp();
