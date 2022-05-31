@@ -15,6 +15,7 @@ set(ENGINE_SOURCES
         texture/EBO.cpp
         texture/VAO.cpp
         texture/VBO.cpp
+        gra3d/gra3d.cpp
         texture/Texture.cpp
         gfx/glf3_render.cpp
         texture/Sprite.cpp
@@ -43,6 +44,7 @@ set(ENGINE_HEADERS
         gfx/glf3_render.h
         gfx/GFX_CONFIG.h
         texture/Sprite.h
+        message.h
         )
 
 add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})

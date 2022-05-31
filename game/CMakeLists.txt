@@ -19,6 +19,9 @@ set(GAME_SOURCES
         menu/logo_main.cpp
         menu/menu_main.cpp
         finder/finder.cpp
+        g2d/g2d_main.cpp
+        g2d/g2d_draw.cpp
+        fade.cpp
         )
 
 set(GAME_HEADERS
@@ -37,6 +40,9 @@ set(GAME_HEADERS
         menu/logo_main.h
         menu/menu_main.h
         finder/finder.h
+        g2d/g2d_main.h
+        g2d/g2d_draw.h
+        fade.h
         )
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})
