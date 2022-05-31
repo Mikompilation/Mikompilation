@@ -36,7 +36,7 @@ void init_super()
   // MemoryCardDebugReqSizeDisp();
   // dmaVif1Init();
   // cddatInit(param 1, param 2, param 3);
-  // InitDrawEnv_FPFv_PA3_iT0PFPA3_i_vT2();
+  // InitDrawEnv();
   // SetPrintWarning();
   // SetPrintAsset();
   // gra3dInit();
