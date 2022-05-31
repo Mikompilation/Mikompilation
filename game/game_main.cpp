@@ -7,6 +7,8 @@
 #include "menu/logo_main.h"
 #include "menu/title_menu.h"
 #include "system/option.h"
+#include "system/system.h"
+#include "scene/scene_effect.h"
 
 bool soft_reset_disable;
 
@@ -24,7 +26,7 @@ void init_super()
 {
   InitCostume();
   soft_reset_disable = false;
-  // InitSystemON();
+  InitSystemON();
   // InitGraph2dBoot();
   // playPssInit();
   InitLogo();
@@ -41,7 +43,7 @@ void init_super()
   // SetPrintAsset();
   // gra3dInit();
   // FinderBankSetup();
-  // SceneEffectInit();
+  SceneEffectInit();
 }
 
 void end_super()

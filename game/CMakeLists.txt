@@ -9,6 +9,9 @@ set(GAME_SOURCES
         game_main.cpp
         gphase.cpp
         system/option.cpp
+        system/system.cpp
+        scene/scene.cpp
+        scene/scene_effect.cpp
         player/plyr_mdl.cpp
         menu/title_menu.cpp
         menu/logo_main.cpp
@@ -21,6 +24,9 @@ set(GAME_HEADERS
         gphase_types.h
         gphase_data.h
         system/option.h
+        system/system.h
+        scene/scene.h
+        scene/scene_effect.h
         player/plyr_mdl.h
         menu/title_menu.h
         menu/logo_main.h
