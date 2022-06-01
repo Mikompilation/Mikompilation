@@ -1,18 +1,20 @@
-#include "file.h"
-#include "fileLoadGlobals.h"
+#include "eecdvd.h"
+#include "iopsys.h"
 #include "logging/printing.h"
 #include "spdlog/spdlog.h"
 
 #include <fstream>
 
-int LoadReq(int fileId, void *memoryAddress)
+int LoadReq(int fileId, void *memoryAddress, bool useParameterMemoryAddress)
 {
   if (gameFiles[fileId].isFileLoadedInMemory)
   {
     return 0;
   }
 
-  threadList.emplace_back(std::thread(LoadFile, fileId));
+  void* fileTargetAddress = useParameterMemoryAddress ? memoryAddress : (void*) nullptr;
+
+  threadList.emplace_back(std::thread(LoadFile, fileId, fileTargetAddress));
 
   return fileId;
 }
@@ -35,7 +37,7 @@ void ClearCompletedThreadList()
   }
 }
 
-bool isFileLoadEnd(int fileId)
+bool IsLoadEnd(int fileId)
 {
   if (!gameFiles[fileId].isFileLoadedInMemory)
   {
@@ -47,9 +49,9 @@ bool isFileLoadEnd(int fileId)
   return gameFiles[fileId].isFileLoadedInMemory;
 }
 
-void LoadFile(int fileId)
+void LoadFile(int fileId, void *memoryAddress)
 {
-  std::string filename = gameFolder.string() + "/" + std::to_string(fileId) + ".bin";
+  auto filename = GetGameFileWithPathFromFileId(fileId);
 
   if (!std::filesystem::exists(filename))
   {
@@ -58,33 +60,31 @@ void LoadFile(int fileId)
     return;
   }
 
+  auto fileSize = GetFileSize_L(fileId);
+
   std::ifstream infile(filename, std::ios::binary);
 
-  infile.seekg(0, std::ios::end);
-  size_t length = infile.tellg();
-  infile.seekg(0, std::ios::beg);
+  char *buffer = memoryAddress == nullptr ? new char[fileSize] : (char*) memoryAddress;
 
-  char *buffer = new char[length];
-
-  infile.read(buffer, length);
+  infile.read(buffer, fileSize);
 
   infile.close();
 
-  gameFiles[fileId].fileSize = length;
+  gameFiles[fileId].fileSize = fileSize;
   gameFiles[fileId].fileContent = buffer;
   gameFiles[fileId].isFileLoadedInMemory = true;
 }
 
-/**
- * \brief Custom implementation to allow future file modding
- * \param fileId 
- * \return 
- */
-int32_t GetFileSize(int fileId)
+size_t GetFileSize_L(int fileId)
 {
-  std::string filename = gameFolder.string() + "/" + std::to_string(fileId) + ".bin";
+  std::string filename = GetGameFileWithPathFromFileId(fileId);
 
   return std::filesystem::file_size(filename);
+}
+
+std::string GetGameFileWithPathFromFileId(int fileId)
+{
+  return gameFolder.string() + "/" + std::to_string(fileId) + ".bin";
 }
 
 bool IsLoadEndAll()

@@ -5,7 +5,7 @@
 /// Header file for joining all game functions
 /// found in the funcs array
 
-inline const int gphase_num = 94;
+inline const int gphase_num = 88;
 
 inline void (*ini_func[gphase_num])() =
     {

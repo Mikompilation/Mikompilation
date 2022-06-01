@@ -38,6 +38,11 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                        ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/game_files $<TARGET_FILE_DIR:${PROJECT_NAME}>/game_files)
+file(
+        GENERATE
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/CopyConfigurationData$<CONFIG>.cmake"
+        CONTENT "file(
+                    COPY \"${PROJECT_SOURCE_DIR}/game_files\"
+                    DESTINATION \"$<TARGET_FILE_DIR:${PROJECT_NAME}>/game_files\"
+                 )"
+)

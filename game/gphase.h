@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gphaseTypes.h"
+#include "gphase_types.h"
 
 inline const int gphase_sys_num = 6;
 inline GPHASE_ID gphase_sys[gphase_sys_num];

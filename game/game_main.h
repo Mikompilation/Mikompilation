@@ -1,5 +1,5 @@
 #pragma once
-#include "gphaseTypes.h"
+#include "gphase_types.h"
 
 inline int *SubTitleAddr;
 

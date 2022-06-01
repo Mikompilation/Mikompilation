@@ -16,7 +16,7 @@ set(GAME_SOURCES
 set(GAME_HEADERS
         game_main.h
         gphase.h
-        gphaseTypes.h
+        gphase_types.h
         gphase_data.h
         player/plyr_mdl.h
         logo/logo_main.h

@@ -1,7 +1,7 @@
 #include "game_main.h"
+#include "fs/eecdvd.h"
+#include "fs/iopsys.h"
 #include "gphase.h"
-#include "fs/file.h"
-#include "fs/fileLoadGlobals.h"
 #include "logging/printing.h"
 #include "player/plyr_mdl.h"
 
@@ -53,7 +53,9 @@ void init_Boot_Init()
 {
   LoadReq(SYSTEM_TEXTURES_PAK2, (void *) 0x1E79B0);
   LoadReq(GAME_TEXT, (void *) 0xD9EC00);
-  LoadReq(SUBTITLE_TEXT, SubTitleAddr);
+
+  SubTitleAddr = (int*) malloc(GetFileSize_L(SUBTITLE_TEXT));
+  LoadReq(SUBTITLE_TEXT, SubTitleAddr, true);
 }
 
 GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId)
@@ -62,7 +64,6 @@ GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId)
 
   if (isAllFilesLoaded)
   {
-    SubTitleAddr = (int *) gameFiles[SUBTITLE_TEXT].fileContent;
     SetNextGPhase(AUTOLOAD_MAIN);
   }
 

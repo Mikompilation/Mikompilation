@@ -6,7 +6,7 @@ set(ENGINE_SOURCES
         sgd/sgdGlobals.cpp
         sgd/sgdRender.cpp
         sgd/sgdLoader.cpp
-        fs/file.cpp
+        fs/eecdvd.cpp
         texture/tim2.cpp
         controller/GameInput.cpp
         texture/Texture.cpp
@@ -27,8 +27,8 @@ set(ENGINE_HEADERS
         sgd/sgdRender.h
         sgd/sgdGlobals.h
         sgd/sgdLoader.h
-        fs/file.h
-        fs/fileLoadGlobals.h
+        fs/eecdvd.h
+        fs/iopsys.h
         controller/GameInput.h
         texture/tim2.h
         texture/ZeroShader.h

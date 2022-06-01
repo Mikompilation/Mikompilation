@@ -14,10 +14,7 @@ enum FileInfo : int
   SUBTITLE_TEXT = 0x1064
 };
 
-/**
- * \brief New redefined struct for loaded file for
- * the Mikompilation project
- */
+///New redefined struct for loaded file for the Mikompilation project
 struct GameFile
 {
   bool isFileLoadedInMemory = false;
@@ -25,15 +22,11 @@ struct GameFile
   void *fileContent;
 };
 
-/**
- * \brief The struct used in the original game's source code
- */
+/// The struct used in the original game's source code
 struct ZeroFile
 {
-  /**
-   * \brief Contains the offset address in the archive file
-   * and some data like isFile or isCompressed on the first 3 bits
-   */
+  /// Contains the offset address in the archive file and
+  /// some data like isFile or isCompressed on the first 3 bits
   uint32_t offset_info;
   uint32_t size;
   uint32_t sizeCompressed;
