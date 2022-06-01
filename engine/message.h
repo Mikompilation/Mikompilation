@@ -1,6 +1,5 @@
 #pragma once
 
-char *messageBuff; // I'm assuimng?
-
+inline char *messageBuff;
 
 void InitMessage();
