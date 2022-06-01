@@ -15,4 +15,6 @@ struct OPTION_WRK
 
 inline OPTION_WRK opt_wrk;
 
-void InitOptionSetup(OPTION_WRK * options);
+void InitOptionSetup(OPTION_WRK *options);
+
+void OptSoundSetupRef();

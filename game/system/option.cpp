@@ -1,4 +1,5 @@
 #include "option.h"
+#include "logging/printing.h"
 
 void InitOptionSetup(OPTION_WRK *options)
 {
@@ -10,5 +11,10 @@ void InitOptionSetup(OPTION_WRK *options)
   options->controlScheme = 0;
   options->isMonoSound = false;
   options->isAnalogStickInverse = false;
-  // OptSoundSetupRef();
+  OptSoundSetupRef();
+}
+
+void OptSoundSetupRef()
+{
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }

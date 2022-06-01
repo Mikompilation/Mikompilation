@@ -1,7 +1,7 @@
 #pragma once
 #include "scene.h"
 
-enum Effects
+enum Effects : int
 {
   Z_DEP,
   DITHER,

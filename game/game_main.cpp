@@ -37,9 +37,7 @@ void init_super()
   InitCostume();
   soft_reset_disable = false;
   InitSystemON();
-  // DebugMemoryCheck();
   InitGraph2dBoot();
-  // playPssInit();
   InitLogo();
   LoadingInit();
   TitleInit();
@@ -47,7 +45,6 @@ void init_super()
   ClearFlgCtrlInit();
   MemoryCardInit();
   dmaVif1Init(nullptr, 0, nullptr, 0);
-  // InitDrawEnv();
   gra3dInit();
   FinderBankSetup();
   SceneEffectInit();

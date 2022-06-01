@@ -1,7 +1,7 @@
 #include "mc.h"
-
+#include "logging/printing.h"
 
 void MemoryCardInit()
 {
-  memoryCard = new uint32_t[MB(8)];
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }

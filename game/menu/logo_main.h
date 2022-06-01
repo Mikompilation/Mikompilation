@@ -3,7 +3,6 @@
 #include "texture/Sprite.h"
 #include "texture/tim2.h"
 
-
 inline SPRT_DAT logodat[3] = {
     /// Sprite for TECMO logo
     {

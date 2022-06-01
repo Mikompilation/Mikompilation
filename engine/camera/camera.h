@@ -2,7 +2,8 @@
 
 #include "math/VectorMath.h"
 
-struct cam_wrk {
+struct cam_wrk 
+{
   Vector4 position;
   Vector4 rotation;
   float unknown1;

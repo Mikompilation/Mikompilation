@@ -3,7 +3,6 @@
 #include "message.h"
 #include "fade.h"
 
-
 void InitGraph2dBoot()
 {
   InitPK2Dbuf();

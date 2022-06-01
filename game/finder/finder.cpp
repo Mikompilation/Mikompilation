@@ -3,6 +3,5 @@
 
 void FinderBankSetup()
 {
-	// SndBankNew(0xc8a,0xc89,0xffffffffffffffff);
-
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }

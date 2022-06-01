@@ -1,3 +1,3 @@
 #pragma once
 
-void IngameWrkInit(int, int);
+void IngameWrkInit(int gPhase1, int gPhase2);

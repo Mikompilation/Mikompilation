@@ -1,4 +1,6 @@
 #pragma once
 
-struct SCENE_CTRL {
+struct SCENE_CTRL 
+{
+
 };
