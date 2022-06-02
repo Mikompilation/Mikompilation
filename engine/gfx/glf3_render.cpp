@@ -1,23 +1,20 @@
 #include "glf3_render.h"
 #include "GFX_CONFIG.h"
-#include <cstdio>
-#include <iostream>
-#include "spdlog/spdlog.h"
 #include "logging/printing.h"
+#include "spdlog/spdlog.h"
+#include <cstdio>
 
-void GLAPIENTRY
-MessageCallback(GLenum source,
-                GLenum type,
-                GLuint id,
-                GLenum severity,
-                GLsizei length,
-                const GLchar* message,
-                const void* userParam )
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb/stb_image.h"
+
+void GLAPIENTRY MessageCallback(GLenum source, GLenum type, GLuint id,
+                                GLenum severity, GLsizei length,
+                                const GLchar *message, const void *userParam)
 {
   const auto logger = spdlog::get(ENGINE_LOGGER);
   logger->error("GL CALLBACK: {} type = {:x}, severity = {:x}, message = {}",
-               (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
-               type, severity, message);
+                (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""), type,
+                severity, message);
 }
 
 GLFWwindow *InitializeWindow()
@@ -36,22 +33,36 @@ GLFWwindow *InitializeWindow()
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
   glEnable(GL_DEBUG_OUTPUT);
   glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-  glEnable(GL_DEBUG_OUTPUT );
+  glEnable(GL_DEBUG_OUTPUT);
 
   engineLogger->info("Creating GLFW window");
 
-  GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Mikompilation", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT,
+                                        "Mikompilation", NULL, NULL);
+
+  int width, height, channel;
+  stbi_uc *img = stbi_load("resources/icon.png", &width, &height, &channel, 0);
+  GLFWimage glfwImage;
+
+  glfwImage.width = width;
+  glfwImage.height = height;
+  glfwImage.pixels = img;
+
+  glfwSetWindowIcon(window, 1, &glfwImage);
+
+  stbi_image_free(img);
 
   glfwMakeContextCurrent(window);
 
   glewExperimental = GL_TRUE;
   GLenum err = glewInit();
 
-  glDebugMessageCallback( MessageCallback, 0 );
+  glDebugMessageCallback(MessageCallback, 0);
 
   if (GLEW_OK != err)
   {
-    engineLogger->critical("GLFW failed to initialize: {}", glewGetErrorString(err));
+    engineLogger->critical("GLFW failed to initialize: {}",
+                           glewGetErrorString(err));
   }
 
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -89,7 +100,7 @@ void teardown(GLFWwindow *window)
 
 void startNewFrame()
 {
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f );
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 

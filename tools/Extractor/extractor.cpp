@@ -1,6 +1,11 @@
 #include "extractor.h"
-#include <fstream>
 #include "deless.h"
+#include <fstream>
+
+int NUM_FILES;
+int FILE_TABLE_ADDRESS;
+std::string REGION;
+bool EXTRACT_FILE_NAME;
 
 char *ReadFullFile(const char *filename)
 {
@@ -35,10 +40,10 @@ char *ReadRangeFile(const char *filename, int startAddress, int readLength)
   return buffer;
 }
 
-void DecompressFile(int file, const std::filesystem::path outputFolder)
+void DecompressFile(std::string file)
 {
-  std::string initialFile = outputFolder.string() + "/" + std::to_string(file) + ".bin";
-  std::string targetFile = outputFolder.string() + "/" + std::to_string(file) + ".bin" + ".LED";
+  std::string initialFile = file;
+  std::string targetFile = file + ".LED";
 
   Decompress(initialFile.c_str(), targetFile.c_str());
 
@@ -47,7 +52,8 @@ void DecompressFile(int file, const std::filesystem::path outputFolder)
   std::filesystem::rename(targetFile, initialFile);
 }
 
-void ExtractZero2GameFiles(const char *imgBdFile, const char *elf, const std::filesystem::path outputFolder)
+void ExtractZero2GameFiles(const char *imgBdFile, const char *elf,
+                           const std::filesystem::path outputFolder)
 {
   if (!std::filesystem::exists(outputFolder))
   {
@@ -55,21 +61,26 @@ void ExtractZero2GameFiles(const char *imgBdFile, const char *elf, const std::fi
   }
 
   std::ifstream fileDataBank(imgBdFile, std::ios::binary);
-  Zero2File *fileHd = (Zero2File *)ReadRangeFile(elf, FILE_TABLE_ADDRESS_US_ZERO2, NUM_FILES_US_JP_ZERO2 * sizeof(Zero2File));
+
+  Zero2File *fileHd = (Zero2File *) ReadRangeFile(
+      elf, FILE_TABLE_ADDRESS, NUM_FILES * sizeof(Zero2File));
 
   char fileBuffer[PS2_SECTOR_SIZE];
 
-  for (int i = 0; i < NUM_FILES_US_JP_ZERO2; i++)
+  for (int i = 0; i < NUM_FILES; i++)
   {
-    printf("Extracting file %d/%d done\n", i, NUM_FILES_US_JP_ZERO2);
+    std::string outputFile = GetFilenameWithPath(i, outputFolder);
+
+    printf("Extracting %d/%d %s\n", i, NUM_FILES - 1, outputFile.c_str());
 
     FileType fileStatus = (FileType) (fileHd[i].info & 0b00000011);
 
     // Some files index are bugged and have a type File but with a size of 0 bytes
-    if (fileStatus == NoFile ||
-        (fileStatus == FileNotCompressed && fileHd[i].size == 0) ||
-        (fileStatus == FileCompressed && fileHd[i].sizeCompressed == 0))
+    if (fileStatus == NoFile
+        || (fileStatus == FileNotCompressed && fileHd[i].size == 0)
+        || (fileStatus == FileCompressed && fileHd[i].sizeCompressed == 0))
     {
+      printf("Ignored\n");
       continue;
     }
 
@@ -77,9 +88,9 @@ void ExtractZero2GameFiles(const char *imgBdFile, const char *elf, const std::fi
 
     fileDataBank.seekg(startAddress, std::ios::beg);
 
-    int size = fileStatus == FileNotCompressed ? fileHd[i].size : fileHd[i].sizeCompressed;
+    int size = fileStatus == FileNotCompressed ? fileHd[i].size
+                                               : fileHd[i].sizeCompressed;
 
-    std::string outputFile = outputFolder.string() + "/" + std::to_string(i) + ".bin";
     FILE *pFile = fopen(outputFile.c_str(), "wb+");
 
     for (int k = 0; k <= size / PS2_SECTOR_SIZE; k++)
@@ -92,7 +103,7 @@ void ExtractZero2GameFiles(const char *imgBdFile, const char *elf, const std::fi
 
     if (fileStatus == FileCompressed)
     {
-      DecompressFile(i, outputFolder);
+      DecompressFile(outputFile);
     }
   }
 
@@ -100,7 +111,32 @@ void ExtractZero2GameFiles(const char *imgBdFile, const char *elf, const std::fi
   delete[] fileHd;
 }
 
-void ExtractGameFilesFromBank(const char *imgHdFile, const char *imgBdFile, std::filesystem::path outputFolder)
+std::string GetFilenameWithPath(int fileId, std::filesystem::path outputFolder)
+{
+  if (!EXTRACT_FILE_NAME)
+  {
+    return outputFolder.string() + std::to_string(fileId) + ".bin";
+  }
+
+  auto fileInfo =
+      REGION == REGION_EU ? filename_dat[fileId] : filename_dat_us[fileId];
+
+  auto filename = fileInfo.name;
+
+  auto directory = filename_path[fileInfo.directory];
+
+  auto fullDirectory = outputFolder.string() + "/" + directory;
+
+  if (!std::filesystem::exists(fullDirectory))
+  {
+    std::filesystem::create_directories(fullDirectory);
+  }
+
+  return fullDirectory + filename;
+}
+
+void ExtractGameFilesFromBank(const char *imgHdFile, const char *imgBdFile,
+                              std::filesystem::path outputFolder)
 {
   ZeroFile *fileHd = (ZeroFile *) ReadFullFile(imgHdFile);
 
@@ -108,7 +144,7 @@ void ExtractGameFilesFromBank(const char *imgHdFile, const char *imgBdFile, std:
 
   char fileBuffer[PS2_SECTOR_SIZE];
 
-  for (int i = 0; i < NUM_FILES_US_ZERO; i++)
+  for (int i = 0; i < NUM_FILES; i++)
   {
     unsigned long startAddress = fileHd[i].address * PS2_SECTOR_SIZE;
 
@@ -119,7 +155,8 @@ void ExtractGameFilesFromBank(const char *imgHdFile, const char *imgBdFile, std:
       continue;
     }
 
-    std::string outputFile = outputFolder.string() + "/" + std::to_string(i) + ".bin";
+    std::string outputFile = GetFilenameWithPath(i, outputFolder);
+
     FILE *pFile = fopen(outputFile.c_str(), "wb+");
 
     for (int k = 0; k <= fileHd[i].size / PS2_SECTOR_SIZE; k++)
@@ -135,15 +172,79 @@ void ExtractGameFilesFromBank(const char *imgHdFile, const char *imgBdFile, std:
   delete[] fileHd;
 }
 
+void Extractor(argparse::ArgumentParser args)
+{
+  REGION = args.get("region");
+  EXTRACT_FILE_NAME = args["--name"] == true;
+
+  if (REGION == REGION_US)
+  {
+    NUM_FILES = NUM_FILES_US_JP_ZERO2;
+    FILE_TABLE_ADDRESS = FILE_TABLE_ADDRESS_US_ZERO2;
+  }
+  else if (REGION == REGION_JP)
+  {
+    NUM_FILES = NUM_FILES_US_JP_ZERO2;
+    FILE_TABLE_ADDRESS = FILE_TABLE_ADDRESS_JP_ZERO2;
+  }
+  else
+  {
+    NUM_FILES = NUM_FILES_EU_ZERO2;
+    FILE_TABLE_ADDRESS = FILE_TABLE_ADDRESS_EU_ZERO2;
+  }
+
+  ExtractZero2GameFiles(args.get("bin").c_str(), args.get("elf").c_str(),
+                        args.get("output").c_str());
+}
+
 int main(int argc, char *argv[])
 {
-  if (argc < 4)
+  argparse::ArgumentParser program("Mikompilation Extractor");
+
+  program.add_argument("bin")
+      .help("Absolute path with file to the game's IMG_BD.BIN")
+      .required();
+
+  program.add_argument("elf")
+      .help("Absolute path with file to the game's elf (US: SLUS_207.66)")
+      .required();
+
+  program.add_argument("-o", "--output")
+      .help("Output folder where all files will be extracted")
+      .default_value(std::filesystem::current_path().string());
+
+  program.add_argument("-n", "--name")
+      .help("Will extract the files' name and directory")
+      .default_value(false)
+      .implicit_value(true);
+
+  program.add_argument("-r", "--region")
+      .default_value("us")
+      .action([](const std::string &value) {
+        static const std::vector<std::string> choices = {
+            REGION_US, REGION_EU, REGION_JP
+        };
+
+        if (std::find(choices.begin(), choices.end(), value) != choices.end())
+        {
+          return value;
+        }
+
+        return std::string {REGION_US};
+      });
+
+  try
   {
-    printf("ERROR NOT ENOUGH ARGUMENTS\n To use: <full path to IMG_BD.BIN> <full path to SLUS_207.66> <Your output folder>");
-    return -1;
+    program.parse_args(argc, argv);
   }
-  
-  ExtractZero2GameFiles(argv[1], argv[2], argv[3]);
+  catch (const std::runtime_error &err)
+  {
+    std::cerr << err.what() << std::endl;
+    std::cerr << program;
+    std::exit(1);
+  }
+
+  Extractor(program);
 
   return 0;
 }
