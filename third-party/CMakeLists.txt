@@ -27,6 +27,7 @@ set(THIRDPARTY_SOURCES
 
 set(THIRDPARTY_HEADERS
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui_memory_editor/imgui_memory_editor.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/stb/stb_image.h
         )
 
 

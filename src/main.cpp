@@ -1,4 +1,3 @@
-#pragma once
 #include "gfx/glf3_render.h"
 #include "MainWindow.h"
 #include "game_main.h"

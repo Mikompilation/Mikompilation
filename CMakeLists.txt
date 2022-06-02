@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.20.2)
 
+if (UNIX)
+    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/linux-compiler-i386-multilib.cmake CACHE STRING "")
+endif ()
+
 project(Mikompilation CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -20,7 +24,11 @@ set(SOURCES
         src/main.cpp
         )
 
-add_executable(Mikompilation ${SOURCES})
+if (WIN32)
+    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/icon.rc")
+ENDIF ()
+
+add_executable(Mikompilation ${SOURCES} ${APP_ICON_RESOURCE_WINDOWS})
 
 target_link_libraries(Mikompilation PUBLIC
         ${UI_LIB}
@@ -35,8 +43,8 @@ target_include_directories(Mikompilation PUBLIC
         )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources)
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources)
 
 file(
         GENERATE
