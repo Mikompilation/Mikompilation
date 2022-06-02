@@ -1,6 +1,7 @@
 #pragma once
 
 #include "texture/Sprite.h"
+#include "texture/tim2.h"
 
 inline SPRT_DAT logodat[3] = {
     /// Sprite for TECMO logo
@@ -53,5 +54,8 @@ inline SPRT_DAT logodat[3] = {
     }
 };
 
+inline TIM2_FILEHEADER *loading_tex_addr;
+
 void InitLogo();
+void LoadingInit();
 void RenderLogo(bool isProjectLogo);

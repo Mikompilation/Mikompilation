@@ -3,6 +3,7 @@ set(ENGINE_LIB "engine" CACHE STRING "Library name for ENGINE")
 set(ENGINE_SOURCES
         VU/sceVu0.cpp
         entity/enemy.cpp
+        camera/camera.cpp
         sgd/sgdGlobals.cpp
         sgd/sgdRender.cpp
         sgd/sgdLoader.cpp
@@ -14,9 +15,16 @@ set(ENGINE_SOURCES
         texture/EBO.cpp
         texture/VAO.cpp
         texture/VBO.cpp
+        gra3d/gra3d.cpp
+        gra3d/draw_env.cpp
+        g2d/g2d_main.cpp
+        g2d/g2d_draw.cpp
         texture/Texture.cpp
         gfx/glf3_render.cpp
         texture/Sprite.cpp
+        Vif1/dmaVif1.cpp
+        fade.cpp
+        message.cpp
         )
 
 set(ENGINE_HEADERS
@@ -36,11 +44,18 @@ set(ENGINE_HEADERS
         texture/EBO.h
         texture/VAO.h
         texture/VBO.h
+        gra3d/gra3d.h
+        gra3d/draw_env.h
+        Vif1/dmaVif1.h
+        g2d/g2d_main.h
+        g2d/g2d_draw.h
         texture/Texture.h
         PS2_HARDWARE_CONFIG.h
         gfx/glf3_render.h
         gfx/GFX_CONFIG.h
         texture/Sprite.h
+        fade.h
+        message.h
         )
 
 add_library(${ENGINE_LIB} EXCLUDE_FROM_ALL ${ENGINE_SOURCES} ${ENGINE_HEADERS})

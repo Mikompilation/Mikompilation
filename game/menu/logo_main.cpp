@@ -35,3 +35,8 @@ void RenderLogo(bool isProjectLogo)
     zero_texture_2->RenderTexture();
   }
 }
+
+void LoadingInit()
+{
+  loading_tex_addr = nullptr;
+}

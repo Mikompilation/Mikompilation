@@ -5,6 +5,21 @@
 #include "logging/printing.h"
 #include "player/plyr_mdl.h"
 
+#include "menu/logo_main.h"
+#include "menu/title_menu.h"
+
+#include "system/option.h"
+#include "system/system.h"
+#include "scene/scene_effect.h"
+
+#include "flag/clear_flg.h"
+#include "gra3d/gra3d.h"
+#include "g2d/g2d_main.h"
+#include "finder/finder.h"
+
+#include "MemoryCard/mc.h"
+#include "Vif1/dmaVif1.h"
+
 bool soft_reset_disable;
 
 void game_init()
@@ -21,8 +36,18 @@ void init_super()
 {
   InitCostume();
   soft_reset_disable = false;
-
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  InitSystemON();
+  InitGraph2dBoot();
+  InitLogo();
+  LoadingInit();
+  TitleInit();
+  InitOptionSetup(&opt_wrk);
+  ClearFlgCtrlInit();
+  MemoryCardInit();
+  dmaVif1Init(nullptr, 0, nullptr, 0);
+  gra3dInit();
+  FinderBankSetup();
+  SceneEffectInit();
 }
 
 void end_super()
