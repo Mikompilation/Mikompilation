@@ -1,5 +1,7 @@
 #pragma once
-#include "gphaseTypes.h"
+#include "gphase_types.h"
+
+inline int *SubTitleAddr;
 
 void game_main();
 void game_init();
@@ -22,7 +24,7 @@ GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId);
 
 /// SoftResetUnlock(void)
 
-/// GetSubTitleAddr(void)
+int *GetSubTitleAddr();
 /// DebugMemoryCheck(void)
 /// SoftResetLock(void)
 /// newAssert(char *)
