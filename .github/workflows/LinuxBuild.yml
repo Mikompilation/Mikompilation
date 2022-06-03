@@ -22,6 +22,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          sudo dpkg --add-architecture i386
           sudo apt install xorg-dev
           sudo apt install gcc-multilib g++-multilib
           sudo apt-get install mesa-common-dev:i386
