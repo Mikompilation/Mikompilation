@@ -3,7 +3,7 @@
 struct SPRT_DAT
 {
   /// PS2 Gs Register address
-  unsigned __int64 GsTex0;
+  long long int GsTex0;
 
   /// Shift the image content within the texture's frame
   unsigned short shift_x;

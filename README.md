@@ -18,6 +18,9 @@ Run the following commands to install the required dependencies:
 
 ```shell
 sudo apt install xorg-dev
+sudo apt install gcc-multilib g++-multilib
+sudo apt-get install mesa-common-dev:i386
+sudo apt-get install libglu1-mesa-dev:i386
 ```
 
 ## Common

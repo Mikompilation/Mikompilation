@@ -115,7 +115,7 @@ std::string GetFilenameWithPath(int fileId, std::filesystem::path outputFolder)
 {
   if (!EXTRACT_FILE_NAME)
   {
-    return outputFolder.string() + std::to_string(fileId) + ".bin";
+    return outputFolder / (std::to_string(fileId) + ".bin");
   }
 
   auto fileInfo =
