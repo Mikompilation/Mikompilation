@@ -17,7 +17,7 @@ Right now, the application only builds for `x32` due to restrictions from the ga
 Run the following commands to install the required dependencies:
 
 ```shell
-sudo apt install xorg-dev
+sudo dpkg --add-architecture i386
 sudo apt install gcc-multilib g++-multilib
 sudo apt-get install mesa-common-dev:i386
 sudo apt-get install libglu1-mesa-dev:i386
