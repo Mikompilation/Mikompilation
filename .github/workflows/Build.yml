@@ -1,4 +1,4 @@
-name: Build Mikompilation
+name: Build-Windows Mikompilation
 
 on:
   push:

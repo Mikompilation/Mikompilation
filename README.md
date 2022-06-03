@@ -1,5 +1,5 @@
 # Mikompilation
-[![Build Mikompilation](https://github.com/wagrenier/Mikompilation/actions/workflows/Build.yml/badge.svg)](https://github.com/wagrenier/Mikompilation/actions/workflows/Build.yml) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/Ap4Sfcmwd9)
+[![Build-Windows Mikompilation](https://github.com/wagrenier/Mikompilation/actions/workflows/Build.yml/badge.svg)](https://github.com/wagrenier/Mikompilation/actions/workflows/Build.yml) [![Build-Linux Mikompilation](https://github.com/wagrenier/Mikompilation/actions/workflows/LinuxBuild.yml/badge.svg)](https://github.com/wagrenier/Mikompilation/actions/workflows/LinuxBuild.yml) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/Ap4Sfcmwd9)
 
 ![Logo](logo/logo_blood.png)
 
@@ -18,6 +18,9 @@ Run the following commands to install the required dependencies:
 
 ```shell
 sudo apt install xorg-dev
+sudo apt install gcc-multilib g++-multilib
+sudo apt-get install mesa-common-dev:i386
+sudo apt-get install libglu1-mesa-dev:i386
 ```
 
 ## Common

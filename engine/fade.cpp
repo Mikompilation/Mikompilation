@@ -1,4 +1,5 @@
 #include "fade.h"
+#include <cstring>
 #include <iostream>
 
 void *FadeCtrlInit()
