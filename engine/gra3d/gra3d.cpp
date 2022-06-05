@@ -6,10 +6,9 @@ void gra3dInit()
   printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }
 
-
-// Need's to return from memory... Potentially ScratchPad memory? An instance of the requested obejct like CoreObject or ScratchPadObject
+// TODO, implement proper memory lookups:
 template <class T>
-T* GetStaticInstance()
+T* GetStaticInstance(uint32_t mem)
 {
-  return this; // ToDo, replace this with pointer cast!
+  return (T *)mem;
 }

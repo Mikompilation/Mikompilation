@@ -1,6 +1,6 @@
 #include "memory.h"
 
-uint32_t Memory::malloc(uint32_t memSize)
+bool Memory::malloc(uint32_t memSize)
 {
     if (memory != nullptr)
     {
@@ -11,6 +11,8 @@ uint32_t Memory::malloc(uint32_t memSize)
     {
         memory = new uint32_t(memSize);
     }
+
+    return (memory != nullptr);
 }
 
 void Memory::free()
@@ -19,6 +21,7 @@ void Memory::free()
     {
         return;
     }
+
     delete memory;
     memory = nullptr;
 }

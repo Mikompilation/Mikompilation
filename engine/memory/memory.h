@@ -10,6 +10,6 @@ static uint32_t debugMaxMemory = MB(128);
 struct Memory
 {
    uint32_t* memory;
-   uint32_t malloc(uint32_t mem);
+   bool malloc(uint32_t mem);
    void free();
 };
