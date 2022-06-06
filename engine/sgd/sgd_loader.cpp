@@ -1,5 +1,5 @@
-#include "sgdLoader.h"
-#include "sgdGlobals.h"
+#include "sgd_loader.h"
+#include "sgd_globals.h"
 
 bool isValidSGDFile(SGDFILEHEADER *pSGDHead)
 {
@@ -190,13 +190,4 @@ void SgMapUnit(SGDFILEHEADER *pSGDHead)
 
   initializeSGDProcUnitHeader(pSGDHead);
   initializeSGDType(pSGDHead);
-
-  if (pSGDHead->field_0x6 == 0) {
-   int i = 0;
-    for (SGDMATERIAL * uVar11 = pSGDHead->pMaterial; (int)uVar11 < (int)pSGDHead->pVectorInfo; uVar11 += sizeof(SGDMATERIAL)) {
-      i += 1;
-    }
-    pSGDHead->field_0x6 = (uint8_t)i;
-    pSGDHead->field_0x5 = PresetChk;
-  }
 }

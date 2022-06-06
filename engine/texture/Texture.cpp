@@ -11,7 +11,7 @@ GLuint indices[] = {
 
 Tim2Converted *LoadTim2Texture(TIM2_FILEHEADER *pTim2FileHeader, const SPRT_DAT *sprtDat)
 {
-  auto ph = (TIM2_PICTUREHEADER *) (sizeof(TIM2_FILEHEADER) + (int) pTim2FileHeader);
+  auto ph = (TIM2_PICTUREHEADER *) (sizeof(TIM2_FILEHEADER) + (char *) pTim2FileHeader);
   unsigned int *texture = new unsigned int[static_cast<int>(sprtDat->size_frame_x) * static_cast<int>(sprtDat->size_frame_y)];
 
   for (int i = 0; i < (int)sprtDat->size_frame_y; i++)

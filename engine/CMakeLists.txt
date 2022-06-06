@@ -4,9 +4,10 @@ set(ENGINE_SOURCES
         VU/sceVu0.cpp
         entity/enemy.cpp
         camera/camera.cpp
-        sgd/sgdGlobals.cpp
-        sgd/sgdRender.cpp
-        sgd/sgdLoader.cpp
+        ## Those files are removed atm for 64bits compatibility
+        #sgd/sgdGlobals.cpp
+        #sgd/sgdRender.cpp
+        #sgd/sgdLoader.cpp
         fs/eecdvd.cpp
         texture/tim2.cpp
         controller/GameInput.cpp
@@ -31,10 +32,11 @@ set(ENGINE_HEADERS
         VU/sceVu0.h
         entity/enemy.h
         camera/camera.h
-        sgd/sgdTypes.h
-        sgd/sgdRender.h
-        sgd/sgdGlobals.h
-        sgd/sgdLoader.h
+        ## Those files are removed atm for 64bits compatibility
+        #sgd/sgdTypes.h
+        #sgd/sgdRender.h
+        #sgd/sgdGlobals.h
+        #sgd/sgdLoader.h
         fs/eecdvd.h
         fs/iopsys.h
         controller/GameInput.h
@@ -67,5 +69,3 @@ target_include_directories(${ENGINE_LIB} PUBLIC
         )
 
 target_link_libraries(${ENGINE_LIB} PUBLIC ${COMMON_LIB} ${THIRDPARTY_LIB})
-
-set_target_properties(${ENGINE_LIB} PROPERTIES LINK_FLAGS "-m32")

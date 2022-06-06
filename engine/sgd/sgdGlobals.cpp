@@ -1,1 +1,0 @@
-#include "sgdGlobals.h"

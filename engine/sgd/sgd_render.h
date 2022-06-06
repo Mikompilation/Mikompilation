@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sgdTypes.h"
+#include "sgd_types.h"
 
 void SelectLight(SGDPROCUNITHEADER *pProcUnit);
 void SetLightData(void *param1, int param2);
