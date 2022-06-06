@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sgdTypes.h"
+#include "sgd_types.h"
 
 void SgMapUnit(SGDFILEHEADER *pSGDHead);
 

@@ -27,13 +27,17 @@ GLFWwindow *InitializeWindow()
     return NULL;
   }
 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+#ifndef __APPLE__
   glEnable(GL_DEBUG_OUTPUT);
   glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
   glEnable(GL_DEBUG_OUTPUT);
+#endif
 
   engineLogger->info("Creating GLFW window");
 
@@ -57,7 +61,9 @@ GLFWwindow *InitializeWindow()
   glewExperimental = GL_TRUE;
   GLenum err = glewInit();
 
+#ifndef __APPLE__
   glDebugMessageCallback(MessageCallback, 0);
+#endif
 
   if (GLEW_OK != err)
   {

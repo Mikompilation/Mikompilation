@@ -1,7 +1,7 @@
-#include "sgdRender.h"
+#include "sgd_render.h"
 #include "flags.h"
 #include "logging/printing.h"
-#include "sgdGlobals.h"
+#include "sgd_globals.h"
 
 void SetPreRenderTYPE2(uint8_t param1)
 {
