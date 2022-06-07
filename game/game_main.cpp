@@ -1,7 +1,7 @@
 #include "game_main.h"
 #include "fs/eecdvd.h"
 #include "fs/iopsys.h"
-#include "gphase.h"
+#include "gphase/gphase.h"
 #include "logging/printing.h"
 #include "player/plyr_mdl.h"
 
@@ -17,9 +17,9 @@
 #include "g2d/g2d_main.h"
 #include "finder/finder.h"
 
-#include "MemoryCard/mc.h"
+#include "mc/mc.h"
 #include "Vif1/dmaVif1.h"
-#include "glob.h"
+#include "system/glob.h"
 
 void game_init()
 {
@@ -75,8 +75,12 @@ void end_Boot_Init()
 
 void init_Boot_Init()
 {
-  LoadReq(SYSTEM_TEXTURES_PAK2, (void *) 0x1E79B0);
-  LoadReq(GAME_TEXT, (void *) 0xD9EC00);
+  auto systemLanguage = GetSystemLanguage();
+  SetLanguage(systemLanguage);
+  auto gameLanguage = GetLanguage();
+
+  LoadReq(SYSTEM_TEXTURES_PAK2 + gameLanguage, (void *) 0x1E79B0);
+  LoadReq(GAME_TEXT + gameLanguage, (void *) 0xD9EC00);
 
   SubTitleAddr = (int*) malloc(GetFileSize_L(SUBTITLE_TEXT));
   LoadReq(SUBTITLE_TEXT, SubTitleAddr, true);
@@ -88,13 +92,13 @@ GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId)
 
   if (isAllFilesLoaded)
   {
-    SetNextGPhase(AUTOLOAD_MAIN);
+    SetNextGPhase(BOOT_PADCHECK);
   }
 
   return DEFAULT;
 }
 
-int *GetSubTitleAddr()
+int* GetSubTitleAddr()
 {
   return SubTitleAddr;
 }

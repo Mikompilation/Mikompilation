@@ -33,5 +33,3 @@ struct SYS_WRK
   int unknown_0x18;
   int unknown_0x1C;
 };
-
-inline SYS_WRK sys_wrk;

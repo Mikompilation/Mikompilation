@@ -2,7 +2,7 @@
 #include "iopsys.h"
 #include "logging/printing.h"
 #include "spdlog/spdlog.h"
-
+#include "CONFIG.h"
 #include <fstream>
 
 int LoadReq(int fileId, void *memoryAddress, bool useParameterMemoryAddress)

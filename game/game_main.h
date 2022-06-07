@@ -1,5 +1,5 @@
 #pragma once
-#include "gphase_types.h"
+#include "gphase/gphase_types.h"
 
 inline int *SubTitleAddr;
 inline int soft_reset_disable;
@@ -25,7 +25,7 @@ GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId);
 
 /// SoftResetUnlock(void)
 
-int *GetSubTitleAddr();
+int* GetSubTitleAddr();
 /// DebugMemoryCheck(void)
 void SoftResetLock();
 /// newAssert(char *)

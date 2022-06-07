@@ -1,7 +1,4 @@
 #pragma once
-#include <filesystem>
-
-inline std::filesystem::path savePath;
 
 struct MC_PLAY_DATA_HEAD
 {

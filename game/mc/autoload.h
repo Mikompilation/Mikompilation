@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../gphase_types.h"
+#include "../gphase/gphase_types.h"
 
 enum LOAD_CTRL : char
 {
