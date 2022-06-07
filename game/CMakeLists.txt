@@ -39,7 +39,7 @@ set(GAME_HEADERS
         menu/menu_main.h
         finder/finder.h
         MemoryCard/mc.h
-        )
+        MemoryCard/autoload.cpp MemoryCard/autoload.h MemoryCard/mc_check_card.cpp MemoryCard/mc_check_card.h MemoryCard/mc_set_data.cpp MemoryCard/mc_set_data.h)
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})
 

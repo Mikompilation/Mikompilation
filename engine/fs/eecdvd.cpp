@@ -56,7 +56,7 @@ void LoadFile(int fileId, void *memoryAddress)
   if (!std::filesystem::exists(filename))
   {
     auto engineLogger = spdlog::get(ENGINE_LOGGER);
-    engineLogger->critical("File {:x} could not be found in your game_files folder", fileId);
+    engineLogger->critical("File 0x{:x} could not be found in your game_files folder", fileId);
     return;
   }
 
@@ -79,12 +79,19 @@ size_t GetFileSize_L(int fileId)
 {
   std::string filename = GetGameFileWithPathFromFileId(fileId);
 
+  if (!std::filesystem::exists(filename))
+  {
+    auto engineLogger = spdlog::get(ENGINE_LOGGER);
+    engineLogger->critical("File 0x{:x} could not be found in your game_files folder", fileId);
+    return -1;
+  }
+
   return std::filesystem::file_size(filename);
 }
 
 std::string GetGameFileWithPathFromFileId(int fileId)
 {
-  return gameFolder.string() + "/" + std::to_string(fileId) + ".bin";
+  return gameFolder / (std::to_string(fileId) + ".bin");
 }
 
 bool IsLoadEndAll()
