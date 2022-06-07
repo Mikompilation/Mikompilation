@@ -2,6 +2,7 @@
 #include "gphase_types.h"
 
 inline int *SubTitleAddr;
+inline int soft_reset_disable;
 
 void game_main();
 void game_init();
@@ -26,5 +27,5 @@ GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId);
 
 int *GetSubTitleAddr();
 /// DebugMemoryCheck(void)
-/// SoftResetLock(void)
+void SoftResetLock();
 /// newAssert(char *)

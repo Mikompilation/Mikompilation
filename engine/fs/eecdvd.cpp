@@ -91,7 +91,7 @@ size_t GetFileSize_L(int fileId)
 
 std::string GetGameFileWithPathFromFileId(int fileId)
 {
-  return gameFolder / (std::to_string(fileId) + ".bin");
+  return (gameFolder / (std::to_string(fileId) + ".bin")).string();
 }
 
 bool IsLoadEndAll()

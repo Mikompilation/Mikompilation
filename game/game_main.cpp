@@ -19,8 +19,7 @@
 
 #include "MemoryCard/mc.h"
 #include "Vif1/dmaVif1.h"
-
-bool soft_reset_disable;
+#include "glob.h"
 
 void game_init()
 {
@@ -35,7 +34,7 @@ void game_main()
 void init_super()
 {
   InitCostume();
-  soft_reset_disable = false;
+  soft_reset_disable = 0;
   InitSystemON();
   InitGraph2dBoot();
   InitLogo();
@@ -98,4 +97,10 @@ GPHASE_ID one_Boot_Init(GPHASE_ID gphaseId)
 int *GetSubTitleAddr()
 {
   return SubTitleAddr;
+}
+
+void SoftResetLock()
+{
+  sys_wrk.unknown_0x10 = 0;
+  soft_reset_disable += 1;
 }
