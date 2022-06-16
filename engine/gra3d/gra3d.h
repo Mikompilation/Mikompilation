@@ -27,3 +27,4 @@ static GRA3DSCRATCHPADLAYOUT *scratchpad;
 template <class T>
 T* GetStaticInstance(uint32_t mem);
 void gra3dInit();
+int gra3dUseScratchpad();
