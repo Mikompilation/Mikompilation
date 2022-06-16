@@ -22,6 +22,11 @@ int gra3dUseScratchpad(int isTrue)
   return bUseScratchpad;
 }
 
+bool gra3dIsUsingScratchpad()
+{
+  return bUseScratchpad;
+}
+
 // TODO, implement proper memory lookups:
 template <class T>
 T* GetStaticInstance(uint32_t mem)

@@ -30,4 +30,5 @@ template <class T>
 T* GetStaticInstance(uint32_t mem);
 void gra3dInit();
 void modifyScratchpad();
+bool gra3dIsUsingScratchpad();
 int gra3dUseScratchpad(int isTrue);
