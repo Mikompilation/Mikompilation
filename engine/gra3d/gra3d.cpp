@@ -6,10 +6,20 @@ void gra3dInit()
   printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }
 
-int gra3dUseScratchpad()
+void modifyScratchpad()
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 
+}
+
+int gra3dUseScratchpad(int isTrue)
+{
+  if (!bUseScratchpad)
+  {
+    bUseScratchpad = isTrue;
+    modifyScratchpad();
+  }
+
+  return bUseScratchpad;
 }
 
 // TODO, implement proper memory lookups:

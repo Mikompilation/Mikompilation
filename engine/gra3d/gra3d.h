@@ -24,7 +24,10 @@ struct G3DCREATIONDATA
 static GRA3DCOREOBJECT *core;
 static GRA3DSCRATCHPADLAYOUT *scratchpad;
 
+static bool bUseScratchpad;
+
 template <class T>
 T* GetStaticInstance(uint32_t mem);
 void gra3dInit();
-int gra3dUseScratchpad();
+void modifyScratchpad();
+int gra3dUseScratchpad(int isTrue);
