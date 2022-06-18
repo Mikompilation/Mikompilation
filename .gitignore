@@ -489,3 +489,12 @@ tools/Extractor/build/build.ninja
 tools/Extractor/build/.ninja_deps
 tools/Extractor/build/Extractor
 tools/Extractor/build/.ninja_log
+tools/Extractor/build/DMY_FILE.IRX
+tools/Extractor/build/DMY_FILE.PSS
+tools/Extractor/build/ICON.SYS
+tools/Extractor/build/IMG_BD.BIN
+tools/Extractor/build/IOPRP280.IMG
+tools/Extractor/build/SLES_523.84
+tools/Extractor/build/SYSTEM.CNF
+tools/Extractor/build/ZERO2IRX.DIL
+tools/Extractor/build/ZERO2IRX.HIL

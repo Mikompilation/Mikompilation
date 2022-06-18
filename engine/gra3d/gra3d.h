@@ -16,9 +16,12 @@ struct GRA3DSCRATCHPADLAYOUT_MAPSHADOW
 
 };
 
+// This is approximately 16 bytes in size
 struct G3DCREATIONDATA
 {
-
+    GRA3DCOREOBJECT* core;
+    GRA3DSCRATCHPADLAYOUT_MAPSHADOW* mapShadow;
+    char* someOtherPointer;
 };
 
 static GRA3DCOREOBJECT *core;

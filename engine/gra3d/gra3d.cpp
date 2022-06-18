@@ -8,7 +8,7 @@ void gra3dInit()
 
 void modifyScratchpad()
 {
-
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }
 
 int gra3dUseScratchpad(int isTrue)
