@@ -1,4 +1,5 @@
 #include "mc_check_card.h"
+#include "logging/printing.h"
 #include <iostream>
 
 void MemoryCardSetAccessPort(int accessPort)
@@ -13,4 +14,16 @@ void* MemoryCardInfoCtrlInit()
   mc_info.cardSlot = -1;
 
   return returnValue;
+}
+
+void MemoryCardGetCardInfoInit(int param1, int param2)
+{
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+}
+
+int MemoryCardGetCardInfoMain()
+{
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+
+  return 0;
 }

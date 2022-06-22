@@ -23,6 +23,7 @@ set(GAME_SOURCES
         mc/autoload.cpp
         mc/mc_check_card.cpp
         mc/mc_set_data.cpp
+        mc/mc_check.cpp
         )
 
 set(GAME_HEADERS
@@ -47,7 +48,8 @@ set(GAME_HEADERS
         mc/mc_set_data.h
         system/glob.h
         system/system_types.h
-        )
+        mc/mc_check.h
+        mc/mc_check_dir.cpp mc/mc_check_dir.h)
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})
 
