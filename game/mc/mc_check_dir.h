@@ -1,11 +1,13 @@
 #pragma once
 
+namespace MC_CHECK_DIR
+{
 enum MC_CHECK_DIR_CTRL_ENUM
 {
-  MC_CHECK_DIR_CTRL_ENUM_INIT,
-  MC_CHECK_DIR_CTRL_ENUM_UNKNOWN2,
-  MC_CHECK_DIR_CTRL_ENUM_UNKNOWN3,
-  MC_CHECK_DIR_CTRL_ENUM_UNKNOWN4
+  INIT,
+  ENUM_UNKNOWN2,
+  ENUM_UNKNOWN3,
+  UNKNOWN4
 };
 
 enum MC_CHECK_DIR_CTRL2_ENUM
@@ -16,11 +18,12 @@ enum MC_CHECK_DIR_CTRL2_ENUM
   E3,
   E4
 };
+}// namespace MC_CHECK_DIR
 
 struct MC_CHECK_DIR_CTRL
 {
-  MC_CHECK_DIR_CTRL_ENUM eMcCheckDirCtrl;
-  MC_CHECK_DIR_CTRL2_ENUM eMcCheckDirCtrl2;
+  MC_CHECK_DIR::MC_CHECK_DIR_CTRL_ENUM eMcCheckDirCtrl;
+  MC_CHECK_DIR::MC_CHECK_DIR_CTRL2_ENUM eMcCheckDirCtrl2;
   char pad[2];
   int unknown_0x04;
   int unknown_0x08;
@@ -28,6 +31,8 @@ struct MC_CHECK_DIR_CTRL
 };
 
 inline MC_CHECK_DIR_CTRL mc_check_dir_ctrl;
+inline char *mc_dir_info[0x37];
 
 char *MemoryCardGetDirInfoInit(int param1, int param2, char *dirname);
 int MemoryCardGetDirInfoMain();
+char *MemoryCardGetDirInfoReq(int param1, int param2, char *dirname);

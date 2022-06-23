@@ -18,7 +18,11 @@ void* MemoryCardInfoCtrlInit()
 
 void MemoryCardGetCardInfoInit(int param1, int param2)
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  mc_check_card_ctrl.eMcCheckCardCtrl = MC_CHECK_CARD::INIT;
+  mc_check_card_ctrl.unknown_0x01 = 4;
+  mc_check_card_ctrl.unknown_0x02 = 0;
+  mc_check_card_ctrl.unknown_0x04 = param1;
+  mc_check_card_ctrl.unknown_0x08 = param2;
 }
 
 int MemoryCardGetCardInfoMain()

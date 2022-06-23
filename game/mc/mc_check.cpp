@@ -7,7 +7,8 @@
 
 char *MemoryCardCheckInit(int param1, int param2, char *filename)
 {
-  mc_check_ctrl.eMcCheckCtrl = INIT;
+  mc_check_ctrl.eMcCheckCtrl = MC_CHECK::INIT;
+  mc_check_ctrl.eMcCheckCtrl2 = MC_CHECK::E4;
   mc_check_ctrl.unknown_0x04 = param1;
   mc_check_ctrl.unknown_0x08 = param2;
 
@@ -18,18 +19,19 @@ char *MemoryCardCheckInit(int param1, int param2, char *filename)
 
 int MemoryCardCheckMain()
 {
-  if (mc_check_ctrl.eMcCheckCtrl != UNKNOWN2)
+  if (mc_check_ctrl.eMcCheckCtrl != MC_CHECK::UNKNOWN1)
   {
-    if (UNKNOWN2 < mc_check_ctrl.eMcCheckCtrl)
+    if (MC_CHECK::UNKNOWN1 < mc_check_ctrl.eMcCheckCtrl)
     {
-      if (mc_check_ctrl.eMcCheckCtrl == UNKNOWN3)
+      if (mc_check_ctrl.eMcCheckCtrl == MC_CHECK::UNKNOWN2)
       {
         MemoryCardGetDirInfoInit(mc_check_ctrl.unknown_0x04,
                                  mc_check_ctrl.unknown_0x08,
                                  mc_check_ctrl.filename);
-        mc_check_ctrl.eMcCheckCtrl = UNKNOWN4;
+
+        mc_check_ctrl.eMcCheckCtrl = MC_CHECK::UNKNOWN3;
       }
-      else
+      else if (mc_check_ctrl.eMcCheckCtrl != MC_CHECK::UNKNOWN3)
       {
         auto logger = spdlog::get(GAME_LOGGER);
         logger->error("Error! MemoryCardCheckMain");
@@ -47,7 +49,7 @@ int MemoryCardCheckMain()
       return mcReady;
     }
 
-    if (mc_check_ctrl.eMcCheckCtrl != INIT)
+    if (mc_check_ctrl.eMcCheckCtrl != MC_CHECK::INIT)
     {
       auto logger = spdlog::get(GAME_LOGGER);
       logger->error("Error! MemoryCardCheckMain");
@@ -56,7 +58,8 @@ int MemoryCardCheckMain()
 
     MemoryCardGetCardInfoInit(mc_check_ctrl.unknown_0x04,
                               mc_check_ctrl.unknown_0x08);
-    mc_check_ctrl.eMcCheckCtrl = UNKNOWN2;
+
+    mc_check_ctrl.eMcCheckCtrl = MC_CHECK::UNKNOWN1;
   }
 
   auto mcReady = MemoryCardGetCardInfoMain();
@@ -73,7 +76,7 @@ int MemoryCardCheckMain()
     }
   }
 
-  mc_check_ctrl.eMcCheckCtrl = UNKNOWN3;
+  mc_check_ctrl.eMcCheckCtrl = MC_CHECK::UNKNOWN2;
 
   return 0;
 }

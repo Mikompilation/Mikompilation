@@ -4,7 +4,6 @@
 #include "mc_check.h"
 #include "mc_check_card.h"
 #include "mc_set_data.h"
-#include <iostream>
 
 void init_AutoLoad_Main()
 {
