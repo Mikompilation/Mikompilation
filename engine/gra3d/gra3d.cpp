@@ -26,11 +26,18 @@ void ModifyScratchpad()
   if (!UseScratchpad)
   {
     matrix = creation.core->matrix;
+    // More down here
   }
 
   // There's init and initalize. Two seperate functions entirely.
   //g3dInitalize(&creation);
   stackPointerScratchPadLayout = GetStaticInstance<GRA3DSCRATCHPADLAYOUT>(0x001b4a5c);
+
+  if (!UseScratchpad)
+  {
+    
+  }
+
 }
 
 int gra3dUseScratchpad(int isTrue)
