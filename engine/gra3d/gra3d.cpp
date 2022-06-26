@@ -3,28 +3,50 @@
 
 void gra3dInit()
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  GRA3DSGDCREATIONDATA sgd;
+
+  // atexit(OnExitApp);
+  ModifyScratchpad();
+  // g3dVif1Init();
+  // g3dVif1SetRegister(reg);
+  // g3ddebugVerifyVif1Address();
+  // InitCamera();
+  // InitLight();
+  // InitFog();
+  // SetClipValue();
+  // gra3dsgdInit(sgd);
 }
 
-void modifyScratchpad()
+void ModifyScratchpad()
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  G3DCREATIONDATA creation;
+  Matrix4x4 matrix;
+  creation.core = GetStaticInstance<GRA3DCOREOBJECT>(0x001b4980);
+
+  if (!UseScratchpad)
+  {
+    matrix = creation.core->matrix;
+  }
+
+  // There's init and initalize. Two seperate functions entirely.
+  //g3dInitalize(&creation);
+  stackPointerScratchPadLayout = GetStaticInstance<GRA3DSCRATCHPADLAYOUT>(0x001b4a5c);
 }
 
 int gra3dUseScratchpad(int isTrue)
 {
-  if (!bUseScratchpad)
+  if (!UseScratchpad)
   {
-    bUseScratchpad = isTrue;
-    modifyScratchpad();
+    UseScratchpad = isTrue;
+    ModifyScratchpad();
   }
 
-  return bUseScratchpad;
+  return UseScratchpad;
 }
 
 bool gra3dIsUsingScratchpad()
 {
-  return bUseScratchpad;
+  return UseScratchpad;
 }
 
 // TODO, implement proper memory lookups:

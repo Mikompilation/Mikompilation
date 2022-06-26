@@ -48,6 +48,7 @@ set(ENGINE_HEADERS
         texture/VBO.h
         gra3d/gra3d.h
         gra3d/draw_env.h
+        gra3d/scratchpad.h
         Vif1/dmaVif1.h
         g2d/g2d_main.h
         g2d/g2d_draw.h

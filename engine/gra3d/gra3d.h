@@ -1,17 +1,14 @@
 #pragma once
 #include <stdint.h>
+#include "scratchpad.h"
+#include "math/VectorMath.h"
 
 struct GRA3DCOREOBJECT
 {
-
+  Matrix4x4 matrix;
 };
 
-struct GRA3DSCRATCHPADLAYOUT
-{
-
-};
-
-struct GRA3DSCRATCHPADLAYOUT_MAPSHADOW
+struct GRA3DSGDCREATIONDATA
 {
 
 };
@@ -27,11 +24,9 @@ struct G3DCREATIONDATA
 static GRA3DCOREOBJECT *core;
 static GRA3DSCRATCHPADLAYOUT *scratchpad;
 
-static bool bUseScratchpad;
-
 template <class T>
 T* GetStaticInstance(uint32_t mem);
 void gra3dInit();
-void modifyScratchpad();
+void ModifyScratchpad();
 bool gra3dIsUsingScratchpad();
 int gra3dUseScratchpad(int isTrue);
