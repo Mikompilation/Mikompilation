@@ -485,3 +485,5 @@ third-party/glew/build/cmake/cmake-build-debug/
 game_files/
 
 third-party/glew/glew.pc
+
+.DS_Store
