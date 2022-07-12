@@ -3,6 +3,15 @@
 #include "scratchpad.h"
 #include "math/VectorMath.h"
 
+enum GRA3DTRANSFORMSTATETYPE
+{
+    TYPE1,
+    TYPE2,
+    TYPE3,
+    TYPE4,
+    TYPE5
+};
+
 struct GRA3DCOREOBJECT
 {
   Matrix4x4 matrix;
@@ -30,3 +39,4 @@ void gra3dInit();
 void ModifyScratchpad();
 bool gra3dIsUsingScratchpad();
 int gra3dUseScratchpad(int isTrue);
+Vector4 * gra3dGetTransformRef(GRA3DTRANSFORMSTATETYPE state);

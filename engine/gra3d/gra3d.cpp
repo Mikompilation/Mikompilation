@@ -40,6 +40,17 @@ void ModifyScratchpad()
 
 }
 
+Vector4 * gra3dGetTransformRef(GRA3DTRANSFORMSTATETYPE state)
+{
+  Vector4* output;
+  if (state != GRA3DTRANSFORMSTATETYPE::TYPE4 && (state == GRA3DTRANSFORMSTATETYPE::TYPE5))
+  {
+    return &scratchpad->transInput;
+  }
+  //output = g3dGetTransformRef(state);
+  return output;
+}
+
 int gra3dUseScratchpad(int isTrue)
 {
   if (!UseScratchpad)
