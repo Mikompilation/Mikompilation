@@ -51,14 +51,14 @@ void initializeVectorInfo(SGDFILEHEADER *pSGDHead)
 
     uint childType = currElement.iChildType;
 
-    if (childType != 0 && (currElement.pChildLeft != (VertexPoint *) nullptr))
+    if (childType != 0 && (currElement.pVertex != (VertexPoint *) nullptr))
     {
-      pCurrentVectorInfo->sgdVectorBsp[i].pChildLeft = (VertexPoint *) ((int) pSGDHead + (int) currElement.pChildLeft);
+      pCurrentVectorInfo->sgdVectorBsp[i].pVertex = (VertexPoint *) ((int) pSGDHead + (int) currElement.pVertex);
     }
 
-    if (1 < childType && (currElement.pChildRight != (VertexPoint *) nullptr))
+    if (1 < childType && (currElement.pNormal != (VertexPoint *) nullptr))
     {
-      pCurrentVectorInfo->sgdVectorBsp[i].pChildRight = (VertexPoint *) ((int) pSGDHead + (int) currElement.pChildRight);
+      pCurrentVectorInfo->sgdVectorBsp[i].pNormal = (VertexPoint *) ((int) pSGDHead + (int) currElement.pNormal);
     }
 
     if (2 < childType && (pCurrentVectorInfo->sgdVectorBsp[i].pParent != (VERTEXLIST *) nullptr))
@@ -75,7 +75,7 @@ void initializeParentVectorInfo(SGDFILEHEADER *pSGDHead)
     return;
   }
 
-  if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildLeft == (VertexPoint *) nullptr && pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildRight == (VertexPoint *) nullptr)
+  if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pVertex == (VertexPoint *) nullptr && pSGDHead->pVectorInfo->sgdVectorBsp[2].pNormal == (VertexPoint *) nullptr)
   {
     pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent = (VERTEXLIST *) nullptr;
   }

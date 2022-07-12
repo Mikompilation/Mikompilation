@@ -3,11 +3,23 @@
 #include "math/VectorMath.h"
 #include <cstdint>
 
+/// SGD Version For PS2\n
+/// 0x1060 For FF1 XBOX\n
+/// 0x1070 For FF2 XBOX
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
 
 typedef uint8_t uint8;
 typedef unsigned int uint;
 typedef unsigned int undefined4;
+typedef int64_t uint64;
+
+struct Color
+{
+  float r;
+  float g;
+  float b;
+  float a;
+};
 
 struct VertexPoint
 {
@@ -38,21 +50,29 @@ struct SGDCOORDINATE
   float fCoordArray[8][4];
   Vector4 rotation;
   SGDCOORDINATE *pParent;
-  undefined4 field_0xd4;
-  undefined4 field_0xd8;
-  undefined4 field_0xdc;
+  int pad[3];
 };
 
 struct SGDMATERIAL
 {
-  char a[0xb0];
+  unsigned int uiFlag;
+  char textureName[12];
+  Color diffuse;
+  Color color2;
+  Color color3;
+  Color color4;
+  unsigned char unknown_0x50[0x20];
+  uint64_t GsTex0;
+  unsigned char unknown_0x78[0x38];
 };
 
 struct SGDVECTORBSP
 {
   uint iChildType;
-  VertexPoint *pChildLeft;
-  VertexPoint *pChildRight;
+  VertexPoint *pVertex;
+  VertexPoint *pNormal;
+
+  /// pTable
   VERTEXLIST *pParent;
 };
 
@@ -77,11 +97,14 @@ struct SGDFILEHEADER
 {
   uint uiVersionId;
   bool fileInitialized;
-  char field_0x5;
-  char field_0x6;
-  bool field_0x7;
+  char pad;
+  short numMaterial;
+
+  /// Bones of the model
   SGDCOORDINATE *pCoord;
   SGDMATERIAL *pMaterial;
+
+  /// Vertices of the model
   SGDVECTORINFO *pVectorInfo;
   uint uiNumBlock;
 
