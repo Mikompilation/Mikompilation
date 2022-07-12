@@ -10,6 +10,6 @@ struct GRA3DSCRATCHPADLAYOUT_MAPSHADOW
 {
 };
 
-GRA3DSCRATCHPADLAYOUT *stackPointerScratchPadLayout;
+static GRA3DSCRATCHPADLAYOUT *stackPointerScratchPadLayout;
 
 static bool UseScratchpad;

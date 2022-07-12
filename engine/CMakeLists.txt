@@ -16,6 +16,7 @@ set(ENGINE_SOURCES
         texture/EBO.cpp
         texture/VAO.cpp
         texture/VBO.cpp
+        g3d/g3dCore.cpp
         g3d/g3dRenderTarget.cpp
         gra3d/gra3d.cpp
         gra3d/draw_env.cpp
@@ -48,6 +49,7 @@ set(ENGINE_HEADERS
         texture/VAO.h
         texture/VBO.h
         g3d/g3dRenderTarget.h
+        g3d/g3dCore.h
         gra3d/gra3d.h
         gra3d/draw_env.h
         gra3d/scratchpad.h

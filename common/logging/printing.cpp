@@ -38,3 +38,10 @@ void printNotImplemented(const char* loggerName, const char* methodName, const c
   const auto logger = spdlog::get(loggerName);
   logger->info("{} in {} not implemented", methodName, fileName);
 }
+
+
+void printError(const char *loggerName, const char *methodName, const char *error)
+{
+  const auto logger = spdlog::get(loggerName);
+  logger->error("{} in {} error", methodName, error);
+}

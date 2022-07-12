@@ -1,4 +1,5 @@
 #include "gra3d.h"
+#include "g3d/g3dCore.h"
 #include "logging/printing.h"
 
 void gra3dInit()
@@ -15,13 +16,15 @@ void gra3dInit()
   // InitFog();
   // SetClipValue();
   // gra3dsgdInit(sgd);
+
+  transformRef = gra3dGetTransformRef(G3DTRANSFORMSTATETYPE::TYPE1);
 }
 
 void ModifyScratchpad()
 {
   G3DCREATIONDATA creation;
   Matrix4x4 matrix;
-  creation.core = GetStaticInstance<GRA3DCOREOBJECT>(0x001b4980);
+  creation.core = GetStaticInstance<G3DCOREOBJECT>(0x001b4980);
 
   if (!UseScratchpad)
   {
@@ -40,14 +43,14 @@ void ModifyScratchpad()
 
 }
 
-Vector4 * gra3dGetTransformRef(GRA3DTRANSFORMSTATETYPE state)
+Vector4 * gra3dGetTransformRef(G3DTRANSFORMSTATETYPE state)
 {
   Vector4* output;
-  if (state != GRA3DTRANSFORMSTATETYPE::TYPE4 && (state == GRA3DTRANSFORMSTATETYPE::TYPE5))
+  if (state != G3DTRANSFORMSTATETYPE::TYPE4 && (state == G3DTRANSFORMSTATETYPE::TYPE5))
   {
     return &scratchpad->transInput;
   }
-  //output = g3dGetTransformRef(state);
+  output = g3dGetTransformRef(state);
   return output;
 }
 
