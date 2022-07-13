@@ -160,8 +160,7 @@ void initializeSGDType(SGDFILEHEADER *pSGDHead)
           MappingMeshData(pPUHead, previousPH, pSGDHead);
           break;
         case MATERIAL:
-          pPUHead->u8lPrimType =
-              (uint) (pSGDHead->pMaterial + pPUHead->u8lPrimType);
+          pPUHead->VUMaterialDesc.pMat = &pSGDHead->pMaterial[pPUHead->VUMaterialDesc.u4iMaterialIndex];
           break;
         case TRI2:
           RebuildTRI2Files(pPUHead);

@@ -3,7 +3,7 @@
 #include "math/VectorMath.h"
 #include <cstdint>
 
-/// SGD Version For PS2\n
+/// 0x1050 For FF  PS2\n
 /// 0x1060 For FF1 XBOX\n
 /// 0x1070 For FF2 XBOX
 constexpr auto SGD_VALID_VERSIONID = 0x1050;
@@ -112,9 +112,8 @@ struct SGDVUVNDESC
 {
   short sNumVertex;
   short sNumNormal;
-  unsigned char ucSize;
-  unsigned char ucVectorType;
-  unsigned char aucPad[2];
+  unsigned short ucSize;
+  unsigned short ucVectorType;
 };
 
 struct SGDVUMESHDESC
@@ -131,13 +130,17 @@ struct SGDVUMESHDESC
 struct SGDVUMATERIALDESC
 {
   uint32_t u4iMaterialIndex;
-  SGDMATERIAL pMat;
+  SGDMATERIAL *pMat;
   int iPad;
 };
 
 struct SGDCOORDINATEDESC
 {
+  /// boneId
   int iCoordId0;
+
+  /// 0 -> 1 bone\n
+  /// 1 -> multi bone attached and iCoordId0 has 1
   int iCoordId1;
 };
 
