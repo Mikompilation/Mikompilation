@@ -12,28 +12,24 @@ typedef uint8_t uint8;
 typedef unsigned int uint;
 typedef unsigned int undefined4;
 typedef int64_t uint64;
+typedef unsigned long long u8l;
 
-struct Color
+enum MTYPE
 {
-  float r;
-  float g;
-  float b;
-  float a;
+  iMT_0 = 0x10,
+  iMT_2 = 0x12,
+  iMT_2F = 0x32
 };
 
-struct VertexPoint
+enum ProcUnitType : int
 {
-  Vector4 vuMatrix;
-  Vector3 vuVector3;
-  uint8 vertexId;
-  uint8 a;
-  uint8 b;
-  uint8 c;
-};
-
-struct VERTEXLIST
-{
-  int iNumVertex;
+  VUVN = 0,
+  MESH = 1,
+  MATERIAL = 2,
+  COORDINATE = 3,
+  BOUNDING_BOX = 4,
+  GS_IMAGE = 5,
+  TRI2 = 10
 };
 
 struct RotationAxis
@@ -41,64 +37,170 @@ struct RotationAxis
   Vector4 x;
   Vector4 y;
   Vector4 z;
+  Vector4 coordinates;
+};
+
+struct SGDVUVNDATA_WEIGHTED
+{
+  // ORIGINAL CODE: unsigned char auc0[224]
+  Vector3 v1;
+  float fBoneWeight;
+  Vector3 v2;
+  // END
+
+  unsigned char ucBoneId0;
+  unsigned char ucBoneId1;
+  unsigned char auc1[2];
+};
+
+struct BONEINFO
+{
+  unsigned short usBoneIndex1;
+  unsigned short usBoneIndex2;
+  uint32_t uiNumVertex;
+};
+
+struct VERTEXLIST
+{
+  int list_num;
+  BONEINFO *lists;
 };
 
 struct SGDCOORDINATE
 {
-  RotationAxis rotationAxis;
-  Vector4 coordinates;
-  float fCoordArray[8][4];
-  Vector4 rotation;
+  RotationAxis matCoord;
+  Matrix4x4 matLocalWorld;
+  Matrix4x4 _matWork;
+  Vector4 vRot;
   SGDCOORDINATE *pParent;
-  int pad[3];
+  int bCalc;
+  int edge_check;
+  int bInViewvolume;
 };
 
 struct SGDMATERIAL
 {
-  unsigned int uiFlag;
-  char textureName[12];
-  Color diffuse;
-  Color color2;
-  Color color3;
-  Color color4;
-  unsigned char unknown_0x50[0x20];
-  uint64_t GsTex0;
-  unsigned char unknown_0x78[0x38];
+  uint uiPrimType;
+  char strTexName[12];
+  Vector4 vAmbient;
+  Vector4 vDiffuse;
+  Vector4 vSpecular;
+  Vector4 vEmission;
+  int iCacheStatus;
+  int iTagAddressOld;
+  int iSizeOld;
+  int iPad;
+  char aCache[0x30];
+  int aiPad[8];
 };
 
-struct SGDVECTORBSP
+struct SGDVECTORADDRESS
 {
-  uint iChildType;
-  VertexPoint *pVertex;
-  VertexPoint *pNormal;
-
-  /// pTable
-  VERTEXLIST *pParent;
+  uint32_t uiSize;
+  SGDVUVNDATA_WEIGHTED *pvVertex;
+  SGDVUVNDATA_WEIGHTED *pvNormal;
+  VERTEXLIST *pVertexList;
 };
 
 struct SGDVECTORINFO
 {
-  uint iNumBlockInfo;
-  SGDVECTORBSP sgdVectorBsp[];
+  uint uiNumAddress;
+  SGDVECTORADDRESS aAddress[];
+};
+
+struct SGDVUVNDESC
+{
+  short sNumVertex;
+  short sNumNormal;
+  unsigned char ucSize;
+  unsigned char ucVectorType;
+  unsigned char aucPad[2];
+};
+
+struct SGDVUMESHDESC
+{
+  int iTagSize;
+  unsigned char ucPad0;
+  unsigned char u1MeshType;
+  unsigned char ucMeshType;
+  unsigned char ucNumMesh;
+  unsigned char ucPad1;
+};
+
+/// Should be 64 bits...
+struct SGDVUMATERIALDESC
+{
+  uint32_t u4iMaterialIndex;
+  SGDMATERIAL pMat;
+  int iPad;
+};
+
+struct SGDCOORDINATEDESC
+{
+  int iCoordId0;
+  int iCoordId1;
+};
+
+struct SGDBOUNDINGBOXDESC
+{
+  int iCoordId;
+  int iPad;
+};
+
+struct SGDGSIMAGEDESC
+{
+  int iQWordSize;
+  int iPad;
+};
+
+struct SGDLIGHTDESC
+{
+  int Type;
+  int iNum;
+};
+
+struct SGDTEXTUREIMAGEDESC
+{
+  int iNumTexture;
+  int iPaddingSize;
+};
+
+struct SGDTEXTUREANIMATIONDESC
+{
+  unsigned char ucNumTexture;
+  unsigned char ucPaddingSize;
+  bool bEnable;
+  unsigned char ucStep;
+  unsigned char ucCount;
+  bool bLoop;
+  unsigned char aucPad;
 };
 
 struct SGDPROCUNITHEADER
 {
   SGDPROCUNITHEADER *pNext;
-  int iCategory;
-  uint procInfo;
-  uint8_t a;
-  uint8_t mtype;
-  uint8_t b;
-  uint8_t c;
+  ProcUnitType iCategory;
+  union
+  {
+    u8l u8lPrimType;
+    SGDVUVNDESC VUVNDesc;
+    SGDVUMESHDESC VUMeshDesc;
+    SGDVUMATERIALDESC VUMaterialDesc;
+    SGDCOORDINATEDESC CoordDesc;
+    SGDBOUNDINGBOXDESC BoundingBoxDesc;
+    SGDGSIMAGEDESC GSImageDesc;
+    SGDLIGHTDESC LightDesc;
+    SGDTEXTUREIMAGEDESC TexDesc;
+    SGDTEXTUREANIMATIONDESC TexAnimDesc;
+  };
 };
 
 struct SGDFILEHEADER
 {
   uint uiVersionId;
-  bool fileInitialized;
-  char pad;
-  short numMaterial;
+  unsigned char ucMapFlag;
+  unsigned char ucModelType;
+  unsigned short usNumMaterial;
 
   /// Bones of the model
   SGDCOORDINATE *pCoord;
@@ -109,28 +211,5 @@ struct SGDFILEHEADER
   uint uiNumBlock;
 
   /// There are as many iterations as uiNumBlock
-  SGDPROCUNITHEADER *pProcUnit[];
-};
-
-struct SgLightCoord
-{
-  uint8_t unknown1[0x60];
-  Vector4 pos0;
-  Vector4 pos1;
-  Vector4 pos2;
-  Vector4 intens;
-  Vector4 intens_b;
-  Vector4 WDLightMtx[3];
-  Vector4 SLightMtx[3];
-};
-
-struct SgLightSpot
-{
-  int u1;
-  int u2;
-  int u3;
-  int u4;
-  Vector4 btimes;
-  Vector4 DColor[3];
-  Vector4 SColor[3];
+  SGDPROCUNITHEADER *apProcUnitHead[];
 };
