@@ -1,6 +1,7 @@
 #include "gra3d.h"
 #include "g3d/g3dCore.h"
 #include "logging/printing.h"
+#include "gra3dSGD.h"
 
 void gra3dInit()
 {
@@ -15,7 +16,7 @@ void gra3dInit()
   // InitLight();
   // InitFog();
   // SetClipValue();
-  // gra3dsgdInit(sgd);
+  gra3dsgdInit(&sgd);
 
   transformRef = gra3dGetTransformRef(G3DTRANSFORMSTATETYPE::TYPE1);
 }
