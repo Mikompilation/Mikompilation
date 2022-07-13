@@ -123,15 +123,12 @@ struct SGDVUMESHDESC
   unsigned char u1MeshType;
   unsigned char ucMeshType;
   unsigned char ucNumMesh;
-  unsigned char ucPad1;
 };
 
-/// Should be 64 bits...
 struct SGDVUMATERIALDESC
 {
   uint32_t u4iMaterialIndex;
   SGDMATERIAL *pMat;
-  int iPad;
 };
 
 struct SGDCOORDINATEDESC
@@ -176,7 +173,7 @@ struct SGDTEXTUREANIMATIONDESC
   unsigned char ucStep;
   unsigned char ucCount;
   bool bLoop;
-  unsigned char aucPad;
+  unsigned char aucPad[2];
 };
 
 struct SGDPROCUNITHEADER
