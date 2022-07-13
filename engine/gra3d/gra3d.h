@@ -4,11 +4,6 @@
 #include "math/VectorMath.h"
 #include "g3d/g3dCore.h"
 
-struct GRA3DSGDCREATIONDATA
-{
-
-};
-
 static GRA3DSCRATCHPADLAYOUT *scratchpad;
 
 static Vector4 * transformRef;

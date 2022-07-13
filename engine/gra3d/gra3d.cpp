@@ -40,7 +40,6 @@ void ModifyScratchpad()
   {
     
   }
-
 }
 
 Vector4 * gra3dGetTransformRef(G3DTRANSFORMSTATETYPE state)
