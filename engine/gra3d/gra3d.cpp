@@ -18,7 +18,7 @@ void gra3dInit()
   // SetClipValue();
   gra3dsgdInit(&sgd);
 
-  transformRef = gra3dGetTransformRef(G3DTRANSFORMSTATETYPE::TYPE1);
+  transformRef = gra3dGetTransformRef(G3DTRANSFORMSTATETYPE::G3DTS_PROJECTION);
 }
 
 void ModifyScratchpad()
