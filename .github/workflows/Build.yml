@@ -25,7 +25,7 @@ jobs:
     
     - name: Install Dependencies
       run: |
-          if [ "$matrix" == "ubuntu-latest" ]; then
+          if [ "$MATRIX_OS" == "ubuntu-latest" ]; then
             sudo apt install xorg-dev
             sudo apt install gcc-multilib g++-multilib
             sudo apt update
