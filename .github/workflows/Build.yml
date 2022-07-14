@@ -1,4 +1,4 @@
-name: Build-Windows Mikompilation
+name: Build Mikompilation
 
 on:
   push:
@@ -18,25 +18,28 @@ jobs:
     runs-on: ${{ matrix.os }} 
     strategy:
       matrix:
-        os: [windows-latest] #ubuntu-latest,
-        
-    
+        os: [windows-latest, ubuntu-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Install Dependencies
+      run: |
+          if [ "$matrix" == "ubuntu-latest" ]; then
+            sudo apt install xorg-dev
+            sudo apt install gcc-multilib g++-multilib
+            sudo apt update
+            sudo apt upgrade
+            sudo apt-get install libglx-dev
+            sudo apt-get install mesa-common-dev
+            sudo apt-get install libglu1-mesa-dev
 
     - name: Configure CMake
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
-      # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Test
       working-directory: ${{github.workspace}}/build
-      # Execute tests defined by the CMake configuration.  
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
-      
