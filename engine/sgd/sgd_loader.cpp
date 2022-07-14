@@ -1,9 +1,10 @@
 #include "sgd_loader.h"
-#include "sgd_globals.h"
 
 bool isValidSGDFile(SGDFILEHEADER *pSGDHead)
 {
-  return pSGDHead != (SGDFILEHEADER *) nullptr && pSGDHead->uiVersionId == SGD_VALID_VERSIONID && !pSGDHead->fileInitialized;
+  return pSGDHead != (SGDFILEHEADER *) nullptr
+         && pSGDHead->uiVersionId == SGD_VALID_VERSIONID
+         && !pSGDHead->ucMapFlag;
 }
 
 void initializeSGDCoordinate(SGDFILEHEADER *pSGDHead)
@@ -36,61 +37,77 @@ void initializeSGDCoordinate(SGDFILEHEADER *pSGDHead)
 
 void initializeVectorInfo(SGDFILEHEADER *pSGDHead)
 {
-  if (pSGDHead->pVectorInfo->iNumBlockInfo == 0)
+  if (pSGDHead->pVectorInfo->uiNumAddress == 0)
   {
     return;
   }
 
   SGDVECTORINFO *pCurrentVectorInfo = pSGDHead->pVectorInfo;
 
-  for (int i = 0; i < pSGDHead->pVectorInfo->iNumBlockInfo; i++)
+  for (int i = 0; i < pSGDHead->pVectorInfo->uiNumAddress; i++)
   {
-
     /* Set the Highest level parent SGDVECTORINFO */
-    SGDVECTORBSP currElement = pCurrentVectorInfo->sgdVectorBsp[i];
+    SGDVECTORADDRESS currElement = pCurrentVectorInfo->aAddress[i];
 
-    uint childType = currElement.iChildType;
+    uint uiSize = currElement.uiSize;
 
-    if (childType != 0 && (currElement.pChildLeft != (VertexPoint *) nullptr))
+    if (uiSize != 0
+        && (currElement.pvVertex != (SGDVUVNDATA_WEIGHTED *) nullptr))
     {
-      pCurrentVectorInfo->sgdVectorBsp[i].pChildLeft = (VertexPoint *) ((int) pSGDHead + (int) currElement.pChildLeft);
+      pCurrentVectorInfo->aAddress[i].pvVertex =
+          (SGDVUVNDATA_WEIGHTED *) ((int) pSGDHead
+                                    + (int) currElement.pvVertex);
     }
 
-    if (1 < childType && (currElement.pChildRight != (VertexPoint *) nullptr))
+    if (1 < uiSize
+        && (currElement.pvNormal != (SGDVUVNDATA_WEIGHTED *) nullptr))
     {
-      pCurrentVectorInfo->sgdVectorBsp[i].pChildRight = (VertexPoint *) ((int) pSGDHead + (int) currElement.pChildRight);
+      pCurrentVectorInfo->aAddress[i].pvNormal =
+          (SGDVUVNDATA_WEIGHTED *) ((int) pSGDHead
+                                    + (int) currElement.pvNormal);
     }
 
-    if (2 < childType && (pCurrentVectorInfo->sgdVectorBsp[i].pParent != (VERTEXLIST *) nullptr))
+    if (2 < uiSize
+        && (pCurrentVectorInfo->aAddress[i].pVertexList
+            != (VERTEXLIST *) nullptr))
     {
-      pCurrentVectorInfo->sgdVectorBsp[i].pParent = (VERTEXLIST *) ((int) pSGDHead + (int) currElement.pParent);
+      pCurrentVectorInfo->aAddress[i].pVertexList =
+          (VERTEXLIST *) ((int) pSGDHead + (int) currElement.pVertexList);
     }
   }
 }
 
 void initializeParentVectorInfo(SGDFILEHEADER *pSGDHead)
 {
-  if (pSGDHead->pVectorInfo == (SGDVECTORINFO *) nullptr || pSGDHead->pVectorInfo->iNumBlockInfo != 4)
+  if (pSGDHead->pVectorInfo == (SGDVECTORINFO *) nullptr
+      || pSGDHead->pVectorInfo->uiNumAddress != 4)
   {
     return;
   }
 
-  if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildLeft == (VertexPoint *) nullptr && pSGDHead->pVectorInfo->sgdVectorBsp[2].pChildRight == (VertexPoint *) nullptr)
+  if (pSGDHead->pVectorInfo->aAddress[2].pvVertex
+          == (SGDVUVNDATA_WEIGHTED *) nullptr
+      && pSGDHead->pVectorInfo->aAddress[2].pvNormal
+             == (SGDVUVNDATA_WEIGHTED *) nullptr)
   {
-    pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent = (VERTEXLIST *) nullptr;
+    pSGDHead->pVectorInfo->aAddress[2].pVertexList = (VERTEXLIST *) nullptr;
   }
 
-  pSGDHead->pVectorInfo->sgdVectorBsp[0].pParent = (VERTEXLIST *) nullptr;
+  pSGDHead->pVectorInfo->aAddress[0].pVertexList = (VERTEXLIST *) nullptr;
 
-  if (pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent == (VERTEXLIST *) nullptr)
+  if (pSGDHead->pVectorInfo->aAddress[2].pVertexList == (VERTEXLIST *) nullptr)
   {
     return;
   }
 
-  MappingVertexList(pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent, pSGDHead->pVectorInfo);
+  MappingVertexList(pSGDHead->pVectorInfo->aAddress[2].pVertexList,
+                    pSGDHead->pVectorInfo);
 
-  MappingVertexList((VERTEXLIST *) (&pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent +
-                                    pSGDHead->pVectorInfo->sgdVectorBsp[2].pParent->iNumVertex * 2), pSGDHead->pVectorInfo);
+  MappingVertexList(
+      (VERTEXLIST *) (&pSGDHead->pVectorInfo->aAddress[2].pVertexList
+                      + pSGDHead->pVectorInfo->aAddress[2].pVertexList->list_num
+                            * 2),
+      pSGDHead->pVectorInfo);
 }
 
 void initializeSGDProcUnitHeader(SGDFILEHEADER *pSGDHead)
@@ -100,15 +117,17 @@ void initializeSGDProcUnitHeader(SGDFILEHEADER *pSGDHead)
     return;
   }
 
-  /* Sets full-chain of SGDPROCUNITHEADER where initialy pNext has the offset */
+  /* Sets full-chain of SGDPROCUNITHEADER where initially pNext has the offset */
   for (int i = 0; i < pSGDHead->uiNumBlock; i++)
   {
-    if (pSGDHead->pProcUnit[i] == (SGDPROCUNITHEADER *) nullptr)
+    if (pSGDHead->apProcUnitHead[i] == (SGDPROCUNITHEADER *) nullptr)
     {
       continue;
     }
 
-    pSGDHead->pProcUnit[i] = (SGDPROCUNITHEADER *) ((int) pSGDHead + (int) pSGDHead->pProcUnit[i]);
+    pSGDHead->apProcUnitHead[i] =
+        (SGDPROCUNITHEADER *) ((int) pSGDHead
+                               + (int) pSGDHead->apProcUnitHead[i]);
   }
 }
 
@@ -121,36 +140,40 @@ void initializeSGDType(SGDFILEHEADER *pSGDHead)
 
   for (uint i = 0; i < pSGDHead->uiNumBlock; i++)
   {
-    SGDPROCUNITHEADER *pPUHead = pSGDHead->pProcUnit[i];
+    SGDPROCUNITHEADER *pPUHead = pSGDHead->apProcUnitHead[i];
     SGDPROCUNITHEADER *previousPH = (SGDPROCUNITHEADER *) nullptr;
 
-    do {
-      if (pPUHead == (SGDPROCUNITHEADER *) nullptr || pPUHead->pNext == (SGDPROCUNITHEADER *) nullptr)
+    do
+    {
+      if (pPUHead == (SGDPROCUNITHEADER *) nullptr
+          || pPUHead->pNext == (SGDPROCUNITHEADER *) nullptr)
       {
         break;
       }
 
       switch (pPUHead->iCategory)
       {
-        case 0:
+        case VUVN:
           previousPH = pPUHead;
           break;
-        case 1:
+        case MESH:
           MappingMeshData(pPUHead, previousPH, pSGDHead);
           break;
-        case 2:
-          pPUHead->procInfo = (uint) (pSGDHead->pMaterial + pPUHead->procInfo);
+        case MATERIAL:
+          pPUHead->VUMaterialDesc.pMat = &pSGDHead->pMaterial[pPUHead->VUMaterialDesc.u4iMaterialIndex];
           break;
-        case 10:
+        case TRI2:
           RebuildTRI2Files(pPUHead);
           break;
         default:
           break;
       }
 
-      pPUHead->pNext = (SGDPROCUNITHEADER *) ((int) &pPUHead->pNext + (int) pPUHead->pNext);
+      pPUHead->pNext =
+          (SGDPROCUNITHEADER *) ((int) &pPUHead->pNext + (int) pPUHead->pNext);
       pPUHead = pPUHead->pNext;
-    } while (pPUHead->pNext != (SGDPROCUNITHEADER *) nullptr);
+    }
+    while (pPUHead->pNext != (SGDPROCUNITHEADER *) nullptr);
   }
 }
 
@@ -161,17 +184,20 @@ void SgMapUnit(SGDFILEHEADER *pSGDHead)
     return;
   }
 
-  pSGDHead->fileInitialized = true;
+  pSGDHead->ucMapFlag = true;
 
   // Check if value has been initialized, if not then add the current value to the offset of beginning of SGD FILE
-  if ((pSGDHead->pCoord < (SGDCOORDINATE *) 0x30000000) && (pSGDHead->pCoord != (SGDCOORDINATE *) nullptr))
+  if ((pSGDHead->pCoord < (SGDCOORDINATE *) 0x30000000)
+      && (pSGDHead->pCoord != (SGDCOORDINATE *) nullptr))
   {
-    pSGDHead->pCoord = (SGDCOORDINATE *) ((int) pSGDHead + (int) pSGDHead->pCoord);
+    pSGDHead->pCoord =
+        (SGDCOORDINATE *) ((int) pSGDHead + (int) pSGDHead->pCoord);
   }
 
   if (pSGDHead->pMaterial < (SGDMATERIAL *) 0x30000000)
   {
-    pSGDHead->pMaterial = (SGDMATERIAL *) ((int) pSGDHead + (int) pSGDHead->pMaterial);
+    pSGDHead->pMaterial =
+        (SGDMATERIAL *) ((int) pSGDHead + (int) pSGDHead->pMaterial);
   }
 
   if (pSGDHead->pCoord != (SGDCOORDINATE *) nullptr)
@@ -183,7 +209,8 @@ void SgMapUnit(SGDFILEHEADER *pSGDHead)
   // pSGDHead to the value currently located at pSGDHead->pVectorInfo
   if (pSGDHead->pVectorInfo != (SGDVECTORINFO *) nullptr)
   {
-    pSGDHead->pVectorInfo = (SGDVECTORINFO *) ((int) pSGDHead + (int) pSGDHead->pVectorInfo);
+    pSGDHead->pVectorInfo =
+        (SGDVECTORINFO *) ((int) pSGDHead + (int) pSGDHead->pVectorInfo);
     initializeVectorInfo(pSGDHead);
     initializeParentVectorInfo(pSGDHead);
   }
