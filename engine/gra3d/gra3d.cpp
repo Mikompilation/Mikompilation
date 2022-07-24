@@ -46,7 +46,7 @@ void ModifyScratchpad()
 Vector4 * gra3dGetTransformRef(G3DTRANSFORMSTATETYPE state)
 {
   Vector4* output;
-  if (state != G3DTRANSFORMSTATETYPE::TYPE4 && (state == G3DTRANSFORMSTATETYPE::TYPE5))
+  if (state != G3DTRANSFORMSTATETYPE::G3DTS_WORLDCLIP && (state == G3DTRANSFORMSTATETYPE::NUM_G3DTRANSFORMSTATETYPE))
   {
     return &scratchpad->transInput;
   }

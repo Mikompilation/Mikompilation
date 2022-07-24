@@ -11,7 +11,7 @@ static GRA3DSGDCREATIONDATA sgdCreate;
 
 inline float** GlobalVertexBuffer;
 inline float** GlobalNormalBuffer;
-int iGlobalBufferSize;
+static int iGlobalBufferSize;
 
 inline SGDPROCUNITHEADER* previous_prim;
 
