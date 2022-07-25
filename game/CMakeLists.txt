@@ -8,7 +8,7 @@ set(GAME_INCLUDE_DIRS
 set(GAME_SOURCES
         game_main.cpp
         ingame.cpp
-        gphase.cpp
+        gphase/gphase.cpp
         system/option.cpp
         system/system.cpp
         scene/scene.cpp
@@ -19,15 +19,20 @@ set(GAME_SOURCES
         menu/logo_main.cpp
         menu/menu_main.cpp
         finder/finder.cpp
-        MemoryCard/mc.cpp
+        mc/mc.cpp
+        mc/autoload.cpp
+        mc/mc_check_card.cpp
+        mc/mc_set_data.cpp
+        mc/mc_check.cpp
+        mc/mc_check_dir.cpp
         )
 
 set(GAME_HEADERS
         game_main.h
         ingame.h
-        gphase.h
-        gphase_types.h
-        gphase_data.h
+        gphase/gphase.h
+        gphase/gphase_types.h
+        gphase/gphase_data.h
         system/option.h
         system/system.h
         scene/scene.h
@@ -38,7 +43,14 @@ set(GAME_HEADERS
         menu/logo_main.h
         menu/menu_main.h
         finder/finder.h
-        MemoryCard/mc.h
+        mc/mc.h
+        mc/autoload.h
+        mc/mc_check_card.h
+        mc/mc_set_data.h
+        system/glob.h
+        system/system_types.h
+        mc/mc_check.h
+        mc/mc_check_dir.h
         )
 
 add_library(${GAME_LIB} EXCLUDE_FROM_ALL ${GAME_SOURCES} ${GAME_HEADERS})

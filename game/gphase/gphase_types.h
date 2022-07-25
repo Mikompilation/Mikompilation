@@ -29,7 +29,11 @@ enum GPHASE_ID : int
   DEFAULT = -1,
   SUPER,
   BOOT_INIT,
+  BOOT_PADCHECK,        /// EU Specific GPHASE
+  LANGDATA_CHECK,       /// EU Specific GPHASE
+  LANGSEL,              /// EU Specific GPHASE
   AUTOLOAD_MAIN,
+  UBI_MODE,             /// EU Specific GPHASE
   OUT_GAME_MAIN,
   STORY_MAIN,
   GAME_OVER_MENU,
@@ -84,7 +88,9 @@ enum GPHASE_ID : int
   TITLE_ALBUM,
   TITLE_GALLERY,
   TITLE_OPTION,
+  TITLE_FRAMERATE_SEL,        /// EU Specific GPHASE
   TITLE_CHAPTER_SELECTION,
+  Title_Move_Movie,           /// EU Specific GPHASE
   STORY_LOAD_MISSION,
   STORY_LOAD_MISSION_EVENT,
   STORY_LOAD_MISSION_SAVE,

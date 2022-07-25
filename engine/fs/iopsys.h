@@ -1,20 +1,21 @@
 #pragma once
 #include <filesystem>
 
-inline const int NUM_FILES_US = 0x106B;
-
-inline std::filesystem::path gameFolder("game_files/");
+/// US: 0x106B
+/// JP: 0x106B
+/// EU: 0x118B
+inline const int NUM_FILES = 0x118B;
 
 enum FileInfo : int
 {
   TECMO_LOGO_TEXTURE = 2,
   ZERO_LOGO_TEXTURE = 3,
   SYSTEM_TEXTURES_PAK2 = 4,
-  GAME_TEXT = 0xCC6,
-  SUBTITLE_TEXT = 0x1064
+  GAME_TEXT = 0xD38,
+  SUBTITLE_TEXT = 0x1184
 };
 
-///New redefined struct for loaded file for the Mikompilation project
+/// New redefined struct for loaded file for the Mikompilation project
 struct GameFile
 {
   bool isFileLoadedInMemory = false;
@@ -32,4 +33,4 @@ struct ZeroFile
   uint32_t sizeCompressed;
 };
 
-inline GameFile gameFiles[NUM_FILES_US];
+inline GameFile gameFiles[NUM_FILES];
