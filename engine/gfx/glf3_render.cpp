@@ -27,6 +27,10 @@ GLFWwindow *InitializeWindow()
     return NULL;
   }
 
+  auto mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+  SCREEN_HEIGHT = mode->height;
+  SCREEN_WIDTH = mode->width;
+
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);

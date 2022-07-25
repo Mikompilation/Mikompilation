@@ -13,7 +13,7 @@ set(COMMON_HEADERS
         logging/printing.h
         logging/setup.h
         file/file_util.h
-        )
+        CONFIG.h)
 
 add_subdirectory(logging/spdlog)
 
