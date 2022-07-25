@@ -1,7 +1,7 @@
 #include "gra3d.h"
 #include "g3d/g3dCore.h"
-#include "logging/printing.h"
 #include "gra3dSGD.h"
+#include "logging/printing.h"
 
 void gra3dInit()
 {
@@ -35,18 +35,19 @@ void ModifyScratchpad()
 
   // There's init and initalize. Two seperate functions entirely.
   //g3dInitalize(&creation);
-  stackPointerScratchPadLayout = GetStaticInstance<GRA3DSCRATCHPADLAYOUT>(0x001b4a5c);
+  stackPointerScratchPadLayout =
+      GetStaticInstance<GRA3DSCRATCHPADLAYOUT>(0x001b4a5c);
 
   if (!UseScratchpad)
   {
-    
   }
 }
 
-Vector4 * gra3dGetTransformRef(G3DTRANSFORMSTATETYPE state)
+Vector4 *gra3dGetTransformRef(G3DTRANSFORMSTATETYPE state)
 {
-  Vector4* output;
-  if (state != G3DTRANSFORMSTATETYPE::G3DTS_WORLDCLIP && (state == G3DTRANSFORMSTATETYPE::NUM_G3DTRANSFORMSTATETYPE))
+  Vector4 *output;
+  if (state != G3DTRANSFORMSTATETYPE::G3DTS_WORLDCLIP
+      && (state == G3DTRANSFORMSTATETYPE::NUM_G3DTRANSFORMSTATETYPE))
   {
     return &scratchpad->transInput;
   }
@@ -71,8 +72,8 @@ bool gra3dIsUsingScratchpad()
 }
 
 // TODO, implement proper memory lookups:
-template <class T>
-T* GetStaticInstance(uint32_t mem)
+template<class T>
+T *GetStaticInstance(uint32_t mem)
 {
-  return (T *)mem;
+  return (T *) mem;
 }
