@@ -1,6 +1,7 @@
 #include "mc_check_card.h"
 #include "logging/printing.h"
 #include <iostream>
+#include <cstring>
 
 void MemoryCardSetAccessPort(int accessPort)
 {

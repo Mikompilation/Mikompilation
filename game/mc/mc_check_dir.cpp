@@ -1,6 +1,7 @@
 #include "mc_check_dir.h"
 #include "CONFIG.h"
 #include "logging/printing.h"
+#include <cstring>
 
 char *MemoryCardGetDirInfoInit(int param1, int param2, char *dirname)
 {

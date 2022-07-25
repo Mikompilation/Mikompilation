@@ -1,6 +1,7 @@
 #include "mc_set_data.h"
 #include "../game_main.h"
 #include "mc.h"
+#include <cstring>
 
 void MemoryCardSoftResetLock()
 {
