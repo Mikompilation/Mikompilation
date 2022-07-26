@@ -5,10 +5,10 @@ void gra3dsgdInit(GRA3DSGDCREATIONDATA *sgd)
   SgSetVNBuffer(sgd->buffer, sgd->bufferSize);
 }
 
-void SgSetVNBuffer(float **buf, int bufSize)
+void SgSetVNBuffer(float *buf[3], int bufSize)
 {
-  GlobalVertexBuffer = buf;
-  GlobalNormalBuffer[bufSize] = buf[(bufSize / 2) * 4];
+  pGlobalVertexBuffer = buf;
+  pGlobalNormalBuffer = buf + (bufSize / 2) * 4;
   iGlobalBufferSize = bufSize / 2;
 }
 

@@ -3,6 +3,6 @@
 class CRenderTarget
 {
   CRenderTarget();
-  int SetHeight();
   ~CRenderTarget();
+  int SetHeight();
 };

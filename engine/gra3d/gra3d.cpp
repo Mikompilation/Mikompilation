@@ -29,11 +29,9 @@ void ModifyScratchpad()
 
   if (!UseScratchpad)
   {
-    matrix = creation.core->matrix;
-    // More down here
+    //matrix = creation.core->matrix;
   }
 
-  // There's init and initalize. Two seperate functions entirely.
   //g3dInitalize(&creation);
   stackPointerScratchPadLayout =
       GetStaticInstance<GRA3DSCRATCHPADLAYOUT>(0x001b4a5c);
@@ -46,12 +44,15 @@ void ModifyScratchpad()
 Vector4 *gra3dGetTransformRef(G3DTRANSFORMSTATETYPE state)
 {
   Vector4 *output;
+
   if (state != G3DTRANSFORMSTATETYPE::G3DTS_WORLDCLIP
       && (state == G3DTRANSFORMSTATETYPE::NUM_G3DTRANSFORMSTATETYPE))
   {
     return &scratchpad->transInput;
   }
+
   output = g3dGetTransformRef(state);
+
   return output;
 }
 
