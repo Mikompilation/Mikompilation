@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <cstdint>
 
 struct SPRT_DAT
 {

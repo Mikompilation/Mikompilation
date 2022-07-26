@@ -7,6 +7,8 @@ inline int soft_reset_disable;
 void game_main();
 void game_init();
 
+void NewGameMain();
+
 /// Super GPHASE
 void init_super();
 void end_super();

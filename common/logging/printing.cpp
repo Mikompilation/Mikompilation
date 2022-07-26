@@ -3,7 +3,8 @@
 
 int printVectorC(Vector4 *vector, const char *message)
 {
-  return printf("%s (%ff,%ff,%ff,%ff)\n", message, vector->x, vector->y, vector->z, vector->w);
+  return printf("%s (%ff,%ff,%ff,%ff)\n", message, vector->x, vector->y,
+                vector->z, vector->w);
 }
 
 int printLMatC(Vector4 *pVector4, const char *message)
@@ -25,16 +26,24 @@ int printLMatC(Vector4 *pVector4, const char *message)
     pVVar1 = pVector4 + 1;
     pVVar2 = pVector4 + 2;
     pVector4 = (Vector4 *) &pVector4->y;
-    iVar3 = printf("%f %f %f\n", (double) fVar5, (double) pVVar1->x, (double) pVVar2->x);
+    iVar3 = printf("%f %f %f\n", (double) fVar5, (double) pVVar1->x,
+                   (double) pVVar2->x);
     fVar5 = *(float *) pVector4;
   }
 
   return iVar3;
 }
 
-void printNotImplemented(const char* loggerName, const char* methodName, const char* fileName)
+void printNotImplemented(const char *loggerName, const char *methodName,
+                         const char *fileName)
 {
-  
   const auto logger = spdlog::get(loggerName);
   logger->info("{} in {} not implemented", methodName, fileName);
+}
+
+void printError(const char *loggerName, const char *methodName,
+                const char *error)
+{
+  const auto logger = spdlog::get(loggerName);
+  logger->error("{} in {} error", methodName, error);
 }
