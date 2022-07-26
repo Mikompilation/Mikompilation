@@ -9,8 +9,8 @@ struct GRA3DSGDCREATIONDATA
 
 static GRA3DSGDCREATIONDATA sgdCreate;
 
-inline float **GlobalVertexBuffer;
-inline float **GlobalNormalBuffer;
+inline float **pGlobalVertexBuffer;
+inline float **pGlobalNormalBuffer;
 static int iGlobalBufferSize;
 
 inline SGDPROCUNITHEADER *previous_prim;
