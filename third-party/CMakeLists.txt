@@ -30,7 +30,6 @@ set(THIRDPARTY_HEADERS
         ${CMAKE_CURRENT_SOURCE_DIR}/stb/stb_image.h
         )
 
-
 add_library(ThirdParty EXCLUDE_FROM_ALL ${THIRDPARTY_SOURCES} ${THIRDPARTY_HEADERS})
 
 set(ThirdParty_INCLUDE_DIRS
@@ -40,7 +39,8 @@ set(ThirdParty_INCLUDE_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/ImGuiFileDialog
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui_memory_editor
         ${CMAKE_CURRENT_SOURCE_DIR}/glew/include
-        CACHE PATH "Path for the library ThirdParty")
+        CACHE PATH "Path for the library ThirdParty"
+        )
 
 target_include_directories(ThirdParty PUBLIC
         ${ThirdParty_INCLUDE_DIRS}
