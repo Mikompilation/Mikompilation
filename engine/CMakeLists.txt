@@ -12,10 +12,6 @@ set(ENGINE_SOURCES
         texture/tim2.cpp
         controller/GameInput.cpp
         texture/Texture.cpp
-        texture/ZeroShader.cpp
-        texture/EBO.cpp
-        texture/VAO.cpp
-        texture/VBO.cpp
         g3d/g3dCore.cpp
         g3d/g3dRenderTarget.cpp
         gra3d/gra3d.cpp
@@ -25,7 +21,6 @@ set(ENGINE_SOURCES
         g2d/g2d_draw.cpp
         texture/Texture.cpp
         gfx/glf3_render.cpp
-        texture/Sprite.cpp
         Vif1/dmaVif1.cpp
         fade.cpp
         message.cpp
@@ -44,11 +39,7 @@ set(ENGINE_HEADERS
         fs/iopsys.h
         controller/GameInput.h
         texture/tim2.h
-        texture/ZeroShader.h
         texture/Texture.h
-        texture/EBO.h
-        texture/VAO.h
-        texture/VBO.h
         g3d/g3dRenderTarget.h
         g3d/g3dCore.h
         gra3d/gra3d.h
