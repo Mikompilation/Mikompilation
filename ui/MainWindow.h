@@ -1,6 +1,5 @@
 #pragma once
 
-#include "FileSelector.h"
 #include "MemoryViewer.h"
 #include "TopMenuBar.h"
 #include "imgui_render.h"
@@ -9,11 +8,9 @@ class MainWindow
 {
  private:
   MemoryViewer *memoryViewer;
-  GLFWwindow *window;
   TopMenuBar* topMenuBar;
 
  public:
-  MainWindow(GLFWwindow *window);
-  bool Init();
+  MainWindow();
   void Update();
 };

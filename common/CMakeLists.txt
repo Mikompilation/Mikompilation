@@ -16,8 +16,6 @@ set(COMMON_HEADERS
         CONFIG.h
         )
 
-add_subdirectory(logging/spdlog)
-
 add_library(${COMMON_LIB} EXCLUDE_FROM_ALL ${COMMON_SOURCES} ${COMMON_HEADERS})
 
 target_include_directories(${COMMON_LIB} PUBLIC

@@ -6,7 +6,6 @@ set(UI_INCLUDE_DIRS
 
 set(UI_SOURCES
         imgui_render.cpp
-        FileSelector.cpp
         MainWindow.cpp
         TopMenuBar.cpp
         MemoryViewer.cpp
@@ -14,7 +13,6 @@ set(UI_SOURCES
 
 set(UI_HEADERS
         imgui_render.h
-        FileSelector.h
         MainWindow.h
         TopMenuBar.h
         MemoryViewer.h
@@ -22,4 +20,5 @@ set(UI_HEADERS
 
 add_library(${UI_LIB} EXCLUDE_FROM_ALL ${UI_SOURCES} ${UI_HEADERS})
 
-target_link_libraries(${UI_LIB} PUBLIC ${THIRDPARTY_LIB})
+target_link_libraries(${UI_LIB} PRIVATE IMGUI SDL2-static)
+target_include_directories(${UI_LIB} PUBLIC ${IMGUI_DIR})

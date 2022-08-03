@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mikompilation)
 
-add_subdirectory(common)
-
 add_subdirectory(third-party)
+
+add_subdirectory(common)
 
 add_subdirectory(engine)
 
@@ -30,6 +30,7 @@ target_link_libraries(Mikompilation PUBLIC
         ${UI_LIB}
         ${GAME_LIB}
         ${ENGINE_LIB}
+        SDL2main
         )
 
 target_include_directories(Mikompilation PUBLIC

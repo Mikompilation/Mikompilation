@@ -20,7 +20,7 @@ set(ENGINE_SOURCES
         g2d/g2d_main.cpp
         g2d/g2d_draw.cpp
         texture/Texture.cpp
-        gfx/glf3_render.cpp
+        gfx/AppWindow.cpp
         Vif1/dmaVif1.cpp
         fade.cpp
         message.cpp
@@ -51,7 +51,7 @@ set(ENGINE_HEADERS
         g2d/g2d_draw.h
         texture/Texture.h
         PS2_HARDWARE_CONFIG.h
-        gfx/glf3_render.h
+        gfx/AppWindow.h
         gfx/GFX_CONFIG.h
         texture/Sprite.h
         fade.h
@@ -66,4 +66,4 @@ target_include_directories(${ENGINE_LIB} PUBLIC
         ${ENGINE_INCLUDE_DIRS}
         )
 
-target_link_libraries(${ENGINE_LIB} PUBLIC ${COMMON_LIB} ${THIRDPARTY_LIB})
+target_link_libraries(${ENGINE_LIB} PRIVATE ${COMMON_LIB} SDL2-static)
