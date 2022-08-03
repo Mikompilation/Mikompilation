@@ -25,18 +25,22 @@ AppWindow::Window::Window()
                                   SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
                                   SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-  this->surface = SDL_GetWindowSurface(this->window);
+  if (this->window == nullptr)
+  {
+    engineLogger->critical(SDL_GetError());
+  }
+
   this->renderer =
       SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+
+  if (this->renderer == nullptr)
+  {
+    engineLogger->critical(SDL_GetError());
+  }
 }
 
 AppWindow::Window::~Window()
 {
-  if (this->surface != nullptr)
-  {
-    SDL_FreeSurface(this->surface);
-  }
-
   if (this->renderer != nullptr)
   {
     SDL_DestroyRenderer(this->renderer);

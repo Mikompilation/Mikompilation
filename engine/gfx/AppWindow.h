@@ -20,7 +20,6 @@ class Window
  private:
   SDL_Window *window;
   SDL_Renderer *renderer;
-  SDL_Surface *surface;
   SDL_GLContext windowContext;
 };
 }// namespace AppWindow
