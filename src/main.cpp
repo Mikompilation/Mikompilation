@@ -1,28 +1,28 @@
-#include "gfx/glf3_render.h"
 #include "MainWindow.h"
 #include "game_main.h"
+#include "gfx/AppWindow.h"
 #include "logging/setup.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char** args)
 {
   SetupLoggers();
 
-  GLFWwindow *glfwWindow = InitializeWindow();
+  auto *window = new AppWindow::Window();
 
-  MainWindow mainWindow(glfwWindow);
-  mainWindow.Init();
+  InitializeImGui(window->GetWindow(), window->GetRenderer());
+  MainWindow mainWindow;
   game_init();
 
-  while (!glfwWindowShouldClose(glfwWindow))
+  while (!window->ShouldCloseApp())
   {
-    startNewFrame();
+    window->StartNewFrame();
     game_main();
     mainWindow.Update();
-    endFrame(glfwWindow);
+    window->EndFrame();
   }
 
-  Terminate();
-  teardown(glfwWindow);
+  ImGuiTerminate();
+  delete window;
 
   return 0;
 }

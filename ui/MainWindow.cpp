@@ -1,32 +1,17 @@
 #include "MainWindow.h"
 #include "imgui.h"
 
-MainWindow::MainWindow(GLFWwindow *window)
+MainWindow::MainWindow()
 {
-  this->window = window;
-}
-
-bool MainWindow::Init()
-{
-  if (window == NULL)
-  {
-    return false;
-  }
-
-  InitializeImGui(window);
-
   this->memoryViewer = new MemoryViewer();
-
   this->topMenuBar = new TopMenuBar;
-
-  return true;
 }
 
 void MainWindow::Update()
 {
   NewFrame();
 
-  if (ImGui::IsKeyPressed(GLFW_KEY_HOME, false))
+  if (ImGui::IsKeyPressed('a', false))
   {
     this->topMenuBar->shouldDisplay = !this->topMenuBar->shouldDisplay;
   }
