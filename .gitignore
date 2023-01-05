@@ -488,3 +488,5 @@ third-party/glew/glew.pc
 tools/Extractor/build/*
 
 .DS_Store
+
+cmake-build-release/
