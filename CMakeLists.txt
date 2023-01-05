@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20.2)
 
 project(Mikompilation CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mikompilation)
 
@@ -10,11 +10,6 @@ add_subdirectory(third-party)
 
 add_subdirectory(common)
 
-add_subdirectory(engine)
-
-add_subdirectory(game)
-
-add_subdirectory(ui)
 
 set(SOURCES
         src/main.cpp

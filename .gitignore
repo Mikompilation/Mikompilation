@@ -490,3 +490,5 @@ tools/Extractor/build/*
 .DS_Store
 
 cmake-build-release/
+
+zero_rom/cmake-build-debug/
