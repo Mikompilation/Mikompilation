@@ -2,7 +2,7 @@
 
 #include "gphase.h"
 
-int main();
+int main(int argc, char** args);
 void DebugMemoryCheck();
 void newAssert(char *pStr);
 void init_super();
