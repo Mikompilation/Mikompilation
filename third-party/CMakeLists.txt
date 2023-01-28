@@ -1,5 +1,9 @@
 # Setup SDL2
-add_subdirectory(SDL2)
+find_package(SDL2)
+
+if(NOT SDL2_FOUND)
+  add_subdirectory(SDL2)
+endif()
 
 # Setup SPDLOG
 add_subdirectory(spdlog)

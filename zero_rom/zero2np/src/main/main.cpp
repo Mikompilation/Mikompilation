@@ -1,6 +1,8 @@
 #include "main.h"
 
-int main(int argc, char** args)
+static int soft_reset_disable;
+
+int main(int argc, char **args)
 {
   InitGPhaseSys();
 
@@ -15,6 +17,8 @@ int main(int argc, char** args)
 
 void init_super()
 {
+  //InitCostume();
+  soft_reset_disable = 0;
 }
 
 void end_super()
