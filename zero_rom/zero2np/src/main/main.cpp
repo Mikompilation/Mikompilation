@@ -17,7 +17,7 @@ int main(int argc, char **args)
 
 void init_super()
 {
-  //InitCostume();
+  InitCostume();
   soft_reset_disable = 0;
 }
 

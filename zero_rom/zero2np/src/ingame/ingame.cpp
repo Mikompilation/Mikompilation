@@ -1,6 +1,6 @@
 #include "ingame.h"
 
-void CostumeInit()
+void InitCostume()
 {
   SetPlyrMdlNo(0);
   SetSisterMdlNo(1);

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gphase.h"
-//#include "ingame.h"
+#include "ingame.h"
 
 int main(int argc, char **args);
 void DebugMemoryCheck();
