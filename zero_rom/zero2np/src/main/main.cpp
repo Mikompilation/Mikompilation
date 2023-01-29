@@ -1,6 +1,7 @@
 #include "main.h"
 
 static int soft_reset_disable;
+OPTION_WRK opt_wrk;
 
 int main(int argc, char **args)
 {
@@ -18,6 +19,8 @@ int main(int argc, char **args)
 void init_super()
 {
   InitCostume();
+  LoadingInit();
+  InitOptionSetup(&opt_wrk);
   soft_reset_disable = 0;
 }
 

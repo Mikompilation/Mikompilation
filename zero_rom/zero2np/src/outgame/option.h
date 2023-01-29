@@ -15,3 +15,4 @@ struct OPTION_WRK
 };
 
 void InitOptionSetup(OPTION_WRK *ow);
+void OptSoundSetupRef(OPTION_WRK *ow);

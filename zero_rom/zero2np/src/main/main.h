@@ -2,6 +2,8 @@
 
 #include "gphase.h"
 #include "ingame.h"
+#include "loading.h"
+#include "option.h"
 
 int main(int argc, char **args);
 void DebugMemoryCheck();
