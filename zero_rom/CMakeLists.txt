@@ -5,6 +5,8 @@ set(GAME_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/plyr/plyr_mdl.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/ingame.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame/option.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame/logo.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame/title.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/loading/loading.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/system/os/system.cpp
         PARENT_SCOPE

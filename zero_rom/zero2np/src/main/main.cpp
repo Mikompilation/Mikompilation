@@ -19,9 +19,12 @@ int main(int argc, char **args)
 void init_super()
 {
   InitCostume();
-  LoadingInit();
-  InitOptionSetup(&opt_wrk);
   soft_reset_disable = 0;
+  //playPssInit();
+  InitLogo();
+  LoadingInit();
+  TitleInit();
+  InitOptionSetup(&opt_wrk);
 }
 
 void end_super()
