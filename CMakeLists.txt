@@ -6,8 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mikompilation)
 
-include(cmake/recursive.cmake)
-
 add_subdirectory(third-party)
 add_subdirectory(zero_rom)
 
@@ -22,8 +20,4 @@ target_link_libraries(Mikompilation PUBLIC
         IMGUI
         )
 
-HEADER_DIRECTORIES(GAME_HEADERS)
-
-target_include_directories(Mikompilation PUBLIC
-${GAME_HEADERS}
-)
+target_include_directories(Mikompilation PUBLIC ${GAME_HEADERS})

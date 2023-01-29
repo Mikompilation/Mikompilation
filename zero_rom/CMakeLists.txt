@@ -11,3 +11,15 @@ set(GAME_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/system/os/system.cpp
         PARENT_SCOPE
         )
+
+
+set(GAME_HEADERS
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/main
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/common
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/plyr
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/loading
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/system/os
+        PARENT_SCOPE
+)

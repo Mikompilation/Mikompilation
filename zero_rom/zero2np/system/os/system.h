@@ -1,8 +1,8 @@
 #pragma once
 #include <stdint.h>
 
-
-struct SYS_WRK {
+struct SYS_WRK
+{
   unsigned long count;
   short int sreset_count;
   unsigned char sreset_ng;
@@ -11,6 +11,5 @@ struct SYS_WRK {
   int game_mode;
   unsigned char interrupt;
 };
-
 
 void InitSysWrk();
