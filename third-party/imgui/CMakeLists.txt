@@ -14,6 +14,7 @@ target_include_directories(IMGUI
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/backends
+        ${SDL2_INCLUDE_DIRS}
         )
 
-target_link_libraries(IMGUI PRIVATE SDL2-static)
+target_link_libraries(IMGUI SDL2)

@@ -1,8 +1,13 @@
 #pragma once
 
 #include "gphase.h"
+#include "ingame.h"
+#include "loading.h"
+#include "logo.h"
+#include "option.h"
+#include "title.h"
 
-int main(int argc, char** args);
+int main(int argc, char **args);
 void DebugMemoryCheck();
 void newAssert(char *pStr);
 void init_super();

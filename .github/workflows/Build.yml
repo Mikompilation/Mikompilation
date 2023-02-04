@@ -22,13 +22,9 @@ jobs:
     - name: Install Dependencies
       if: ${{ matrix.os == 'ubuntu-latest' }}
       run: |
-          sudo apt install xorg-dev
-          sudo apt install gcc-multilib g++-multilib
           sudo apt update
           sudo apt upgrade
-          sudo apt-get install libglx-dev
-          sudo apt-get install mesa-common-dev
-          sudo apt-get install libglu1-mesa-dev
+          sudo apt install libsdl2-dev
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}

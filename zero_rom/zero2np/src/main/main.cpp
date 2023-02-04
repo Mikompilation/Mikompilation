@@ -1,6 +1,9 @@
 #include "main.h"
 
-int main(int argc, char** args)
+static int soft_reset_disable;
+OPTION_WRK opt_wrk;
+
+int main(int argc, char **args)
 {
   InitGPhaseSys();
 
@@ -15,6 +18,13 @@ int main(int argc, char** args)
 
 void init_super()
 {
+  InitCostume();
+  soft_reset_disable = 0;
+  //playPssInit();
+  InitLogo();
+  LoadingInit();
+  TitleInit();
+  InitOptionSetup(&opt_wrk);
 }
 
 void end_super()
