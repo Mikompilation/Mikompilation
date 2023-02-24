@@ -20,3 +20,8 @@ void SndSetGroupVolume(int type, int vol)
 
   snd_sys.type_vol[type] = vol;
 }
+
+void *SndInit(EEIOP_DEF *def, void *buffer)
+{
+  return nullptr;
+}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ee_iop.h"
+
 struct _SOUND_SYS
 {
   char mono;
@@ -9,3 +11,4 @@ struct _SOUND_SYS
 void SndSetMono();
 void SndSetStereo();
 void SndSetGroupVolume(int type, int vol);
+void *SndInit(EEIOP_DEF *def, void *buffer);

@@ -1,16 +1,9 @@
 #pragma once
-#include <stdint.h>
 
-struct SYS_WRK
-{
-  unsigned long count;
-  short int sreset_count;
-  unsigned char sreset_ng;
-  unsigned char video_mode;
-  unsigned char language;
-  int game_mode;
-  unsigned char interrupt;
-};
+#include "heapctrl.h"
 
 void InitSysWrk();
 void InitSystemON();
+void* systemGetMem(int size);
+void systemFreeMem(void *adrs);
+HEAP_WRK *GetSystemHeapWrkP();

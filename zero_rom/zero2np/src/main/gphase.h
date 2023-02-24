@@ -1,6 +1,5 @@
 #pragma once
 
-
 const int gphase_sys_num = 6;
 inline const int gphase_num = 94;
 

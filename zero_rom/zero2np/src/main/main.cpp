@@ -1,10 +1,14 @@
 #include "main.h"
 #include "../system/os/system.h"
 #include "../system/playpss/playpss.h"
+#include "ingame.h"
+#include "loading.h"
 #include "logging/logging.h"
+#include "logo.h"
+#include "option.h"
+#include "title.h"
 
 static int soft_reset_disable;
-OPTION_WRK opt_wrk;
 
 int main(int argc, char **args)
 {
@@ -30,10 +34,13 @@ void init_super()
   LoadingInit();
   TitleInit();
   InitOptionSetup(&opt_wrk);
+
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }
 
 void end_super()
 {
+  return;
 }
 
 GPHASE_ENUM after_super(GPHASE_ENUM result)
