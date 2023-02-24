@@ -16,8 +16,7 @@ ENDIF ()
 add_executable(Mikompilation ${GAME_SOURCES} ${APP_ICON_RESOURCE_WINDOWS})
 
 target_link_libraries(Mikompilation PUBLIC
-        SDL2main
-        IMGUI
+        spdlog
         )
 
 target_include_directories(Mikompilation PUBLIC ${GAME_HEADERS})

@@ -1,4 +1,7 @@
 #include "main.h"
+#include "../system/os/system.h"
+#include "../system/playpss/playpss.h"
+#include "logging/logging.h"
 
 static int soft_reset_disable;
 OPTION_WRK opt_wrk;
@@ -18,9 +21,11 @@ int main(int argc, char **args)
 
 void init_super()
 {
+  InitLogging();
   InitCostume();
   soft_reset_disable = 0;
-  //playPssInit();
+  InitSystemON();
+  playPssInit();
   InitLogo();
   LoadingInit();
   TitleInit();

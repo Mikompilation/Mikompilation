@@ -13,3 +13,4 @@ struct SYS_WRK
 };
 
 void InitSysWrk();
+void InitSystemON();

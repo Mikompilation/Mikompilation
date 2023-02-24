@@ -9,6 +9,9 @@ struct OPTION_WRK
   unsigned char view_vertical;
   unsigned char ana_replace;
   unsigned char credits;
+
+  /// 0 -> Stereo\n
+  /// 1 -> Mono
   unsigned char snd_output;
   unsigned char move_operate;
   unsigned char pad;
