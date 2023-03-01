@@ -3,7 +3,6 @@
 
 void SetASCIIString2(int pri, float x, float y, int type, u_char r, u_char g,
                      u_char b, char *str)
-
 {
   SetASCIIString3(pri, x, y, type, r, g, b, 0x80, str);
 }
