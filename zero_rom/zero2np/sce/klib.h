@@ -16,3 +16,4 @@ void SignalSema(int sema);
 void WaitSema(int sema);
 int CreateSema(SemaParam *sema);
 int GetThreadId();
+void AddDmacHandler(int, void*, int);

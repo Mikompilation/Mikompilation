@@ -6,3 +6,4 @@ inline const char *ENGINE_LOGGER = "ENGINE";
 
 void InitLogging();
 void printNotImplemented(const char *loggerName, const char *methodName, const char *fileName);
+void printMessage(const char *loggerName, const char *message);

@@ -33,3 +33,9 @@ void printNotImplemented(const char *loggerName, const char *methodName,
   const auto logger = spdlog::get(loggerName);
   logger->info("{} in {} not implemented", methodName, fileName);
 }
+
+void printMessage(const char *loggerName, const char *message)
+{
+  const auto logger = spdlog::get(loggerName);
+  logger->info(message);
+}

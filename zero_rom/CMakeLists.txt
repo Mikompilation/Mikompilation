@@ -1,6 +1,7 @@
 set(GAME_SOURCES
         # SCE
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/sce/klib.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/sce/sce_types.h
 
         # Main
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/main/main.cpp
@@ -18,22 +19,35 @@ set(GAME_SOURCES
 
         # Debug
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/debug/mem_dbg.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/debug/zero2_perf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/debug/perf_measure.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/debug/debug_menu.cpp
 
         # Ingame
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/plyr/plyr_mdl.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/ingame.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/loading/loading.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/map/MapSave.cpp
 
         # Outgame
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame/option.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame/logo.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame/title.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame/mission_sel.cpp
+
+        # Graphics
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph2d/message.cpp
 
         # System
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/os/system.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/playpss/playpss.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/eeiop/snd.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/eeiop/snd_bank.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/eeiop/ee_iop.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/eeiop/cddat.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/eeiop/snd_3d.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/pad/key_cnf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/pad/pad.cpp
 
         PARENT_SCOPE
         )

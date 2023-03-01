@@ -83,6 +83,17 @@ typedef _IOP_STREAM_RET IOP_STREAM_RET;
 typedef _IOP_COMMAND_ENUM IOP_COMMAND_ENUM;
 typedef _EEIOP_DEF EEIOP_DEF;
 
+struct _IOP_RET_STATUS
+{
+  int voice_end[2];
+  IOP_STREAM_RET stream_ret[2];
+  IOP_STREAM_RET pcm_stream_ret[2];
+  int mpLoopAdrs[2][24];
+  int mpNowAdrs[2][24];
+};
+
+typedef _IOP_RET_STATUS IOP_RET_STATUS;
+
 void *ee_iopMalloc(int size);
 void ee_iopFree(void *adrs);
 int ee_iopGetNeedSize(EEIOP_DEF *def);

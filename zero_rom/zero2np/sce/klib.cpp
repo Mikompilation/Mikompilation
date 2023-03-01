@@ -18,3 +18,7 @@ int GetThreadId()
 {
   return 0;
 }
+
+void AddDmacHandler(int, void *, int)
+{
+}

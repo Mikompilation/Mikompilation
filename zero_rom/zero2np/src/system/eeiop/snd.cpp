@@ -1,4 +1,6 @@
 #include "snd.h"
+#include "logging/logging.h"
+#include "snd_3d.h"
 #include <assert.h>
 
 static _SOUND_SYS snd_sys;
@@ -23,5 +25,7 @@ void SndSetGroupVolume(int type, int vol)
 
 void *SndInit(EEIOP_DEF *def, void *buffer)
 {
+  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  Snd3DInit();
   return nullptr;
 }
