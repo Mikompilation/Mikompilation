@@ -60,6 +60,6 @@ set(GAME_HEADERS
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/outgame
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/ingame/loading
-        zero2np/src/system/os
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/os
         PARENT_SCOPE
 )
