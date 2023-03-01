@@ -155,7 +155,7 @@ GPHASE_ENUM DoJobPhase(int layer)
 
   assert(layer < gphase_sys_num && "layer_num over 6\n");
 
-  if (gphase_sys.ini_flg[layer] == 0
+  if (gphase_sys.ini_flg[layer] != 0
       && ini_func[gphase_sys.now[layer]] != nullptr)
   {
     (*ini_func[gphase_sys.now[layer]])();
