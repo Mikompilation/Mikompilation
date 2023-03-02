@@ -14,6 +14,6 @@ void TitleInit()
   title_bg_addr = nullptr;
   title_logo_addr = nullptr;
   outgame_cmn_tex_addr = nullptr;
-  title_bg_send_lock = 0;
   title_load_end = 0;
+  title_bg_send_lock = 0;
 }

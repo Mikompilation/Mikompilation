@@ -1,16 +1,17 @@
 #pragma once
 
-
 const int gphase_sys_num = 6;
 inline const int gphase_num = 94;
 
-enum GPHASE_ENUM : int {
+enum GPHASE_ENUM : int
+{
   GPHASE_CONTINUE = 0,
   GPHASE_END = 1,
   GPHASE_NOFRAME = 2
 };
 
-enum GPHASE_ID_ENUM : int {
+enum GPHASE_ID_ENUM : int
+{
   GID_SUPER = 0,
   GID_BOOT_INIT = 1,
   GID_BOOT_PADCHECK = 2,
@@ -108,14 +109,16 @@ enum GPHASE_ID_ENUM : int {
   GPHASE_ID_NONE = -1
 };
 
-struct GPHASE_DAT {
+struct GPHASE_DAT
+{
   int layer;
   int superID;
   int son_ID;
   int son_num;
 };
 
-struct GPHASE_SYS {
+struct GPHASE_SYS
+{
   GPHASE_ID_ENUM now[gphase_sys_num];
   GPHASE_ID_ENUM next[gphase_sys_num];
   int ini_flg[gphase_sys_num];

@@ -1,11 +1,6 @@
 #pragma once
 
 #include "gphase.h"
-#include "ingame.h"
-#include "loading.h"
-#include "logo.h"
-#include "option.h"
-#include "title.h"
 
 int main(int argc, char **args);
 void DebugMemoryCheck();
