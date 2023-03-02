@@ -13,7 +13,7 @@ if (WIN32)
     set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/resources/icon.rc")
 ENDIF ()
 
-add_executable(Mikompilation ${GAME_SOURCES} ${GAME_HEADERS} ${APP_ICON_RESOURCE_WINDOWS})
+add_executable(Mikompilation ${GAME_SOURCES} ${APP_ICON_RESOURCE_WINDOWS})
 
 target_link_libraries(Mikompilation PUBLIC
         spdlog
