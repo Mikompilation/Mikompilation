@@ -1,6 +1,7 @@
 #pragma once
 
 #include "my_malloc.h"
+#include <cstdio>
 
 struct _HEAP_WRK
 {
