@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include "utility2.h"
 
 struct PK2_HEAD
 {

@@ -16,6 +16,7 @@ set(GAME_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/common/mem_util.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/common/heapctrl.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/common/ol_load.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/common/utility2.cpp
 
         # Debug
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/debug/mem_dbg.cpp

@@ -1,15 +1,5 @@
 #include "packfile.h"
 
-template<typename T>
-T* RelOffsetToPtr(const void* ptr, const int offset)
-{
-#if INTPTR_MAX == INT64_MAX
-  return (T*)((int64_t )ptr + offset);
-#elif INTPTR_MAX == INT32_MAX
-  return (T*)((int)ptr + (int)offset);
-#endif
-}
-
 int64_t PakAlign128(int64_t address)
 {
   if ((address & 0xf) != 0)
@@ -27,7 +17,7 @@ void* GetPakTaleAddr(PK2_HEAD *pakHead)
 
   for (auto i = pakHead->pack_num; i > 0; i--)
   {
-    offsetPtr = RelOffsetToPtr<unsigned int>(offsetPtr, offset_adrs + 0x10);
+    offsetPtr = OffsetToPtr<unsigned int>(offsetPtr, offset_adrs + 0x10);
     offset_adrs = *offsetPtr;
   }
 
