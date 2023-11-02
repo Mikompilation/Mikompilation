@@ -1,0 +1,20 @@
+site_name: Mikompilation
+site_url: https://www.mikompilation.com
+site_description: Research project to reimplement Fatal Frame 2
+site_author: wagrenier
+
+repo_url: https://github.com/wagrenier/Mikompilation
+edit_uri: blob/main/docs
+
+nav:
+  - Home: index.md
+  - Engine: 
+      - Engine/Engine.md
+      - 3D:
+        - SGD: Engine/3D/SGD.md
+
+# To be seen which one is better
+#theme: readthedocs
+
+plugins:
+  - search
