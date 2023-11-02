@@ -8,13 +8,19 @@ edit_uri: blob/main/docs
 
 nav:
   - Home: index.md
+  - Build: Build.md
   - Engine: 
       - Engine/Engine.md
       - 3D:
         - SGD: Engine/3D/SGD.md
+  - Game:
+      - GPhaseSytem: Game/GPhaseSystem.md
 
 # To be seen which one is better
-#theme: readthedocs
+theme: 
+  name: mkdocs
+  icon:
+    logo: img/favicon.ico
 
 plugins:
   - search
