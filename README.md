@@ -5,5 +5,8 @@
 
 Decompilation project for the Fatal Frame 2 : Crimson Butterfly；Project Zero 2；<ruby>零<rt>ぜろ</rt></ruby>～<ruby>紅い蝶<rt>あかいちょう</rt> game engine. Our goal is to have a fully playable port on PC and maybe on future platforms too.
 
+## Docs
+See our documentation at [our dedicated webpage](https://mikompilation.com)
+
 ## Special Thanks
 * [@MasterHimuro](https://twitter.com/masterhimuro) for doing the logo
