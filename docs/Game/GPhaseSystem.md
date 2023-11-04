@@ -254,6 +254,9 @@ Take note that the `SUPER GPHASE (GID_SUPER)` is at **position 0/ is the first e
 
 ### Structure Definitions
 #### GPHASE_DAT
+
+The `GPHASE_DAT` structure contains all information related to a game phase. The layer indicates to which layer a game phase belongs to. `superID` indicates the parent of that phase. `son_ID` indicates the child of a game phase and `son_num` indicates how many children a game phase has.
+
 <details>
 <summary>Definition Of GPHASE_DAT</summary>
 
@@ -269,6 +272,9 @@ struct GPHASE_DAT
 </details>
 
 #### GPHASE_SYS
+
+`GPHASE_SYS` is a structure that stores the current phase of the game, the next one and some execution flag. At this moment I do not know more than that.
+
 <details>
 <summary>Definition Of GPHASE_SYS</summary>
 
