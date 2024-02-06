@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://www.mikompilation.com/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://www.mikompilation.com/Build/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://www.mikompilation.com/Engine/Engine/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://www.mikompilation.com/Engine/3D/SGD/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://www.mikompilation.com/Game/GPhaseSystem/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>
