@@ -5,6 +5,16 @@
 
 static _SOUND_SYS snd_sys;
 
+void SndMain()
+{
+  Snd3DMain();
+  //StreamAutoPlayMain();
+  //snd_utilAutoBDMain();
+  //SndStreamMain();
+  //SndPCMStreamMain();
+  //SndBufPlayMain();
+}
+
 void SndSetMono()
 {
   snd_sys.mono = 1;

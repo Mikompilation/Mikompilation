@@ -8,6 +8,7 @@ struct _SOUND_SYS
   int type_vol[5];
 };
 
+void SndMain();
 void SndSetMono();
 void SndSetStereo();
 void SndSetGroupVolume(int type, int vol);

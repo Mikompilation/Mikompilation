@@ -14,3 +14,4 @@ HEAP_WRK *GetSystemHeapWrkP();
 void SetVBlankWaitNum(int iWaitNum);
 void SystemSetVCallback();
 void SystemBankSetup();
+void SendDMAMain();

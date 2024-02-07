@@ -54,3 +54,7 @@ void snd3DSetEnvironment(SND_3D_ENV *env)
   farthest_dist_calc = snd_3d_env.farthest_dist * dist_unit;
   CheckEnvValue();
 }
+
+void Snd3DMain()
+{
+}

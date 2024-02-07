@@ -6,8 +6,8 @@ add_library(IMGUI EXCLUDE_FROM_ALL
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui_widgets.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/imgui_memory_editor/imgui_memory_editor.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdlrenderer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdl.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdlrenderer2.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdl2.cpp
         )
 
 target_include_directories(IMGUI

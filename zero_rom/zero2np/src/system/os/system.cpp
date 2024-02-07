@@ -5590,3 +5590,7 @@ void SystemBankSetup()
 {
   system_sound_bank_id = SndBankNew(0xcf9, 0xcf8, -1);
 }
+
+void SendDMAMain()
+{
+}

@@ -1,8 +1,11 @@
 #include "ee_iop.h"
 #include "../../../sce/sce_types.h"
+#include "../../../sce/klib.h"
 #include "logging/logging.h"
 #include "snd.h"
 #include "spdlog/spdlog.h"
+
+#include <utility2.h>
 
 static void *(*ee_iop_malloc)(int /* size */);
 static void (*ee_iop_free)(void * /* adrs */);
@@ -36,9 +39,35 @@ int ee_iopInit(EEIOP_DEF *def)
   return 0;
 }
 
+void WaitMainRpc()
+{
+}
+
 void ee_iopMain()
 {
-  printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
+  SndMain();
+  WaitMainRpc();
+  //pcVar2 = iop_ret_buffer;
+  //pIVar1 = &iop_ret;
+
+  //do
+  //{
+  //  iop_ret.stream_ret[0] = *(IOP_STREAM_RET *) ((int) iop_ret_buffer + 8);
+  //  iop_ret.stream_ret[1] = *(IOP_STREAM_RET *) ((int) iop_ret_buffer + 0x10);
+  //  iop_ret.pcm_stream_ret[0] = *(IOP_STREAM_RET *) ((int) iop_ret_buffer + 0x18);
+  //  iop_ret.voice_end = iop_ret_buffer;
+  //  pcVar2 = (char *) ((int) pcVar2 + 0x20);
+  //  pIVar1 = (IOP_RET_STATUS *) (pIVar1->pcm_stream_ret + 1);
+  //} while (iop_ret_buffer != iop_ret_buffer + 0x1a0);
+
+  //*(undefined8 *)pIVar1->voice_end = iop_ret_buffer._416_8_;
+
+  iopCommandRegister(IOP_COM_END, nullptr, 0);
+  FlushCache();
+  unsigned int ssize = GetAlignUp(iop_com_offset, 4);
+  unsigned int rsize = GetAlignUp(0x1a8, 4);
+  //sceSifCallRpc(&sif_cli_data, 0, 1, iop_com_buffer, ssize, iop_ret_buffer, rsize, nullptr, nullptr);
+  iopCommandFrameInit();
 }
 
 int iopCommandRegister(IOP_COMMAND_ENUM command, char *buf, int size2)

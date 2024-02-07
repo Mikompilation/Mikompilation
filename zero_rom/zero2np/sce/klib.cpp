@@ -22,3 +22,7 @@ int GetThreadId()
 void AddDmacHandler(int, void *, int)
 {
 }
+
+void FlushCache()
+{
+}

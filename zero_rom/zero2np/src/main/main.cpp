@@ -8,8 +8,18 @@
 #include "logo.h"
 #include "option.h"
 #include "title.h"
+#include "../debug/debug.h"
+
+#include <SDL.h>
+#include <imgui.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_sdlrenderer2.h>
+#include <imgui_internal.h>
 
 static int soft_reset_disable;
+SDL_Window *window;
+SDL_Renderer *renderer;
+SDL_Event eventData;
 
 int main(int argc, char **args)
 {
@@ -19,7 +29,7 @@ int main(int argc, char **args)
   {
     GPhaseSysMain();
   }
-  while (true);
+  while (soft_reset_disable == 0);
 
   return 0;
 }
@@ -49,39 +59,95 @@ void init_super()
   //FinderBankSetup();
   //SceneEffectInit();
 
+  SDL_Init(SDL_INIT_VIDEO);
+
+  window = SDL_CreateWindow(
+    "Mikompilation",
+    SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED,
+    640,
+    480,
+    SDL_WINDOW_RESIZABLE
+  );
+
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+
+  ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+  ImGui_ImplSDLRenderer2_Init(renderer);
+
   printNotImplemented(GAME_LOGGER, __FUNCTION__, __FILE__);
 }
 
 void end_super()
 {
-  return;
+  // Cleanup SDL & ImGUI
+  ImGui_ImplSDLRenderer2_Shutdown();
+  ImGui_ImplSDL2_Shutdown();
+  ImGui::DestroyContext();
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  SDL_Quit();
 }
 
+/// Gets called after every game loop
 GPHASE_ENUM after_super(GPHASE_ENUM result)
 {
-  //EachDebugMain();
+  EachDebugMain();
   ee_iopMain();
-  //SendDMAMain();
+  SendDMAMain();
+
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+
+  ImGui::Render();
+
+  ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+  SDL_RenderPresent(renderer);
+
+  switch (eventData.type)
+  {
+    case SDL_QUIT:
+      soft_reset_disable = 1;
+  }
+
   return (GPHASE_ENUM)(CheckSoftReset() != 0);
 }
 
+/// Gets called before every game loop
 GPHASE_ENUM pre_super(GPHASE_ENUM super)
 {
-  void *pvVar1;
-
   //ClearDrawEnv();
   //pvVar1 = GetDrawEnv(0);
-  //SetScissorRegister(0,*(long *)((int)pvVar1 + 0x30));
+  //SetScissorRegister(0, *(long *)((int)pvVar1 + 0x30));
   //pvVar1 = GetDrawEnv(1);
-  //SetScissorRegister(1,*(long *)((int)pvVar1 + 0x30));
+  //SetScissorRegister(1, *(long *)((int)pvVar1 + 0x30));
   //GET_SCISSOR_REGISTER(0);
   //PadSyncCallback();
   //PadAnalogMain();
+
+  SDL_RenderClear(renderer);
+  SDL_PollEvent(&eventData);
+  ImGui_ImplSDL2_ProcessEvent(&eventData);
+
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+  SDL_RenderDrawLine(renderer, 0,0,600,400);
+
+  ImGui_ImplSDLRenderer2_NewFrame();
+  ImGui_ImplSDL2_NewFrame(window);
+  ImGui::NewFrame();
+
+  ImGuiIO& io = ImGui::GetIO();
+
+  ImGui::Begin("Hello, SDL2!");
+  ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+  ImGui::End();
 
   return GPHASE_CONTINUE;
 }
 
 int CheckSoftReset()
 {
-  return 0;
+  return soft_reset_disable;
 }
