@@ -70,7 +70,7 @@ void init_super()
     SDL_WINDOW_RESIZABLE
   );
 
-  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC);
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -131,8 +131,9 @@ GPHASE_ENUM pre_super(GPHASE_ENUM super)
   SDL_PollEvent(&eventData);
   ImGui_ImplSDL2_ProcessEvent(&eventData);
 
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+  SDL_SetRenderDrawColor(renderer, 0x80, 0x80, 0x80, SDL_ALPHA_OPAQUE);
   SDL_RenderDrawLine(renderer, 0,0,600,400);
+
 
   ImGui_ImplSDLRenderer2_NewFrame();
   ImGui_ImplSDL2_NewFrame(window);
