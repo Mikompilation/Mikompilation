@@ -1,8 +1,10 @@
 #pragma once
 
-typedef int sceVu0IVECTOR[4];
-typedef float sceVu0FVECTOR[4];
-typedef float sceVu0FMATRIX[4][4];
+typedef int qword[4]                __attribute__((aligned(16)));
+typedef int sceVu0IVECTOR[4]        __attribute__((aligned(16)));
+typedef int sceVu0IMATRIX[4][4]     __attribute__((aligned(16)));
+typedef float sceVu0FVECTOR[4]      __attribute__((aligned(16)));
+typedef float sceVu0FMATRIX[4][4]   __attribute__((aligned(16)));
 
 typedef void (*sceSifEndFunc)(/* parameters unknown */);
 typedef void *(*sceSifRpcFunc)(/* parameters unknown */);

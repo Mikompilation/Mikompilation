@@ -39,6 +39,15 @@ set(GAME_SOURCES
 
         # Graphics
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph2d/message.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/gra3dSGD.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/sgd_types.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/g3dDebug.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/gra3d.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/g3dCore.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/gra3dDma.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/gra3dShadow.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/gra3dSGDData.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/graphics/graph3d/g3dUtil.h
 
         # System
         ${CMAKE_CURRENT_SOURCE_DIR}/zero2np/src/system/os/system.cpp
