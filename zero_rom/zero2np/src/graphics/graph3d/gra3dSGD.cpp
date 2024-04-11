@@ -233,6 +233,50 @@ void _gra3dDrawSGD(SGDFILEHEADER* pSGDTop, SGDRENDERTYPE type, SGDCOORDINATE* pC
     }
 }
 
+void SgSortPreProcessP(SGDPROCUNITHEADER *pPUHead)
+{
+    ASSERT_RETURN(!pPUHead);
+
+    while (pPUHead)
+    {
+        switch (pPUHead->iCategory)
+        {
+            case GS_IMAGE: GsImageProcess(pPUHead); break;
+            case TRI2:
+                if (save_tri2_pointer == (SGDPROCUNITHEADER *)0xffffffff)
+                {
+                    LoadTRI2Files(pPUHead);
+                    save_tri2_pointer = nullptr;
+                }
+                else
+                {
+                    save_tri2_pointer = pPUHead;
+                }
+
+                break;
+            case MonotoneTRI2:
+                if (gra3dIsMonotoneDrawEnable())
+                {
+                    if (save_bw_pointer == (SGDPROCUNITHEADER *)0xffffffff)
+                    {
+                        LoadTRI2Files(pPUHead);
+                        save_bw_pointer = nullptr;
+                    }
+                    else
+                    {
+                        save_bw_pointer = pPUHead;
+                    }
+                }
+                break;
+            case INVALID: g3ddbg_ASSERT(false, ""); break;
+            case StackTRI2: g3ddbg_ASSERT(false, ""); break;
+        }
+
+        pPUHead = pPUHead->pNext;
+        g3ddbg_ASSERT_WARNING((int)pPUHead != (int)0xffffffff, "sgd has been broken...");
+    }
+}
+
 void sgdRemap(SGDFILEHEADER* pSGDHead)
 {
     SGDVECTORINFO* pVectorInfo;

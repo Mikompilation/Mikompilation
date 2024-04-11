@@ -8,7 +8,7 @@ void _gra3dDrawSGD(SGDFILEHEADER* pSGDTop, SGDRENDERTYPE type, SGDCOORDINATE* pC
 void sgdResetMaterialCache(SGDFILEHEADER *pSGDData);
 void gra3dsgdSetupVu1();
 CoordCache& _GetCoordCache();
-void _SetCoordCache(CoordCache const &CC);
+void _SetCoordCache(const CoordCache &rCC);
 int gra3dsgdGetNumBlock();
 void SgSortPreProcessP(SGDPROCUNITHEADER *pPUHead);
 void gra3dsgdDrawPresetDataObject(SGDPROCUNITHEADER *pPUHead);
@@ -21,5 +21,7 @@ SGDCOORDINATE * gra3dsgdGetCoordinate(int iIndex);
 int _GetGlobalBufferSize();
 sceVu0FVECTOR* _GetGlobalVertexBuffer();
 sceVu0FVECTOR* _GetGlobalNormalBuffer();
+void LoadTRI2Files(SGDPROCUNITHEADER *pPUHead);
+void GsImageProcess(const SGDPROCUNITHEADER *pPUHead);
 
 #endif //MIKOMPILATION_GRA3DSGD_H
